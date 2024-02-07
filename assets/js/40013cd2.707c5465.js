@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocs_grupo_03=self.webpackChunkdocs_grupo_03||[]).push([[9064],{9368:s=>{s.exports=JSON.parse('{"label":"facebook","permalink":"/2024-T0002-EC09-G03/blog/tags/facebook","allTagsPath":"/2024-T0002-EC09-G03/blog/tags","count":1,"unlisted":false}')}}]);
