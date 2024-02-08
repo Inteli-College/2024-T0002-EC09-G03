@@ -1,6 +1,7 @@
+# Requisitos Funcionais, não Funcionais e Restrições
 **Introdução:**
 
-O projeto EcoVigilância representa um marco inovador no monitoramento ambiental urbano, com o objetivo de utilizar tecnologia sensorial avançada para coletar, analisar e disponibilizar dados sobre diversos aspectos ambientais. Este projeto, liderado pela Empresa de Tecnologia da Informação e Comunicação do Município de São Paulo - Prodam-SP S.A., visa aprimorar a qualidade de vida nas cidades, promovendo um ambiente mais sustentável e saudável. EcoVigilância busca integrar cidadãos, gestores públicos e tecnologias emergentes em um esforço coletivo para enfrentar desafios ambientais, como a poluição do ar, ruído urbano, e gestão de resíduos, através de uma abordagem holística e inovadora.
+O projeto em parceria com a PRODAM representa um marco inovador no monitoramento ambiental urbano, com o objetivo de utilizar tecnologia sensorial avançada para coletar, analisar e disponibilizar dados sobre diversos aspectos ambientais. Este projeto, liderado pela Empresa de Tecnologia da Informação e Comunicação do Município de São Paulo - Prodam-SP S.A., visa aprimorar a qualidade de vida nas cidades, promovendo um ambiente mais sustentável e saudável. EcoVigilância busca integrar cidadãos, gestores públicos e tecnologias emergentes em um esforço coletivo para enfrentar desafios ambientais, como a poluição do ar, ruído urbano, e gestão de resíduos, através de uma abordagem holística e inovadora.
 
 **Requisitos Funcionais:**
 
@@ -30,4 +31,4 @@ O projeto EcoVigilância representa um marco inovador no monitoramento ambiental
 
 **Conclusão:**
 
-EcoVigilância é um projeto ambicioso que coloca a tecnologia a serviço do meio ambiente e da sociedade, promovendo uma gestão urbana mais inteligente e sustentável. Através da implementação dos requisitos funcionais e não funcionais detalhados, além de aderir às restrições estabelecidas, este projeto tem o potencial de transformar a maneira como as cidades monitoram e respondem a questões ambientais. Com foco na inovação, segurança, e engajamento cidadão, EcoVigilância está destinado a se tornar um modelo para futuras iniciativas de cidades inteligentes e sustentáveis, reforçando o compromisso da Prodam-SP S.A. com a melhoria contínua da qualidade de vida urbana.
+Em suma, tratamos de um projeto ambicioso que coloca a tecnologia a serviço do meio ambiente e da sociedade, promovendo uma gestão urbana mais inteligente e sustentável. Através da implementação dos requisitos funcionais e não funcionais detalhados, além de aderir às restrições estabelecidas, este projeto tem o potencial de transformar a maneira como as cidades monitoram e respondem a questões ambientais. Com foco na inovação, segurança, e engajamento cidadão, EcoVigilância está destinado a se tornar um modelo para futuras iniciativas de cidades inteligentes e sustentáveis, reforçando o compromisso da Prodam-SP S.A. com a melhoria contínua da qualidade de vida urbana.
