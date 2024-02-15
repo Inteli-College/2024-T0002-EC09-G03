@@ -1,0 +1,11 @@
+name: Testa o github actions
+
+on: [push]
+
+jobs:
+  teste:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Roda um script simples que exibe "Hello, world!"
+      run: echo Hello, world!
