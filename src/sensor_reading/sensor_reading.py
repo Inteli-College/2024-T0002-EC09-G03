@@ -7,7 +7,7 @@ from paho.mqtt import client as mqtt_client
 broker = 'broker.hivemq.com'
 port = 8000
 client_id = "clientId-Qro3K1kRhV"
-csv_file_path = "Ponderada 1\data\sensors.csv"
+csv_file_path = "sensors.csv"
 
 def read_sensor_data_from_csv(csv_path):
     while True:  # Loop infinito para simular dados contínuos
@@ -48,7 +48,7 @@ def connect_mqtt():
         else:
             print("Failed to connect, return code %d\n", rc)
 
-    client = mqtt_client.Client(client_id)
+    client = mqtt_client.Client(mqtt_client.CallbackAPIVersion.VERSION2, client_id)
     client.on_connect = on_connect
     client.connect(broker, port)
     return client
