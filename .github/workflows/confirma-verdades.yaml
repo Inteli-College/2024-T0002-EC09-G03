@@ -1,0 +1,14 @@
+name: Confirma verdades absolutas
+
+on: [push]
+
+jobs:
+  verdades:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Exibe conteúdo de arquivo txt
+      run: cat texto-muito-importante.txt
