@@ -15,7 +15,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ./Material
+        working-directory: ./docs-grupo-03
     steps:
       - uses: actions/checkout@v4
         with:
@@ -33,7 +33,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./Material/build
+          path: ./docs-grupo-03/build
 
   deploy:
     name: Deploy to GitHub Pages
