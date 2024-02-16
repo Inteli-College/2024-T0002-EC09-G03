@@ -155,12 +155,13 @@ Os custos com os funcionários CLT são baseados em pesquisas de mercado dos sit
 ### Despesas com serviços da AWS
 Nessa tabela, as despesas relacionadas ao ambiente de desenvolvimento na AWS são distribuídas da seguinte forma:
 
-- 1 EC2 a $ 2,000 mensais para operacionalizar os serviços do robô.
-- RDS com custo mensal de R$ 200 para o banco MySQL.
+- 1 EC2 a $ 1,000 mensais para operacionalizar os serviços do dashboard.
+- RDS com custo mensal de $ 500 para o banco Postgres.
+- ECS com custo mensal de $ 400 para orquestração dos serviços.
 
-### Cálculo do imposto por dentro
+### Cálculo do imposto funcionário
 
-No cálculo do custo total de R$ 381,266.64, já foram incluídos impostos, que representam 12% do custo antes dos impostos. Para entender o valor dos impostos nesse contexto, usamos a seguinte fórmula:
+<!-- No cálculo do custo total de R$ 381,266.64, já foram incluídos impostos, que representam 12% do custo antes dos impostos. Para entender o valor dos impostos nesse contexto, usamos a seguinte fórmula:
 
 - Custo Total = Custo Sem Imposto + (Custo Sem Imposto × Taxa de Imposto).
 
@@ -170,20 +171,18 @@ Reorganizando a fórmula para encontrar o custo sem imposto, temos:
 
 Substituindo com nossos valores:
 
-- Custo Sem Imposto = R$ 381,266.64 / (1 + 0.12).
+- Custo Sem Imposto = R$ 1,075,784.00/ (1 + 0.12).
 
 Calculando, temos:
 
-- Custo Sem Imposto ≈ R$ 299,766.00.
+- Custo Sem Imposto ≈ R$ 960,522.00.
 
 Portanto, o valor dos impostos é:
 
-- R$ 381,266.64 - R$ 632,400.46 = R$ 75,888.06.
+- R$ 960,522 - R$ 1,075,784.00 = R$ 115,262.06. -->
 
-### Hipótese de Estimativa de Receitas
-
-Para calcular a estimativa de receitas deste projeto de implementação de um robô de autoatendimento, será considerado o cenário hipotético de desempenho financeiro descrito a seguir.
-
+#### Custo operacional
+#### Custo de desenvolvimento
 #### Premissas iniciais
 
 - **Investimento Inicial**: R$ 1.000.000.
@@ -192,13 +191,6 @@ Para calcular a estimativa de receitas deste projeto de implementação de um ro
 - **Aumento na Capacidade Produtiva**: Presumamos um aumento de 15% na receita devido ao aumento da produção e satisfação do cliente.
 - **Redução de Erros**: Estimemos uma economia de 5% nos custos associados a erros operacionais.
 
-#### Cálculo da receita
-
-- **Receita Anual Antes do Robô**: Para este exemplo, temos R$ 10.000.000.
-- **Custos Operacionais Anuais Antes do Robô**: Suponhamos R$ 7.000.000.
-- **Economia de Custos Operacionais com Robô**: 10% de R$ 7.000.000 = R$ 700.000.
-- **Redução de Custos por Erros**: 5% de R$ 7.000.000 = R$ 350.000.
-- **Aumento na Receita devido ao Robô**: 15% de R$ 10.000.000 = R$ 1.500.000.
 
 
 Esta hipótese de lucros leva em conta o investimento inicial como um gasto único.
