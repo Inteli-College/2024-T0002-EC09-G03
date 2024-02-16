@@ -1,5 +1,5 @@
 {
-    "label": "Simulador MQQT",
+    "label": "Simulador MQTT",
     "position": 4,
     "link": {
       "type": "generated-index",
