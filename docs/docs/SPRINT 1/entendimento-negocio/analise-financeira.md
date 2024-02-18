@@ -156,7 +156,7 @@ Os custos com os funcionários CLT são baseados em pesquisas de mercado dos sit
 
 O cálculo do imposto para um funcionário CLT (Consolidação das Leis do Trabalho) no Brasil envolveu a aplicação de diversos descontos sobre o salário bruto. Os principais descontos são o Imposto de Renda Retido na Fonte (IRRF), que varia conforme a faixa salarial, e as contribuições previdenciárias (INSS), que têm percentuais específicos. Além disso, podem existir outros descontos, como vale-transporte e benefícios. O salário líquido é obtido subtraindo-se esses descontos do salário bruto. O cálculo detalhado é feito mensalmente, considerando as particularidades de cada empregado e as regras fiscais vigentes.
 
-## Sendo atribuida a seguinte expressão: Custo Total = Salario Bruto + INSS + IRRF + FGTS + (VR + VT + PLANO DE SAUDE)
+#### Sendo atribuida a seguinte expressão: Custo Total = Salario Bruto + INSS + IRRF + FGTS + (VR + VT + PLANO DE SAUDE)
 
 ### Custo operacional
 O custo operacional em um projeto de software e IoT inclui despesas contínuas relacionadas à manutenção, suporte e operação do sistema após sua implementação. Isso abrange gastos como hospedagem de servidores, manutenção de software, manutenção de dispositivos IoT, monitoramento de desempenho, entre outros. Considerar esses custos é crucial para garantir a sustentabilidade e eficiência contínua do projeto ao longo do tempo. E os valores foram categorizados como:
