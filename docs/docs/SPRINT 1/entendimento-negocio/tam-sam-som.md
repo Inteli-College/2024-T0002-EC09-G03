@@ -17,6 +17,4 @@ O SOM é uma previsão realista daquilo que o produto ou serviço pode conquista
 **Conclusão:**
 Observando os valores obtidos para o TAM, SAM e SOM, percebemos que o mercado de cidades inteligentes é promissor, apesar do investimento inicial significativo. A demanda por soluções inovadoras e sustentáveis é crescente, o que pode motivar a adoção dessas soluções. A perspectiva realista de conquistar uma parte desse mercado mostra um potencial considerável para a Prodam.
 
-**Referências:**
-Incluímos referências relevantes, como análises do mercado global de cidades inteligentes, vantagens e desvantagens, dados específicos sobre municípios inteligentes em São Paulo e média de investimento pelo governo estadual.
 
