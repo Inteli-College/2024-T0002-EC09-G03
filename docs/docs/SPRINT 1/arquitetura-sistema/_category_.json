@@ -3,7 +3,7 @@
     "position": 3,
     "link": {
       "type": "generated-index",
-      "description": "Nesta seção..."
+      "description": "Esta seção descreve a arquitetura de um sistema de IoT, incluindo simulação de sensores com ESP32s, comunicação via HiveMQ como broker MQTT, e interface de usuário desenvolvida com React, Next.JS e TailwindCSS. O backend é baseado em Go e Gin, enquanto os dados são armazenados no PostgreSQL. A estrutura é projetada para eficiência e escalabilidade, facilitando a coleta, processamento e apresentação dos dados, visando uma experiência de usuário reativa e suave."
     }
   }
   

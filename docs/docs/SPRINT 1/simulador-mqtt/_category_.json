@@ -3,7 +3,7 @@
     "position": 4,
     "link": {
       "type": "generated-index",
-      "description": "Nesta seção..."
+      "description": "Esta seção detalha um simulador MQTT em Python para simulação de leitura de dados de sensores e envio para um broker MQTT, utilizando Python 3.x e bibliotecas como paho-mqtt. Instruções de configuração e uso são fornecidas, incluindo a preparação de um arquivo CSV com dados simulados. O projeto inclui um script principal para a simulação e publicação de dados, e um arquivo de testes para validar as funcionalidades."
     }
   }
   

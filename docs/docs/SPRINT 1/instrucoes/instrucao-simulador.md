@@ -1,1 +1,0 @@
-# Instrução de uso simulador
