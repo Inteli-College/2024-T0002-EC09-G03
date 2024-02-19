@@ -11,7 +11,7 @@ Antes de executar os testes, certifique-se de que o ambiente de teste está devi
 
 ## Execução dos Testes
 
-Para executar os testes, utilize o comando:
+Para executar os testes, entre no diretório `src/sensor_reading/tests` pelo terminal e utilize o comando:
 
 ```sh
 pytest test_sensors_pytest.py

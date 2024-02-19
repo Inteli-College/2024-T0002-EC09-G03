@@ -12,7 +12,7 @@
 
 ## Descrição Geral
 
-Este projeto é uma prova de conceito que simula a leitura de dados de sensores e o envio desses dados para um broker MQTT. O código lê dados contínuos de um arquivo CSV que simula a saída de sensores físicos, como sensores de radiação solar e temperatura ambiente, e publica esses dados em tópicos MQTT específicos.
+Este projeto que está localizado no caminho `/src/sensor_reading` é uma prova de conceito que simula a leitura de dados de sensores e o envio desses dados para um broker MQTT. O código lê dados contínuos de um arquivo CSV que simula a saída de sensores físicos, como sensores de radiação solar e temperatura ambiente, e publica esses dados em tópicos MQTT específicos.
 
 ## Requisitos
 
@@ -24,15 +24,17 @@ Este projeto é uma prova de conceito que simula a leitura de dados de sensores 
 
 ## Configuração
 
-1. Instale as dependências necessárias usando pip:
+1. Entre no diretório `/src/sensor_reading` pelo terminal
+
+2. Instale as dependências necessárias usando pip:
 
    ```sh
    pip install paho-mqtt pytest
    ```
 
-2. Certifique-se de que o broker MQTT esteja acessível. Se estiver usando um broker local, inicie o serviço do broker.
+3. Certifique-se de que o broker MQTT esteja acessível. Se estiver usando um broker local, inicie o serviço do broker.
 
-3. Prepare um arquivo CSV `sensors.csv` com dados simulados para os sensores. O arquivo deve ter um cabeçalho e pelo menos algumas linhas de dados, por exemplo:
+4. Prepare um arquivo CSV `sensors.csv` com dados simulados para os sensores. O arquivo deve ter um cabeçalho e pelo menos algumas linhas de dados, por exemplo:
 
    ```csv
    radiacao_solar,temperatura
