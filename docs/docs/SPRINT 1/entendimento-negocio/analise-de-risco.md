@@ -1,6 +1,6 @@
 # Análise de riscos e um plano de gestão de riscos do projeto
 
-[ Imagem da matriz de risco ]
+![Matriz](../../../static/img/matriz-risco-oportunidades.png)
 
 ## 1.  Classificação e mitigação dos riscos
 
