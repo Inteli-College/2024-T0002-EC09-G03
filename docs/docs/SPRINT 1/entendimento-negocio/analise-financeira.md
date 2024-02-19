@@ -73,7 +73,7 @@ A tabela abaixo ilustra as estimativas de despesas anuais e custos associados ao
       <tr>
       <td>Engenheiro Elétrico</td>
       <td>1</td>
-      <td>Encarregado do desenvolvimento...</td>
+      <td>Encarregado do desenvolvimento de equipamentos elétricos.</td>
       <td>R$ 15,500.00</td>
       <td>19,824.50</td>
       <td>12</td>
@@ -151,46 +151,44 @@ A tabela abaixo ilustra as estimativas de despesas anuais e custos associados ao
 </table>
 
 Os custos com os funcionários CLT são baseados em pesquisas de mercado dos sites [Catho](https://paraempresas.catho.com.br/quanto-custa-um-funcionario-para-empresa/) e [iDinheiro](https://www.idinheiro.com.br/). Além dos salários base, foram inclusos benefícios como plano de saúde de R$ 600, Vale Transporte de R$ 400 e VR de R$ 600.
+  
+### Cálculo do imposto funcionário
 
-### Despesas com serviços da AWS
-Nessa tabela, as despesas relacionadas ao ambiente de desenvolvimento na AWS são distribuídas da seguinte forma:
+O cálculo do imposto para um funcionário CLT (Consolidação das Leis do Trabalho) no Brasil envolveu a aplicação de diversos descontos sobre o salário bruto. Os principais descontos são o Imposto de Renda Retido na Fonte (IRRF), que varia conforme a faixa salarial, e as contribuições previdenciárias (INSS), que têm percentuais específicos. Além disso, podem existir outros descontos, como vale-transporte e benefícios. O salário líquido é obtido subtraindo-se esses descontos do salário bruto. O cálculo detalhado é feito mensalmente, considerando as particularidades de cada empregado e as regras fiscais vigentes.
+
+#### Sendo atribuida a seguinte expressão: Custo Total = Salario Bruto + INSS + IRRF + FGTS + (VR + VT + PLANO DE SAUDE)
+
+### Custo operacional
+O custo operacional em um projeto de software e IoT inclui despesas contínuas relacionadas à manutenção, suporte e operação do sistema após sua implementação. Isso abrange gastos como hospedagem de servidores, manutenção de software, manutenção de dispositivos IoT, monitoramento de desempenho, entre outros. Considerar esses custos é crucial para garantir a sustentabilidade e eficiência contínua do projeto ao longo do tempo. E os valores foram categorizados como:
+
+#### Hopedagem
+
+As despesas relacionadas de hospedagem são direcionadas ao ambiente de desenvolvimento na AWS que estão distribuídas da seguinte forma:
 
 - 1 EC2 a $ 1,000 mensais para operacionalizar os serviços do dashboard.
 - RDS com custo mensal de $ 500 para o banco Postgres.
 - ECS com custo mensal de $ 400 para orquestração dos serviços.
+- 1 Engenheiro de software para configuração dos serviços
 
-### Cálculo do imposto funcionário
+Custo mensal: R$ 20,502
 
-<!-- No cálculo do custo total de R$ 381,266.64, já foram incluídos impostos, que representam 12% do custo antes dos impostos. Para entender o valor dos impostos nesse contexto, usamos a seguinte fórmula:
+#### Manutençao de software 
 
-- Custo Total = Custo Sem Imposto + (Custo Sem Imposto × Taxa de Imposto).
+Recuros destinados a gerenciamento do software, e disponibilidade de recursos graficos e sistemáticos:
 
-Reorganizando a fórmula para encontrar o custo sem imposto, temos:
+- 1 Engenheiros de software
+- 1 Estagiário
+- UX/UI Design
+- PO (Projeto como um todo)
 
-- Custo Sem Imposto = Custo Total / (1 + Taxa de Imposto).
+  Custo mensal: R$ 38,591
 
-Substituindo com nossos valores:
+#### Dispositivos IoT
+Manutenção e criação do ambiente IoT ao qual o sistema vai ser mantido, para isso requer equipe tanto para manutençao quanto para criação das interfaces e integrações com os demais sistemas:
 
-- Custo Sem Imposto = R$ 1,075,784.00/ (1 + 0.12).
+- 1 Engenheiro da computação
+- 1 Engenheiro Elétrico
+- 4 Técnico em eletrônica
 
-Calculando, temos:
+  Custo mensal: R$ 51,092
 
-- Custo Sem Imposto ≈ R$ 960,522.00.
-
-Portanto, o valor dos impostos é:
-
-- R$ 960,522 - R$ 1,075,784.00 = R$ 115,262.06. -->
-
-#### Custo operacional
-#### Custo de desenvolvimento
-#### Premissas iniciais
-
-- **Investimento Inicial**: R$ 1.000.000.
-- **Gastos com Manutenção**: Consideremos que estes sejam uma fração anual do investimento inicial, por exemplo, 5% ao ano, que equivale a R$ 50.000.
-- **Melhoria em Eficiência**: Suponhamos que a implementação do robô melhore a eficiência operacional, levando a uma economia de custos de 10% sobre os custos operacionais anuais da empresa.
-- **Aumento na Capacidade Produtiva**: Presumamos um aumento de 15% na receita devido ao aumento da produção e satisfação do cliente.
-- **Redução de Erros**: Estimemos uma economia de 5% nos custos associados a erros operacionais.
-
-
-
-Esta hipótese de lucros leva em conta o investimento inicial como um gasto único.
