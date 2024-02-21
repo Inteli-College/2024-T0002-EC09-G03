@@ -13,7 +13,7 @@ type ServiceBody struct {
 
 type serviceCallback func(*ServiceBody) error
 
-func sensorCallback(ctx *gin.Context, service serviceCallback) {
+func sensorController(ctx *gin.Context, service serviceCallback) {
 	bodyArgs := ServiceBody{}
 
 	if err := ctx.Bind(&bodyArgs); err != nil {

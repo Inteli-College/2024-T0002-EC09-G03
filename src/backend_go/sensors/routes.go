@@ -8,7 +8,7 @@ func SetupRoutes(router *gin.Engine) {
 	userGroup := router.Group("/sensors")
 	{
 		userGroup.POST("/", func(ctx *gin.Context) {
-			sensorCallback(ctx, getReadings)
+			sensorController(ctx, getReadings)
 		})
 		// userGroup.POST("/", CreateUser)
 	}
