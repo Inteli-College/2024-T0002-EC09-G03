@@ -3,6 +3,9 @@
 
 ## Diagrama UML de sequência
 
+
+![Diagrama UML de sequencia](../../../static/img/uml-sequencia.svg)
+
 ```
 @startuml
 actor Usuário
@@ -44,6 +47,8 @@ deactivate Painel
 
 ```
 ## Diagrama UML de implantação
+
+![Diagrama UML de sequencia](../../../static/img/uml-implantacao.svg)
 
 ```
 @startuml
