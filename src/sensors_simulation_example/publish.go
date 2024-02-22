@@ -2,70 +2,96 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"os"
 	"time"
 
-	mqtt "github.com/eclipse/paho.mqtt.golang"
 	"github.com/joho/godotenv"
+	amqp "github.com/rabbitmq/amqp091-go"
 )
 
-var broker_url string
-var broker_port string
-var rabbit_name string
-var rabbit_password string
-
-func configureClient(name string) mqtt.Client {
-	opts := mqtt.NewClientOptions()
-
-	opts.AddBroker(fmt.Sprintf("tcp://%s:%s", os.Getenv("BROKER_URL"), os.Getenv("BROKER_PORT")))
-	opts.SetClientID(name)
-	opts.SetUsername(rabbit_name)     // Substitua pelo seu usuário
-	opts.SetPassword(rabbit_password) // Substitua pela sua senha
-
-	opts.OnConnect = func(client mqtt.Client) {
-		fmt.Printf("->Client %s connected succecifuly!", name)
-	}
-
-	opts.OnConnectionLost = func(client mqtt.Client, err error) {
-		fmt.Printf("-> Client %s disconnected due to: %v", name, err)
-	}
-
-	client := mqtt.NewClient(opts)
-	if token := client.Connect(); token.Wait() && token.Error() != nil {
-		panic(token.Error())
-	}
-
-	return client
+// MyDataStructure represents the structure of the data to send.
+type MyDataStructure struct {
+	Name    string `json:"name"`
+	Unit    string `json:"unit"`
+	CoordsX string `json:"coords_x"`
+	CoordsY string `json:"coords_y"`
+	Date    string `json:"date"`
 }
 
-func init() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Erro carregando o arquivo .env")
-	}
-	broker_url = os.Getenv("BROKER_URL")
-	broker_port = os.Getenv("BROKER_PORT")
-	rabbit_name = os.Getenv("RABBIT_USER")
-	rabbit_password = os.Getenv("RABBIT_PASSWORD")
+// DataWrapper wraps MyDataStructure for sending as a single "data" field.
+type DataWrapper struct {
+	Data MyDataStructure `json:"data"`
+}
 
-	if broker_port == "" || broker_url == "" || rabbit_name == "" || rabbit_password == "" {
-		log.Fatal("Env variables not set.")
+// failOnError logs any errors and exits.
+func failOnError(err error, msg string) {
+	if err != nil {
+		log.Fatalf("%s: %v", msg, err)
 	}
 }
 
 func main() {
-	client := configureClient("sensor")
-	myData := struct {
-		Data string `json:"data"`
-	}{
-		Data: "Hello",
+	// Load environment variables from .env file
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
 	}
-	myJSON, _ := json.Marshal(myData)
 
-	for {
-		client.Publish("sensor/data", 1, true, myJSON)
-		time.Sleep(time.Duration(1 * time.Second))
+	// Retrieve the RabbitMQ URL from environment variables
+	rabbitMQURL := os.Getenv("RABBITMQ_URL") // Example: "amqp://user:password@localhost:5672/"
+
+	// Connect to RabbitMQ
+	conn, err := amqp.Dial(rabbitMQURL)
+	failOnError(err, "Failed to connect to RabbitMQ")
+	defer conn.Close()
+
+	// Open a channel
+	ch, err := conn.Channel()
+	failOnError(err, "Failed to open a channel")
+	defer ch.Close()
+
+	// Declare a queue
+	q, err := ch.QueueDeclare(
+		"MQTTSensors", // name
+		true,          // durable
+		false,         // delete when unused
+		false,         // exclusive
+		false,         // no-wait
+		nil,           // arguments
+	)
+	failOnError(err, "Failed to declare a queue")
+
+	// Prepare the data to send
+	myData := MyDataStructure{
+		Name:    "ExampleName",
+		Unit:    "C",
+		CoordsX: "23",
+		CoordsY: "45",
+		Date:    time.Now().Format(time.RFC3339),
 	}
+
+	// Wrap the data in DataWrapper
+	dataWrapper := DataWrapper{
+		Data: myData,
+	}
+
+	// Marshal the wrapped data into JSON
+	body, err := json.Marshal(dataWrapper)
+	failOnError(err, "Failed to marshal JSON")
+
+	// Publish the message
+	err = ch.Publish(
+		"",     // exchange
+		q.Name, // routing key
+		false,  // mandatory
+		false,  // immediate
+		amqp.Publishing{
+			ContentType: "application/json",
+			Body:        body,
+		})
+	failOnError(err, "Failed to publish a message")
+
+	// Log the sent message
+	log.Printf(" [x] Sent %s", body)
 }
