@@ -4,6 +4,8 @@ Nessa seção são apresentadas as interações detalhadas entre os diferentes c
 
 ## Diagrama UML de sequência
 
+Esse diagrama oferece uma representação das interações entre o usuário e o painel de controle, elucidando o processo de solicitação de dados à aplicação IoT. A validação e concessão de acesso aos usuários autorizados são explicitadas, demonstrando a funcionalidade de autenticação e autorização da aplicação. Além disso, o diagrama retrata de forma clara a troca de informações entre a aplicação IoT e o broker MQTT, que desempenha um papel central na obtenção de dados dos sensores distribuídos. A sequência de interações entre o broker e os sensores, assim como a transmissão de dados de volta à aplicação IoT, é apresentada de maneira lógica e compreensível.
+
 ![Diagrama UML de sequencia](../../../static/img/uml-sequencia.svg)
 
 ```
@@ -46,6 +48,8 @@ deactivate Painel
 @enduml
 
 ```
+
+No Diagrama UML de sequência acima, um usuário acessa um painel de controle, que olicita dados a uma aplicação de Internet das Coisas (IoT). Essa aplicação autentica o usuário, concedendo acesso ao painel após a autenticação bem-sucedida. Em seguida, a aplicação autoriza o usuário e se conecta a um broker MQTT, que é responsável por gerenciar a comunicação entre os diversos sensores e a aplicação. O broker envia solicitações aos sensores, como Sensor 1, Sensor 2 e Sensor N, que respondem enviando os dados solicitados de volta ao broker. Finalmente, o broker envia os dados recebidos de volta à aplicação IoT, que os envia ao painel de controle para serem exibidos. Este processo é desencadeado pela interação inicial do usuário com o painel e continua até a transmissão dos dados de volta ao painel para exibição.
 
 ## Diagrama UML de implantação
 
