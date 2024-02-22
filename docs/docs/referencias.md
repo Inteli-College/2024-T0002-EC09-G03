@@ -1,8 +1,5 @@
 # Referências
 
-Referencias analise Pestel:
-## Referências
-
 1. **Riscos Políticos para o Brasil em 2024**
    - [S&P Global](https://www.s&p.global/pt/research/articles/2023/07/26/riscos-politicos-para-o-brasil-em-2024)
 
@@ -48,12 +45,15 @@ Referencias analise Pestel:
 15. **Licenciamento Ambiental**
     - [Instituto Brasileiro do Meio Ambiente e dos Recursos Naturais Renováveis (IBAMA)](https://www.ibama.gov.br/licenciamento)
 
-referencias: tam sam som
+16. **Análise de Mercado de Smart Cities**
 
-## Referências
-Incluímos referências relevantes, como análises do mercado global de cidades inteligentes, vantagens e desvantagens, dados específicos sobre municípios inteligentes em São Paulo e média de investimento pelo governo estadual [^1^] [^2^] [^3^] [^4^].
+    - [Smart Cities Market Analysis, Industry Size & Forecast](https://www.marketsandmarkets.com/Market-Reports/smart-cities-market-542.html)
 
-[^1^]: [Smart Cities Market Analysis, Industry Size & Forecast](https://www.marketsandmarkets.com/Market-Reports/smart-cities-market-542.html)
-[^2^]: [As vantagens e desvantagens das cidades inteligentes](https://www.estimativa.org.br/cidades-inteligentes-vantagens-e-desvantagens/)
-[^3^]: [Contabilização dos Municípios em São Paulo listados Como Inteligentes (Urban Systems)](https://valorinveste.globo.com/mercados/brasil-e-politica/noticia/2020/09/14/sao-paulo-fica-em-primeiro-lugar-no-ranking-de-cidades-inteligentes.ghtml)
-[^4^]: [Média de Investimento Realizado pelo Governo de São Paulo (2021)](https://www.saopaulo.sp.gov.br/spnoticias/estado-de-sao-paulo-dobra-o-volume-de-investimentos-em-2021/)
+17. **Vantagens e Desvantagens de cidades inteligentes**
+    - [As vantagens e desvantagens das cidades inteligentes](https://www.estimativa.org.br/cidades-inteligentes-vantagens-e-desvantagens/)
+
+18. **Municípios de São Paulo Listado como Inteligentes**
+      - [Contabilização dos Municípios em São Paulo listados Como Inteligentes (Urban Systems)](https://valorinveste.globo.com/mercados/brasil-e-politica/noticia/2020/09/14/sao-paulo-fica-em-primeiro-lugar-no-ranking-de-cidades-inteligentes.ghtml)
+
+19. **Média de Investimento Realizado pelo Governo de São Paulo (2021)**
+    - [Média de Investimento Realizado pelo Governo de São Paulo (2021)](https://www.saopaulo.sp.gov.br/spnoticias/estado-de-sao-paulo-dobra-o-volume-de-investimentos-em-2021/)

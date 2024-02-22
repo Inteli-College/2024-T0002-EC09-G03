@@ -1,6 +1,3 @@
-Claro, aqui está a análise PESTEL aprimorada sem as referências:
-
-```markdown
 # Análise PESTEL para a Prodam
 
 A análise PESTEL é uma ferramenta estratégica valiosa para a Prodam, fornecendo uma visão abrangente dos fatores políticos, econômicos, sociais, tecnológicos, ambientais e legais que podem impactar o desenvolvimento e a implementação do projeto. Abaixo estão os detalhes aprimorados para cada categoria:
@@ -91,7 +88,3 @@ A análise PESTEL é uma ferramenta estratégica valiosa para a Prodam, fornecen
 - *Estratégias de Mitigação:*
   - Testes de usabilidade regulares: Identificar e corrigir problemas.
   - Feedback contínuo dos usuários: Aprimorar constantemente a interface.
-
-## Fatores Ambientais
-
-**Emissões de Gases de Efeito
