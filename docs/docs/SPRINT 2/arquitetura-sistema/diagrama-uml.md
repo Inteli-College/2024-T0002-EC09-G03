@@ -43,3 +43,27 @@ deactivate Painel
 @enduml
 
 ```
+## Diagrama UML de implantação
+
+```
+@startuml
+package "Sistema IoT" {
+    [Painel]
+    [Aplicação IoT]
+    [Broker MQTT]
+    [Sensor 1]
+    [Sensor 2]
+    [Sensor N]
+}
+
+Painel --> AplicacaoIoT: Solicita Dados
+AplicacaoIoT --> Broker: Conecta
+AplicacaoIoT --> Sensor1: Solicita Dados
+AplicacaoIoT --> Sensor2: Solicita Dados
+AplicacaoIoT --> SensorN: Solicita Dados
+Broker --> Sensor1: Solicita Dados
+Broker --> Sensor2: Solicita Dados
+Broker --> SensorN: Solicita Dados
+@enduml
+
+```
