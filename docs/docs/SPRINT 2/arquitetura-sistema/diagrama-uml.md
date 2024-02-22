@@ -1,8 +1,8 @@
 # Diagrama UML de sequência e implantação
 
+Nessa seção são apresentadas as interações detalhadas entre os diferentes componentes do sistema proposto, incluindo os dispositivos de hardware multimodais, a plataforma web de engajamento do cidadão e o dashboard de gerenciamento de dados. Esse diagrama oferece uma visão clara da dinâmica de comunicação entre esses elementos, bem como sua distribuição física nos ambientes urbanos. Ao representar as sequências de eventos entre os sensores, a plataforma web e o sistema de gerenciamento, o diagrama fornece uma base sólida para o planejamento e implementação das soluções propostas, contribuindo significativamente para a compreensão e o desenvolvimento eficaz do projeto.
 
 ## Diagrama UML de sequência
-
 
 ![Diagrama UML de sequencia](../../../static/img/uml-sequencia.svg)
 
@@ -46,6 +46,7 @@ deactivate Painel
 @enduml
 
 ```
+
 ## Diagrama UML de implantação
 
 ![Diagrama UML de sequencia](../../../static/img/uml-implantacao.svg)
