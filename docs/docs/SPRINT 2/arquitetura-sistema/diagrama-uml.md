@@ -55,7 +55,7 @@ No Diagrama UML de sequência acima, um usuário acessa um painel de controle, q
 
 O Diagrama de UML de implantação discrima a distribuição dos componentes do sistema em um ambiente real de implementação de software, representando os elementos como nós de implantação. Aqui, são destacado as o painel de controle, a aplicação IoT, o broker MQTT e os sensores, identificando suas interações e a forma como estão dispostos no ambiente físico. O diagrama de implantação fornece uma visão da infraestrutura de aplicações de software e hardware necessárias para o funcionamento do sistema, auxiliando no planejamento e compreensão da distribuição dos componentes em sua implementação por uma equipe de desenvolvimento.
 
-![Diagrama UML de sequencia](../../../static/img/uml-sequencia.svg)
+![Diagrama UML de implantacao](../../../static/img/uml-implantacao.svg)
 
 ```
 @startuml
