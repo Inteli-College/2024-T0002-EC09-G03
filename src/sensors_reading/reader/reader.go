@@ -77,17 +77,26 @@ func Reader(db *gorm.DB) {
 	forever := make(chan bool)
 
 	go func() {
+
+		var sensors_reading_batch [1000]Sensor
+		count := 0
 		for d := range msgs {
 			var sensor Sensor
 			err := json.Unmarshal(d.Body, &sensor)
 			if err != nil {
 				log.Printf("Error decoding JSON: %s", err)
-				continue
+				return
 			}
 			// log.Printf("Received a message: %+v", sensor)
 			dataJson, _ := json.Marshal(sensor.Data)
 
-			database.CreateSensorsData(db, sensor.Name, string(dataJson), sensor.CoordsX, sensor.CoordsY, sensor.Date)
+			if count%1000 == 0 {
+				database.CreateSensorsData(db, sensor.Name, string(dataJson), sensor.CoordsX, sensor.CoordsY, sensor.Date)
+				count = 0
+			}
+
+			sensors_reading_batch[count] = sensor
+			count += 1
 		}
 	}()
 

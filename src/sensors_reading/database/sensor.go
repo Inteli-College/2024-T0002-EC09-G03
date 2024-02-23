@@ -15,7 +15,6 @@ type Sensor struct {
 func GetSensorByName(db *gorm.DB, name string) Sensor {
 	var sensor Sensor
 	db.Where("name = ?", name).First(&sensor)
-
 	return sensor
 }
 

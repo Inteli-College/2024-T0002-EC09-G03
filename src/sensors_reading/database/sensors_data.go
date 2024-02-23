@@ -28,3 +28,22 @@ func CreateSensorsData(db *gorm.DB, sensor_name string, data string, coordinate_
 
 	return sensorData
 }
+
+type SensorsReading struct {
+	Id      string
+	Name    string
+	Data    string
+	CoordsX float64
+	CoordsY float64
+	Date    time.Time
+}
+
+func createSensorDataBatch(db *gorm.DB, sensors_reading_batch []SensorsReading) {
+	var sensor Sensor = GetSensorOrCreate(db)
+	id := uuid.New()
+	sensorData := []SensorsData{Id: id.String(), Sensor_id: sensor.Id, Data: data, Coordinate_x: coordinate_x, Coordinate_y: coordinate_y, CreatedAt: createdAt}
+	result := db.Create(&sensors_reading_batch)
+	if result.Error != nil {
+		panic("failed to create sensor data")
+	}
+}
