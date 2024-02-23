@@ -1,7 +1,6 @@
 CREATE TABLE Sensors (
     id TEXT PRIMARY KEY,
     name VARCHAR(255),
-    description TEXT
 );
 
 CREATE TABLE Sensors_Data (

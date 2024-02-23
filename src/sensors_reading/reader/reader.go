@@ -6,8 +6,10 @@ import (
 	"os"
 	"time"
 
+	"github.com/Inteli-College/2024-T0002-EC09-G03/sensors_reading/database"
 	"github.com/joho/godotenv"
 	amqp "github.com/rabbitmq/amqp091-go"
+	"gorm.io/gorm"
 )
 
 type Sensor struct {
@@ -30,7 +32,7 @@ func failOnError(err error, msg string) {
 	}
 }
 
-func Reader() {
+func Reader(db *gorm.DB) {
 	// Load environment variables from .env file
 	err := godotenv.Load()
 	if err != nil {
@@ -76,13 +78,16 @@ func Reader() {
 
 	go func() {
 		for d := range msgs {
-			var target Sensor
-			err := json.Unmarshal(d.Body, &target)
+			var sensor Sensor
+			err := json.Unmarshal(d.Body, &sensor)
 			if err != nil {
 				log.Printf("Error decoding JSON: %s", err)
 				continue
 			}
+			// log.Printf("Received a message: %+v", sensor)
+			dataJson, _ := json.Marshal(sensor.Data)
 
+			database.CreateSensorsData(db, sensor.Name, string(dataJson), sensor.CoordsX, sensor.CoordsY, sensor.Date)
 		}
 	}()
 
