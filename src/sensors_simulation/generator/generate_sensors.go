@@ -1,15 +1,16 @@
 package generator
 
 import (
+	"fmt"
+	"log"
 	"math/rand"
-	"reflect"
 
 	"github.com/Inteli-College/2024-T0002-EC09-G03/sensors"
 )
 
 var existingCoords = make(map[string]map[float64]bool)
 
-func generateCoords(sensor sensors.SensorInterface) (float64, float64) {
+func generateCoords(typeName string) (float64, float64) {
 	baseX := -46.633308
 	baseY := 23.550520
 
@@ -23,32 +24,29 @@ func generateCoords(sensor sensors.SensorInterface) (float64, float64) {
 		coordsX := baseX + offsetX
 		coordsY := baseY + offsetY
 
-		if existingCoords[sensor.GetSensorName()] == nil {
-			existingCoords[sensor.GetSensorName()] = make(map[float64]bool)
+		if existingCoords[typeName] == nil {
+			existingCoords[typeName] = make(map[float64]bool)
 		}
 
-		if existingCoords[sensor.GetSensorName()][coordsX+coordsY] {
+		if existingCoords[typeName][coordsX+coordsY] {
 			continue
 		} else {
-			existingCoords[sensor.GetSensorName()][coordsX+coordsY] = true
+			existingCoords[typeName][coordsX+coordsY] = true
 			return coordsX, coordsY
 		}
 	}
 }
 
-func GenerateSensors(number int, sensorsTypes *[]reflect.Type) *[]interface{} {
-	var instances []interface{}
+func GenerateSensors(number int, sensorsTypes *map[string]sensors.SensorsTypes) *[]*sensors.Sensor {
+	var instances []*sensors.Sensor
 
-	for _, t := range *sensorsTypes {
+	for key, value := range *sensorsTypes {
 		for i := 0; i < number/len(*sensorsTypes); i++ {
-			instance := reflect.New(t).Interface()
-
-			if accertedInstance, ok := instance.(sensors.SensorInterface); ok {
-				accertedInstance.New()
-				accertedInstance.SetCoords(generateCoords(accertedInstance))
-			}
-
-			instances = append(instances, instance)
+      coordsX, coordsY := generateCoords(key)
+      log.Printf("Generating sensor: %s", fmt.Sprintf("%s %f,%f", value.Name, coordsX, coordsY))
+			tempSensor := sensors.Sensor{}
+			tempSensor.New(fmt.Sprintf("%s %f,%f", value.Name, coordsX, coordsY), value.Unit, coordsX, coordsY, value.Callback)
+			instances = append(instances, &tempSensor)
 		}
 	}
 
