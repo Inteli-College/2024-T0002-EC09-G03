@@ -8,9 +8,6 @@ import (
 	"github.com/Inteli-College/2024-T0002-EC09-G03/sensors_reading/reader"
 )
 
-func init() {
-}
-
 func main() {
 	initialization.LoadEnvVariables()
 	db := database.Connect()
