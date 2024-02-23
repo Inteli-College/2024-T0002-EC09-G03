@@ -5,7 +5,7 @@ import (
 	"log"
 	"math/rand"
 
-	"github.com/Inteli-College/2024-T0002-EC09-G03/sensors"
+	"github.com/Inteli-College/2024-T0002-EC09-G03/src/sensors_simulation/sensors"
 )
 
 var existingCoords = make(map[string]map[float64]bool)
@@ -45,7 +45,7 @@ func GenerateSensors(number int, sensorsTypes *map[string]sensors.SensorsTypes) 
       coordsX, coordsY := generateCoords(key)
       log.Printf("Generating sensor: %s", fmt.Sprintf("%s %f,%f", value.Name, coordsX, coordsY))
 			tempSensor := sensors.Sensor{}
-			tempSensor.New(fmt.Sprintf("%s %f,%f", value.Name, coordsX, coordsY), value.Unit, coordsX, coordsY, value.Callback)
+			tempSensor.New(fmt.Sprintf("%s %f,%f", value.Name, coordsX, coordsY), coordsX, coordsY, value.Callback)
 			instances = append(instances, &tempSensor)
 		}
 	}

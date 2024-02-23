@@ -6,27 +6,31 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/Inteli-College/2024-T0002-EC09-G03/conections"
+	"github.com/Inteli-College/2024-T0002-EC09-G03/src/sensors_simulation/conections"
 	mqtt "github.com/eclipse/paho.mqtt.golang"
 )
 
-type simulationFunction func() (float64, error)
+type simulationFunction func() ([]SensorData, error)
 
 type Sensor struct {
-	Name       string    `json:"name"`
-	Unit       string    `json:"unit"`
-	Data       float64   `json:"data"`
-	CoordsX    float64   `json:"coords_x"`
-	CoordsY    float64   `json:"coords_y"`
-	Date       time.Time `json:"date"`
+	Name       string       `json:"name"`
+	Data       []SensorData `json:"data"`
+	CoordsX    float64      `json:"coords_x"`
+	CoordsY    float64      `json:"coords_y"`
+	Date       time.Time    `json:"date"`
 	client     mqtt.Client
 	simulation simulationFunction
 }
 
-func (s *Sensor) New(name string, unit string, coordsX float64, coordsY float64, callback simulationFunction) {
+type SensorData struct {
+	Measurament float64 `json:"measurament"`
+	Unit        string  `json:"unit"`
+	Material    string  `json:"material"`
+}
+
+func (s *Sensor) New(name string, coordsX float64, coordsY float64, callback simulationFunction) {
 	s.client = conections.GenerateClient(name)
 	s.Name = name
-	s.Unit = unit
 	s.CoordsX = coordsX
 	s.CoordsY = coordsY
 	s.simulation = callback
@@ -53,7 +57,7 @@ func (s *Sensor) Emulate() {
 
 		s.Data = simulatedData
 
-		payload, _ := json.Marshal(s.Data)
+		payload, _ := json.Marshal(*s)
 
 		s.setDateTimeNow()
 		if token := s.client.Publish("sensor/data", 1, false, payload); token.Wait() && token.Error() != nil {
@@ -72,8 +76,14 @@ type SensorsTypes struct {
 var Sensors = map[string]SensorsTypes{
 	"solar": {
 		Name:     "SOLAR",
-		Unit:     "W/m^2",
 		Callback: SolarSimulation,
 	},
+	"gas": {
+		Name:     "GAS",
+		Callback: GasSimulation,
+	},
+	"polution": {
+		Name:     "POLUTION",
+		Callback: PolutionSimulation,
+	},
 }
-

@@ -2,7 +2,7 @@ package sensors
 
 import "math/rand"
 
-func SolarSimulation() (float64, error) {
+func SolarSimulation() ([]SensorData, error) {
 	periodo := getTimePeriod()
 
 	var valorRadiação float64
@@ -16,5 +16,11 @@ func SolarSimulation() (float64, error) {
 		valorRadiação = rand.Float64() * 50
 	}
 
-	return valorRadiação, nil
+	return []SensorData{
+		{
+			Measurament: valorRadiação,
+			Unit:        "W/m^2",
+			Material:    "light",
+		},
+	}, nil
 }

@@ -1,4 +1,4 @@
-module github.com/Inteli-College/2024-T0002-EC09-G03
+module github.com/Inteli-College/2024-T0002-EC09-G03/src/sensors_simulation
 
 go 1.21.6
 

@@ -16,11 +16,11 @@ func GenerateClient(clientName string) mqtt.Client {
 	opts.SetPassword(os.Getenv("RABBIT_PASSWORD"))
 
 	opts.OnConnect = func(client mqtt.Client) {
-		fmt.Printf("->Client %s connected succecifuly!", clientName)
+		fmt.Printf("->Client %s connected succecifuly!\n", clientName)
 	}
 
 	opts.OnConnectionLost = func(client mqtt.Client, err error) {
-		fmt.Printf("-> Client %s disconnected due to: %v", clientName, err)
+		fmt.Printf("-> Client %s disconnected due to: %v\n", clientName, err)
 	}
 
 	client := mqtt.NewClient(opts)
