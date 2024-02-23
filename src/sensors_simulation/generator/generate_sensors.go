@@ -12,7 +12,7 @@ var existingCoords = make(map[string]map[float64]bool)
 
 func generateCoords(typeName string) (float64, float64) {
 	baseX := -46.633308
-	baseY := 23.550520
+	baseY := -23.550520
 
 	maxOffsetX, minOffsetX := 0.3, -0.2
 	maxOffsetY, minOffsetY := 0.1, -0.2
@@ -42,10 +42,10 @@ func GenerateSensors(number int, sensorsTypes *map[string]sensors.SensorsTypes) 
 
 	for key, value := range *sensorsTypes {
 		for i := 0; i < number/len(*sensorsTypes); i++ {
-      coordsX, coordsY := generateCoords(key)
-      log.Printf("Generating sensor: %s", fmt.Sprintf("%s %f,%f", value.Name, coordsX, coordsY))
+			coordsX, coordsY := generateCoords(key)
+			log.Printf("Generating sensor: %s", fmt.Sprintf("%s %f,%f", value.Name, coordsY, coordsX))
 			tempSensor := sensors.Sensor{}
-			tempSensor.New(fmt.Sprintf("%s %f,%f", value.Name, coordsX, coordsY), coordsX, coordsY, value.Callback)
+			tempSensor.New(fmt.Sprintf("%s %f,%f", value.Name, coordsY, coordsX), coordsX, coordsY, value.Callback)
 			instances = append(instances, &tempSensor)
 		}
 	}

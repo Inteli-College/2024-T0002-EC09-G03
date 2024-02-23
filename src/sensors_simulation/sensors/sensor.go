@@ -6,7 +6,7 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/Inteli-College/2024-T0002-EC09-G03/src/sensors_simulation/conections"
+	"github.com/Inteli-College/2024-T0002-EC09-G03/src/sensors_simulation/connections"
 	mqtt "github.com/eclipse/paho.mqtt.golang"
 )
 
@@ -29,7 +29,7 @@ type SensorData struct {
 }
 
 func (s *Sensor) New(name string, coordsX float64, coordsY float64, callback simulationFunction) {
-	s.client = conections.GenerateClient(name)
+	s.client = connections.GenerateClient(name)
 	s.Name = name
 	s.CoordsX = coordsX
 	s.CoordsY = coordsY

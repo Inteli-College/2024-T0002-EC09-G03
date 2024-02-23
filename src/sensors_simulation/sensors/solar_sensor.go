@@ -1,6 +1,8 @@
 package sensors
 
-import "math/rand"
+import (
+	"math/rand"
+)
 
 func SolarSimulation() ([]SensorData, error) {
 	periodo := getTimePeriod()
