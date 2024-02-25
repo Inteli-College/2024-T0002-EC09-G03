@@ -3,17 +3,17 @@ package reader
 import (
 	"encoding/json"
 	"log"
-	"os"
 	"time"
 
+	"github.com/Inteli-College/2024-T0002-EC09-G03/sensors_reading/connections/rabbitmq"
 	"github.com/Inteli-College/2024-T0002-EC09-G03/sensors_reading/database"
-	"github.com/joho/godotenv"
-	amqp "github.com/rabbitmq/amqp091-go"
+	"github.com/rabbitmq/amqp091-go"
 	"gorm.io/gorm"
 )
 
 type Sensor struct {
 	Name    string       `json:"name"`
+	Id      string       `json:"id"`
 	Data    []SensorData `json:"data"`
 	CoordsX float64      `json:"coords_x"`
 	CoordsY float64      `json:"coords_y"`
@@ -33,73 +33,40 @@ func failOnError(err error, msg string) {
 }
 
 func Reader(db *gorm.DB) {
-	// Load environment variables from .env file
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
+	msgs := rabbitmq.GenerateConsumer("MQTTSensors")
+	if msgs == nil {
+		log.Fatal("Msgs null")
 	}
 
-	rabbitMQURL := os.Getenv("RABBITMQ_URL")
+	consumerControl := make(chan struct{}, 98)
+	for i := 0; i < 98; i++ {
+		consumerControl <- struct{}{}
+	}
 
-	// Connect to RabbitMQ
-	conn, err := amqp.Dial(rabbitMQURL)
-	failOnError(err, "Failed to connect to RabbitMQ")
-	defer conn.Close()
+	log.Printf(" [*] Waiting for messages. To exit press CTRL+C")
 
-	// Open a channel
-	ch, err := conn.Channel()
-	failOnError(err, "Failed to open a channel")
-	defer ch.Close()
+	for {
+		<-consumerControl
 
-	// Declare a queue
-	q, err := ch.QueueDeclare(
-		"MQTTSensors", // queue name
-		true,          // durable
-		false,         // delete when unused
-		false,         // exclusive
-		false,         // no-wait
-		nil,           // arguments
-	)
-	failOnError(err, "Failed to declare a queue")
+		msg, ok := <-msgs
 
-	// Consume messages from the queue
-	msgs, err := ch.Consume(
-		q.Name, // queue
-		"",     // consumer
-		true,   // auto-ack
-		false,  // exclusive
-		false,  // no-local
-		false,  // no-wait
-		nil,    // args
-	)
-	failOnError(err, "Failed to register a consumer")
-
-	forever := make(chan bool)
-
-	go func() {
-
-		var sensors_reading_batch [1000]Sensor
-		count := 0
-		for d := range msgs {
-			var sensor Sensor
-			err := json.Unmarshal(d.Body, &sensor)
+		if !ok {
+			log.Fatalln("Unable to retrive msg from queue.")
+		}
+		go func(msg *amqp091.Delivery, db *gorm.DB) {
+			defer func() { consumerControl <- struct{}{} }()
+			var sensorReceived Sensor
+			err := json.Unmarshal(msg.Body, &sensorReceived)
 			if err != nil {
 				log.Printf("Error decoding JSON: %s", err)
 				return
 			}
-			// log.Printf("Received a message: %+v", sensor)
-			dataJson, _ := json.Marshal(sensor.Data)
 
-			if count%1000 == 0 {
-				database.CreateSensorsData(db, sensor.Name, string(dataJson), sensor.CoordsX, sensor.CoordsY, sensor.Date)
-				count = 0
-			}
+			dataJson, _ := json.Marshal(sensorReceived.Data)
 
-			sensors_reading_batch[count] = sensor
-			count += 1
-		}
-	}()
+			database.CreateSensorsData(db, sensorReceived.Id, string(dataJson), sensorReceived.CoordsX, sensorReceived.CoordsY, sensorReceived.Date)
 
-	log.Printf(" [*] Waiting for messages. To exit press CTRL+C")
-	<-forever
+		}(&msg, db)
+	}
+
 }

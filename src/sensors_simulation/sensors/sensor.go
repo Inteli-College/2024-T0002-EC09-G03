@@ -7,13 +7,16 @@ import (
 	"time"
 
 	"github.com/Inteli-College/2024-T0002-EC09-G03/src/sensors_simulation/connections"
+	"github.com/Inteli-College/2024-T0002-EC09-G03/src/sensors_simulation/database"
 	mqtt "github.com/eclipse/paho.mqtt.golang"
+	"gorm.io/gorm"
 )
 
 type simulationFunction func() ([]SensorData, error)
 
 type Sensor struct {
 	Name       string       `json:"name"`
+	Id         string       `json:"id"`
 	Data       []SensorData `json:"data"`
 	CoordsX    float64      `json:"coords_x"`
 	CoordsY    float64      `json:"coords_y"`
@@ -28,11 +31,15 @@ type SensorData struct {
 	Material    string  `json:"material"`
 }
 
-func (s *Sensor) New(name string, coordsX float64, coordsY float64, callback simulationFunction) {
+func (s *Sensor) New(name *string, coordsX *float64, coordsY *float64, callback simulationFunction, db *gorm.DB) {
 	s.client = connections.GenerateClient(name)
-	s.Name = name
-	s.CoordsX = coordsX
-	s.CoordsY = coordsY
+
+	sensorDB := database.CreateSensor(db, name)
+
+	s.Id = sensorDB.Id
+	s.Name = *name
+	s.CoordsX = *coordsX
+	s.CoordsY = *coordsY
 	s.simulation = callback
 }
 
