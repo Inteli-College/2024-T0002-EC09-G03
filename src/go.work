@@ -1,0 +1,7 @@
+go 1.21.6
+
+use (
+	./backend_go
+	./sensors_reading
+	./sensors_simulation
+)

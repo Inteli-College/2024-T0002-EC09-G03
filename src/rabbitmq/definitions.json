@@ -1,0 +1,80 @@
+{
+  "users": [
+    {
+      "name": "admin",
+      "password_hash": "7DB56lSFnBD2oPm2NxHIq+HEk0G+L9vs2nNGTJeo1pZz+VHI",
+      "hashing_algorithm": "rabbit_password_hashing_sha256",
+      "tags": "administrator"
+    },
+    {
+      "name": "consumerSensor",
+      "password_hash": "uRaSvACOLAibGaNs/tsD5LJpB9UXueBW+EhVCFK+yx0IILgQ",
+      "hashing_algorithm": "rabbit_password_hashing_sha256",
+      "tags": "none"
+    },
+    {
+      "name": "publisherSensor",
+      "password_hash": "x6llBWMRJjGchHXo6xM2i/j33TEyddzciodgM51QdaOm54iD",
+      "hashing_algorithm": "rabbit_password_hashing_sha256",
+      "tags": "none"
+    }
+  ],
+  "permissions": [
+    {
+      "user": "admin",
+      "vhost": "/",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    },
+    {
+      "user": "consumerSensor",
+      "vhost": "/",
+      "configure": "^$",
+      "write": "^$",
+      "read": "MQTTSensors"
+    },
+    {
+      "user": "publisherSensor",
+      "vhost": "/",
+      "configure": "^$",
+      "write": "amq.topic",
+      "read": "^$"
+    }
+  ],
+  "vhosts": [
+    {
+      "name": "/"
+    }
+  ],
+  "queues": [
+    {
+      "name": "MQTTSensors",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {},
+      "vhost": "/"
+    }
+  ],
+  "exchanges": [
+    {
+      "name": "amq.topic",
+      "type": "topic",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {},
+      "vhost": "/"
+    }
+  ],
+  "bindings": [
+    {
+      "source": "amq.topic",
+      "vhost": "/",
+      "destination": "MQTTSensors",
+      "destination_type": "queue",
+      "routing_key": "sensor.data",
+      "arguments": {}
+    }
+  ]
+}
