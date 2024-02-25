@@ -12,7 +12,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ./docs-grupo-03
+        working-directory: ./docs
     steps:
       - uses: actions/checkout@v4
         with:
