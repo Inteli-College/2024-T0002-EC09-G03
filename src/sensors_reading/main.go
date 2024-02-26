@@ -8,6 +8,7 @@ import (
 	"github.com/Inteli-College/2024-T0002-EC09-G03/sensors_reading/database"
 	"github.com/Inteli-College/2024-T0002-EC09-G03/sensors_reading/initialization"
 	"github.com/Inteli-College/2024-T0002-EC09-G03/sensors_reading/reader"
+	"github.com/Inteli-College/2024-T0002-EC09-G03/sensors_reading/utils"
 )
 
 func init() {
@@ -24,6 +25,8 @@ func main() {
 	db := database.Connect()
 
 	go actors.WatchNewSensorReq(actors.ChNewSensor)
+
+	go utils.MonitorNumberOfGoroutines()
 
 	reader.Reader(db)
 

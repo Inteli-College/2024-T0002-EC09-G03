@@ -54,7 +54,7 @@ func (s *Sensor) randSleep() {
 
 func (s *Sensor) Emulate() {
 	for {
-		s.randSleep()
+		// s.randSleep()
 		simulatedData, err := s.simulation()
 
 		if err != nil {
