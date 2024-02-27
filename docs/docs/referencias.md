@@ -57,3 +57,31 @@
 
 19. **Média de Investimento Realizado pelo Governo de São Paulo (2021)**
     - [Média de Investimento Realizado pelo Governo de São Paulo (2021)](https://www.saopaulo.sp.gov.br/spnoticias/estado-de-sao-paulo-dobra-o-volume-de-investimentos-em-2021/)
+
+20. **Programa das Nações Unidas para o Meio Ambiente (PNUMA)**
+   - Descrição: O PNUMA é a principal autoridade ambiental global que promove a implementação da dimensão ambiental do desenvolvimento sustentável dentro do Sistema das Nações Unidas e atua como um defensor do meio ambiente mundialmente.
+   - Áreas de atuação incluem mudança climática, ecossistemas, químicos e resíduos, entre outros.
+   - Mais informações: [UNEP - UN Environment Programme](https://www.unep.org/).
+
+21. **Comissão Econômica para a América Latina e o Caribe (CEPAL)**
+   - Para pesquisar mais sobre a CEPAL, acesse: [CEPAL - Comissão Econômica para a América Latina e o Caribe](https://www.cepal.org/pt-br).
+
+22. **Embedded EthiCS da Harvard**
+   - Descrição: Um programa educacional da Harvard que integra considerações éticas ao estudo da ciência da computação, enfatizando a necessidade de os alunos considerarem as implicações éticas no design e desenvolvimento de tecnologia.
+   - Mais informações: [Embedded EthiCS at Harvard](https://embeddedethics.seas.harvard.edu/).
+
+23. **Conselho de Revisão Institucional (IRB)**
+   - Descrição: Os IRBs são comitês que revisam propostas de pesquisa para garantir que sejam eticamente aceitáveis e sigam o código de conduta institucional, protegendo os direitos dos participantes.
+   - Mais informações: Para detalhes específicos sobre procedimentos do IRB, é recomendado visitar sites de instituições acadêmicas que realizam pesquisas com seres humanos, pois cada instituição tem seu próprio IRB e diretrizes.
+
+24. **Lei Geral de Proteção de Dados (LGPD) do Brasil**
+   - Descrição: Uma legislação brasileira que regula a coleta, o uso, o processamento e a armazenagem de dados pessoais, proporcionando aos indivíduos maior controle sobre seus dados pessoais.
+   - Mais informações: [LGPD](https://www.gov.br/esporte/pt-br/acesso-a-informacao/lgpd) e [LGPD - Lei nº 13.709](https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm).
+
+25. **Princípios de ética em IA da União Europeia**
+   - Descrição: A União Europeia desenvolveu diretrizes éticas para a inteligência artificial que visam garantir o desenvolvimento e uso responsável da IA, com foco em assegurar que a IA seja confiável.
+   - Mais informações: [Ethics guidelines for trustworthy AI - European Commission](https://digital-strategy.ec.europa.eu/en/policies).
+
+26. **Diretrizes de inclusão digital**
+   - Descrição: Para explorar diretrizes semelhantes, recomenda-se consultar iniciativas da UNESCO ou ITU (União Internacional de Telecomunicações) que promovem a inclusão digital e o acesso igualitário à tecnologia.
+   - Mais informações: [UNESCO](https://www.unesco.org/en) e [ITU](https://www.itu.int/en/Pages/default.aspx)
