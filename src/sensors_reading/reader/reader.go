@@ -14,12 +14,10 @@ import (
 )
 
 type Sensor struct {
-	Name    string       `json:"name"`
-	Id      string       `json:"id"`
-	Data    []SensorData `json:"data"`
-	CoordsX float64      `json:"coords_x"`
-	CoordsY float64      `json:"coords_y"`
-	Date    time.Time    `json:"date"`
+	Name string       `json:"name"`
+	Id   string       `json:"id"`
+	Data []SensorData `json:"data"`
+	Date time.Time    `json:"date"`
 }
 
 type SensorData struct {
@@ -87,12 +85,10 @@ func feedBatch(msg *amqp091.Delivery, batch *[1000]*database.SensorsData, index 
 	}
 	jsonData, _ := json.Marshal(sensorReceived.Data)
 	sensorData := database.SensorsData{
-		Id:           uuid.New().String(),
-		Sensor_id:    sensorReceived.Id,
-		Data:         string(jsonData),
-		Coordinate_x: sensorReceived.CoordsX,
-		Coordinate_y: sensorReceived.CoordsY,
-		CreatedAt:    sensorReceived.Date,
+		Id:        uuid.New().String(),
+		Sensor_id: sensorReceived.Id,
+		Data:      string(jsonData),
+		CreatedAt: sensorReceived.Date,
 	}
 
 	mArr.Lock()

@@ -27,7 +27,7 @@ func main() {
 	start := time.Now()
 	wg := sync.WaitGroup{}
 	db := database.Connect()
-	sensorsInstanciated := generator.GenerateSensors(600, &sensors.Sensors, db, &wg)
+	sensorsInstanciated := generator.GenerateSensors(3, &sensors.Sensors, db, &wg)
 
 	log.Printf("Tempo: %f\n", time.Since(start).Seconds())
 	log.Printf("Tamanho: %d\n", len(*sensorsInstanciated))

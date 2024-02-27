@@ -8,8 +8,10 @@ import (
 )
 
 type Sensor struct {
-	Id   string
-	Name string
+	Id          string
+	Name        string
+	CoordinateX float64
+	CoordinateY float64
 }
 
 func GetSensorByName(db *gorm.DB, name *string) Sensor {
@@ -18,9 +20,9 @@ func GetSensorByName(db *gorm.DB, name *string) Sensor {
 	return sensor
 }
 
-func CreateSensor(db *gorm.DB, name *string) Sensor {
+func CreateSensor(db *gorm.DB, name *string, coordsX *float64, coordsY *float64) Sensor {
 	id := uuid.New()
-	sensor := Sensor{Id: id.String(), Name: *name}
+	sensor := Sensor{Id: id.String(), Name: *name, CoordinateX: *coordsX, CoordinateY: *coordsY}
 	result := db.Create(&sensor)
 	if result.Error != nil {
 		fmt.Println(result.Error)
@@ -31,10 +33,10 @@ func CreateSensor(db *gorm.DB, name *string) Sensor {
 	return sensor
 }
 
-func GetSensorOrCreate(db *gorm.DB, name *string) Sensor {
-	sensor := GetSensorByName(db, name)
-	if sensor.Name == "" {
-		sensor = CreateSensor(db, name)
-	}
-	return sensor
-}
+// func GetSensorOrCreate(db *gorm.DB, name *string) Sensor {
+// 	sensor := GetSensorByName(db, name)
+// 	if sensor.Name == "" {
+// 		sensor = CreateSensor(db, name)
+// 	}
+// 	return sensor
+// }
