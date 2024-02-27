@@ -12,13 +12,13 @@ import (
 )
 
 func init() {
-	envPath := ""
 
 	if len(os.Args) > 1 {
-		envPath = os.Args[1]
+		initialization.LoadEnvVariables(&os.Args[1])
+	} else {
+		initialization.LoadEnvVariables()
 	}
 
-	initialization.LoadEnvVariables(envPath)
 }
 
 func main() {
