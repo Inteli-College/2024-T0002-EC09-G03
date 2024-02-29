@@ -3,8 +3,7 @@ package main
 import (
 	"os"
 
-	// "github.com/Inteli-College/2024-T0002-EC09-G03/sensors_reading/actors"
-	"github.com/Inteli-College/2024-T0002-EC09-G03/sensors_reading/actors"
+	"github.com/Inteli-College/2024-T0002-EC09-G03/sensors_reading/connections/rabbitmq"
 	"github.com/Inteli-College/2024-T0002-EC09-G03/sensors_reading/database"
 	"github.com/Inteli-College/2024-T0002-EC09-G03/sensors_reading/initialization"
 	"github.com/Inteli-College/2024-T0002-EC09-G03/sensors_reading/reader"
@@ -22,13 +21,15 @@ func init() {
 }
 
 func main() {
-	db := database.Connect()
+	db := database.New()
+	db.Connect()
 
-	go actors.WatchNewSensorReq(actors.ChNewSensor)
+	queue := rabbitmq.New()
+	queue.GenerateConsumer("MQTTSensors")
 
 	go utils.MonitorNumberOfGoroutines()
 
-	reader.Reader(db)
+	reader.Reader(db, queue)
 
 	select {}
 }
