@@ -9,7 +9,9 @@ O Sistema de Feedback Interativo visa estabelecer um canal direto e acessível p
 ### Visão Geral
 A tela inicial do cliente proporciona uma atmosfera acolhedora e fácil navegação para explorar tópicos relevantes e compartilhar seus feedbacks.
 
-COLOCAR IMAGENS
+![Diagrama UML de sequencia](../../../static/img/home-client.png)
+![Diagrama UML de sequencia](../../../static/img/send-message-client.png)
+![Diagrama UML de sequencia](../../../static/img/send-messages-client-add-name.png)
 
 ### Recursos
 - **Exibição de Tópicos:** Lista visualmente atraente dos principais tópicos para uma navegação fácil.
@@ -24,7 +26,9 @@ A interface foi projetada para ser amigável e convidativa, incentivando os clie
 ### Visão Geral
 A tela inicial do negócio apresenta uma plataforma completa para gerenciar tópicos, visualizar feedbacks e manter uma comunicação eficaz com os clientes.
 
-COLOCAR IMAGENS
+![Diagrama UML de sequencia](../../../static/img/home-business.png)
+![Diagrama UML de sequencia](../../../static/img/message-business-vision.png)
+![Diagrama UML de sequencia](../../../static/img/adicionar-topicos.png)
 
 ### Recursos
 - **Exibição de Tópicos:** Visão abrangente dos tópicos em discussão para uma gestão organizada.
