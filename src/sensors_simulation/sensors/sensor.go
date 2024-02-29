@@ -4,15 +4,43 @@ import (
 	"encoding/json"
 	"log"
 	"math/rand"
+	"sync"
 	"time"
 
-	"github.com/Inteli-College/2024-T0002-EC09-G03/src/sensors_simulation/connections"
-	"github.com/Inteli-College/2024-T0002-EC09-G03/src/sensors_simulation/database"
-	mqtt "github.com/eclipse/paho.mqtt.golang"
-	"gorm.io/gorm"
+	mqttConn "github.com/Inteli-College/2024-T0002-EC09-G03/src/sensors_simulation/connections/mqtt"
+	sensorTable "github.com/Inteli-College/2024-T0002-EC09-G03/src/sensors_simulation/database/sensor"
 )
 
 type simulationFunction func() ([]SensorData, error)
+
+type dbInterface interface {
+	CreateSensor(name *string, coordsX *float64, coordsY *float64) sensorTable.Sensor
+}
+
+type mqttInterface interface {
+	Publish(topic *string, qos byte, retained bool, payload interface{})
+}
+
+type SensorsTypes struct {
+	Name     string
+	Unit     string
+	Callback simulationFunction
+}
+
+var Sensors = map[string]SensorsTypes{
+	"Solar": {
+		Name:     "Solar",
+		Callback: SolarSimulation,
+	},
+	"Gas": {
+		Name:     "Gas",
+		Callback: GasSimulation,
+	},
+	"Polution": {
+		Name:     "Polution",
+		Callback: PolutionSimulation,
+	},
+}
 
 type Sensor struct {
 	Name       string       `json:"name"`
@@ -21,7 +49,7 @@ type Sensor struct {
 	CoordsX    float64      `json:"coords_x"`
 	CoordsY    float64      `json:"coords_y"`
 	Date       time.Time    `json:"date"`
-	client     mqtt.Client
+	client     mqttInterface
 	simulation simulationFunction
 }
 
@@ -29,18 +57,6 @@ type SensorData struct {
 	Measurament float64 `json:"measurament"`
 	Unit        string  `json:"unit"`
 	Material    string  `json:"material"`
-}
-
-func (s *Sensor) New(name *string, coordsX *float64, coordsY *float64, callback simulationFunction, db *gorm.DB) {
-	s.client = connections.GenerateClient(name)
-
-	sensorDB := database.CreateSensor(db, name, coordsX, coordsY)
-
-	s.Id = sensorDB.Id
-	s.Name = *name
-	s.CoordsX = *coordsX
-	s.CoordsY = *coordsY
-	s.simulation = callback
 }
 
 func (s *Sensor) setDateTimeNow() {
@@ -67,30 +83,30 @@ func (s *Sensor) Emulate() {
 		payload, _ := json.Marshal(*s)
 
 		s.setDateTimeNow()
-		if token := s.client.Publish("sensor/data", 1, false, payload); token.Wait() && token.Error() != nil {
-
-			log.Fatalf("From: %s - error: %s", s.Name, token.Error().Error())
-		}
+		topic := "sensor/data"
+		s.client.Publish(&topic, 1, false, payload)
 	}
 }
 
-type SensorsTypes struct {
-	Name     string
-	Unit     string
-	Callback simulationFunction
-}
+func New(name *string, coordsX *float64, coordsY *float64, callback simulationFunction, db dbInterface, wg *sync.WaitGroup, opts ...*string) *Sensor {
 
-var Sensors = map[string]SensorsTypes{
-	"solar": {
-		Name:     "SOLAR",
-		Callback: SolarSimulation,
-	},
-	"gas": {
-		Name:     "GAS",
-		Callback: GasSimulation,
-	},
-	"polution": {
-		Name:     "POLUTION",
-		Callback: PolutionSimulation,
-	},
+	var sensorId string
+
+	if len(opts) == 0 {
+		sensorId = db.CreateSensor(name, coordsX, coordsY).Id
+	} else {
+		sensorId = *opts[0]
+	}
+	client := mqttConn.New(name, wg)
+
+	return &Sensor{
+		Id:         sensorId,
+		Name:       *name,
+		CoordsX:    *coordsX,
+		CoordsY:    *coordsY,
+		simulation: callback,
+
+		client: client,
+	}
+
 }
