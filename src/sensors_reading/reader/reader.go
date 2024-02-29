@@ -14,12 +14,10 @@ import (
 )
 
 type Sensor struct {
-	Name    string       `json:"name"`
-	Id      string       `json:"id"`
-	Data    []SensorData `json:"data"`
-	CoordsX float64      `json:"coords_x"`
-	CoordsY float64      `json:"coords_y"`
-	Date    time.Time    `json:"date"`
+	Name string       `json:"name"`
+	Id   string       `json:"id"`
+	Data []SensorData `json:"data"`
+	Date time.Time    `json:"date"`
 }
 
 type SensorData struct {
@@ -47,6 +45,7 @@ func Reader(db *gorm.DB) {
 		var mArr = sync.Mutex{}
 		var wg = sync.WaitGroup{}
 		var batch [1000]*database.SensorsData
+		start := time.Now()
 
 		for i := 0; i < 1000; i++ {
 			msg, ok := <-msgs
@@ -58,17 +57,19 @@ func Reader(db *gorm.DB) {
 
 		}
 
-		go sendBatch(consumerControl, db, &wg, &batch)
+		go sendBatch(consumerControl, db, &wg, &batch, &start)
 
 	}
 
 }
 
-func sendBatch(consumerControl chan struct{}, db *gorm.DB, wg *sync.WaitGroup, batch *[1000]*database.SensorsData) {
+func sendBatch(consumerControl chan struct{}, db *gorm.DB, wg *sync.WaitGroup, batch *[1000]*database.SensorsData, start *time.Time) {
 	wg.Wait()
 
 	slice := batch[:]
 	database.CreateSensorsDataBatch(db, &slice)
+
+	log.Printf("\033[35m[ %d ms ]\033[0m to group 1000 records and send to DB\n", time.Since(*start).Milliseconds())
 
 	consumerControl <- struct{}{}
 }
@@ -84,12 +85,10 @@ func feedBatch(msg *amqp091.Delivery, batch *[1000]*database.SensorsData, index 
 	}
 	jsonData, _ := json.Marshal(sensorReceived.Data)
 	sensorData := database.SensorsData{
-		Id:           uuid.New().String(),
-		Sensor_id:    sensorReceived.Id,
-		Data:         string(jsonData),
-		Coordinate_x: sensorReceived.CoordsX,
-		Coordinate_y: sensorReceived.CoordsY,
-		CreatedAt:    sensorReceived.Date,
+		Id:        uuid.New().String(),
+		Sensor_id: sensorReceived.Id,
+		Data:      string(jsonData),
+		CreatedAt: sensorReceived.Date,
 	}
 
 	mArr.Lock()

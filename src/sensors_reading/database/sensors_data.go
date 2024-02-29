@@ -10,17 +10,15 @@ import (
 )
 
 type SensorsData struct {
-	Id           string
-	Sensor_id    string
-	Data         string
-	Coordinate_x float64
-	Coordinate_y float64
-	CreatedAt    time.Time
+	Id        string
+	Sensor_id string
+	Data      string
+	CreatedAt time.Time
 }
 
 func CreateSensorsData(db *gorm.DB, sensor_id string, data string, coordinate_x float64, coordinate_y float64, createdAt time.Time) SensorsData {
 	id := uuid.New()
-	sensorData := SensorsData{Id: id.String(), Sensor_id: sensor_id, Data: data, Coordinate_x: coordinate_x, Coordinate_y: coordinate_y, CreatedAt: createdAt}
+	sensorData := SensorsData{Id: id.String(), Sensor_id: sensor_id, Data: data, CreatedAt: createdAt}
 	result := db.Create(&sensorData)
 	if result.Error != nil {
 		panic(fmt.Sprintf("failed to create sensor data: %s\n", result.Error.Error()))
@@ -28,13 +26,12 @@ func CreateSensorsData(db *gorm.DB, sensor_id string, data string, coordinate_x 
 	return sensorData
 }
 
-func CreateSensorsDataBatch(db *gorm.DB, data *[]*SensorsData){
-  result := db.CreateInBatches(*data, len(*data))
-  if result.Error != nil {
+func CreateSensorsDataBatch(db *gorm.DB, data *[]*SensorsData) {
+	result := db.CreateInBatches(*data, len(*data))
+	if result.Error != nil {
 		panic(fmt.Sprintf("failed to create sensor data: %s\n", result.Error.Error()))
 	}
 }
-
 
 type SensorsReading struct {
 	Id      string
@@ -44,4 +41,3 @@ type SensorsReading struct {
 	CoordsY float64
 	Date    time.Time
 }
-

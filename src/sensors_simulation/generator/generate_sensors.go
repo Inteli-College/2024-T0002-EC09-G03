@@ -61,7 +61,7 @@ func GenerateSensors(number int, sensorsTypes *map[string]sensors.SensorsTypes, 
 				go func(value *sensors.SensorsTypes, wg *sync.WaitGroup) {
 					defer wg.Done()
 					coordsX, coordsY := generateCoords(key)
-					log.Printf("Generating sensor: %s", fmt.Sprintf("%s %f,%f", value.Name, coordsY, coordsX))
+					log.Printf("Generating sensor: %s", fmt.Sprintf("%s %f,%f", value.Name, *coordsY, *coordsX))
 					tempSensor := sensors.Sensor{}
 					sensorName := fmt.Sprintf("%s %f,%f", value.Name, *coordsY, *coordsX)
 					tempSensor.New(&sensorName, coordsX, coordsY, value.Callback, db)

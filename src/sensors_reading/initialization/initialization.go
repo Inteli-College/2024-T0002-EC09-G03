@@ -27,30 +27,26 @@ func checkEnvVarExistence(vars []string) error {
 	return nil
 }
 
-func LoadEnvVariables(path ...string) {
-	log.Print("Loading .env variables...")
+func LoadEnvVariables(path ...*string) {
+	log.Print("Loading env variables...")
 
-	if envLoadingErr := checkEnvVarExistence(variablesToCheck[:]); envLoadingErr != nil {
+	var dotEnvErr error
 
-		var finalPath string
-		if len(path) > 0 && path[0] != "" {
-			finalPath = path[0]
-		} else {
-			finalPath = "./.env"
-		}
-
-		err := godotenv.Load(finalPath)
-		if err != nil {
-			log.Fatalf("Error when loading .env file in the path: %s\n%s", finalPath, err.Error())
-		}
-
-		if envMissing := checkEnvVarExistence(variablesToCheck[:4]); envMissing != nil {
-
-			log.Fatalf("Env variable %s not set. \n", envMissing)
-		}
-
-		return
+	switch {
+	case len(path) > 0:
+		dotEnvErr = godotenv.Load(*path[0])
+	default:
+		dotEnvErr = godotenv.Load()
 	}
 
-	log.Println("Environment variables already loaded!")
+	if errEnvMissing := checkEnvVarExistence(variablesToCheck[:4]); errEnvMissing != nil {
+
+		if dotEnvErr != nil {
+			log.Fatalf("%s\n%s\n", dotEnvErr.Error(), errEnvMissing.Error())
+		}
+
+		log.Fatalf("%s\n", errEnvMissing.Error())
+	}
+
+	log.Println("Environment variables loaded!")
 }

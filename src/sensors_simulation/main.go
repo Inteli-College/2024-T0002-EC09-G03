@@ -10,38 +10,33 @@ import (
 	"github.com/Inteli-College/2024-T0002-EC09-G03/src/sensors_simulation/generator"
 	"github.com/Inteli-College/2024-T0002-EC09-G03/src/sensors_simulation/initialization"
 	"github.com/Inteli-College/2024-T0002-EC09-G03/src/sensors_simulation/sensors"
+	"github.com/Inteli-College/2024-T0002-EC09-G03/src/sensors_simulation/utils"
 )
 
 func init() {
-	envPath := ""
 
 	if len(os.Args) > 1 {
-		envPath = os.Args[1]
+		initialization.LoadEnvVariables(&os.Args[1])
+	} else {
+		initialization.LoadEnvVariables()
 	}
 
-	initialization.LoadEnvVariables(envPath)
 }
 
 func main() {
 	start := time.Now()
 	wg := sync.WaitGroup{}
 	db := database.Connect()
-	sensorsInstanciated := generator.GenerateSensors(5000, &sensors.Sensors, db, &wg)
+	sensorsInstanciated := generator.GenerateSensors(3, &sensors.Sensors, db, &wg)
 
 	log.Printf("Tempo: %f\n", time.Since(start).Seconds())
 	log.Printf("Tamanho: %d\n", len(*sensorsInstanciated))
-	for _, sensor := range *sensorsInstanciated {
-		// wgGroup := sync.WaitGroup{}
-		//
-		// go func(db *gorm.DB) {
-		// 	wgGroup.Add(1)
-		// 	database.CreateSensor(db, sensor.Name)
-		// 	defer wgGroup.Done()
-		// }(db)
 
-		// wgGroup.Wait()
+	for _, sensor := range *sensorsInstanciated {
 		go sensor.Emulate()
 	}
+
+	go utils.MonitorNumberOfGoroutines()
 
 	select {}
 }

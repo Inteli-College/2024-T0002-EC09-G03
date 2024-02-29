@@ -34,7 +34,7 @@ type SensorData struct {
 func (s *Sensor) New(name *string, coordsX *float64, coordsY *float64, callback simulationFunction, db *gorm.DB) {
 	s.client = connections.GenerateClient(name)
 
-	sensorDB := database.CreateSensor(db, name)
+	sensorDB := database.CreateSensor(db, name, coordsX, coordsY)
 
 	s.Id = sensorDB.Id
 	s.Name = *name
@@ -54,7 +54,7 @@ func (s *Sensor) randSleep() {
 
 func (s *Sensor) Emulate() {
 	for {
-		s.randSleep()
+		// s.randSleep()
 		simulatedData, err := s.simulation()
 
 		if err != nil {
