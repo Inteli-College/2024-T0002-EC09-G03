@@ -29,7 +29,7 @@ func Connect() *gorm.DB {
 
 	opts, _ := db.DB()
 
-	opts.SetMaxOpenConns(98)
+	opts.SetMaxOpenConns(10)
 	opts.SetMaxIdleConns(2)
 	opts.SetConnMaxLifetime(5 * time.Minute)
 

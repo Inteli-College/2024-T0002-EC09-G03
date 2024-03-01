@@ -25,19 +25,20 @@ func (s *mqtt) generateClient(wg *sync.WaitGroup) {
 	opts.SetPassword(os.Getenv("RABBIT_PASSWORD"))
 
 	opts.OnConnect = func(client mqttPaho.Client) {
-		fmt.Printf("->Client %s connected successfully!\n", *s.clientName)
-		wg.Done()
+		fmt.Printf("-> Client %s connected successfully!\n", *s.clientName)
+		defer wg.Done()
 	}
 
 	opts.OnConnectionLost = func(client mqttPaho.Client, err error) {
-		fmt.Printf("-> Client %s disconnected due to: %v\n", *s.clientName, err)
+		fmt.Printf("-> Client %s disconnected due to: %s\n", *s.clientName, err.Error())
+		wg.Add(1)
 	}
 
-	mClient.Lock()
-	defer mClient.Unlock()
+	// mClient.Lock()
+	// defer mClient.Unlock()
 	client := mqttPaho.NewClient(opts)
 	if token := client.Connect(); token.Wait() && token.Error() != nil {
-		panic(token.Error())
+		panic(fmt.Sprintf("Erro na conexão: %s\n", token.Error()))
 	}
 
 	s.client = client

@@ -108,7 +108,7 @@ func activateSensors(existingSensors *[]*sensorTable.Sensor, sensorsTypes *map[s
 
 func createAndActivateSensors(number int, existingSensors *[]*sensorTable.Sensor, sensorsTypes *map[string]sensors.SensorsTypes, db dbInterface, wg *sync.WaitGroup, instances *[]*sensors.Sensor) {
 
-	go activateSensors(existingSensors, sensorsTypes, db, wg, instances)
-
+	activateSensors(existingSensors, sensorsTypes, db, wg, instances)
 	createSensorsFromScratch(number, sensorsTypes, db, wg, instances)
+
 }
