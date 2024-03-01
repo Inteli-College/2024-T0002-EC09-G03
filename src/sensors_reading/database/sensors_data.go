@@ -22,20 +22,3 @@ func (s *DB) CreateSensorsDataBatch(data *[]*SensorsData) {
 		panic(fmt.Sprintf("failed to create sensor data: %s\n", result.Error.Error()))
 	}
 }
-
-// func CreateSensorsData(db *gorm.DB, sensor_id string, data string, coordinate_x float64, coordinate_y float64, createdAt time.Time) SensorsData {
-// 	id := uuid.New()
-// 	sensorData := SensorsData{Id: id.String(), Sensor_id: sensor_id, Data: data, CreatedAt: createdAt}
-// 	result := db.Create(&sensorData)
-// 	if result.Error != nil {
-// 		panic(fmt.Sprintf("failed to create sensor data: %s\n", result.Error.Error()))
-// 	}
-// 	return sensorData
-// }
-//
-// func CreateSensorsDataBatch(db *gorm.DB, data *[]*SensorsData) {
-// 	result := db.CreateInBatches(*data, len(*data))
-// 	if result.Error != nil {
-// 		panic(fmt.Sprintf("failed to create sensor data: %s\n", result.Error.Error()))
-// 	}
-// }

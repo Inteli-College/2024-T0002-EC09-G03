@@ -30,7 +30,12 @@ func feedBatch(msg *[]byte, batch *[1000]*database.SensorsData, index int, mArr 
 		log.Printf("Error decoding JSON: %s", err)
 		return
 	}
-	jsonData, _ := json.Marshal(sensorReceived.Data)
+	dataToJson := struct {
+		Data []SensorData `json:"data"`
+	}{
+		Data: sensorReceived.Data,
+	}
+	jsonData, _ := json.Marshal(dataToJson)
 	sensorData := database.SensorsData{
 		Id:        uuid.New().String(),
 		Sensor_id: sensorReceived.Id,
