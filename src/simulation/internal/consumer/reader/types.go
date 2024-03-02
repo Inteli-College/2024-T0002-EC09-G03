@@ -3,7 +3,7 @@ package reader
 import (
 	"time"
 
-	"github.com/Inteli-College/2024-T0002-EC09-G03/sensors_reading/database"
+	"github.com/Inteli-College/2024-T0002-EC09-G03/internal/consumer/database"
 )
 
 type Sensor struct {

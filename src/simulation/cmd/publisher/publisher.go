@@ -7,12 +7,12 @@ import (
 	"sync"
 	"time"
 
-	"github.com/Inteli-College/2024-T0002-EC09-G03/src/sensors_simulation/database"
-	sensorTable "github.com/Inteli-College/2024-T0002-EC09-G03/src/sensors_simulation/database/sensor"
-	genSensors "github.com/Inteli-College/2024-T0002-EC09-G03/src/sensors_simulation/generator/sensors"
-	"github.com/Inteli-College/2024-T0002-EC09-G03/src/sensors_simulation/initialization"
-	"github.com/Inteli-College/2024-T0002-EC09-G03/src/sensors_simulation/sensors"
-	"github.com/Inteli-College/2024-T0002-EC09-G03/src/sensors_simulation/utils"
+	initialization "github.com/Inteli-College/2024-T0002-EC09-G03/internal/init"
+	"github.com/Inteli-College/2024-T0002-EC09-G03/internal/publisher/database"
+	sensorTable "github.com/Inteli-College/2024-T0002-EC09-G03/internal/publisher/database/sensor"
+	genSensors "github.com/Inteli-College/2024-T0002-EC09-G03/internal/publisher/generator/sensors"
+	"github.com/Inteli-College/2024-T0002-EC09-G03/internal/publisher/sensors"
+	"github.com/Inteli-College/2024-T0002-EC09-G03/internal/publisher/utils"
 )
 
 var sensorsAmount int

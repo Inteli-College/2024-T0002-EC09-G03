@@ -1,4 +1,4 @@
-package initialization
+package init
 
 import (
 	"errors"
@@ -9,6 +9,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
+// TODO: missing differentiation cmd
 var variablesToCheck = [4]string{
 	"BROKER_URL",
 	"BROKER_PORT",

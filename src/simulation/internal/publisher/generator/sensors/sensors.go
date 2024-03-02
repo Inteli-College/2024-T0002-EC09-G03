@@ -6,9 +6,9 @@ import (
 	"strings"
 	"sync"
 
-	sensorTable "github.com/Inteli-College/2024-T0002-EC09-G03/src/sensors_simulation/database/sensor"
-	"github.com/Inteli-College/2024-T0002-EC09-G03/src/sensors_simulation/generator/coords"
-	"github.com/Inteli-College/2024-T0002-EC09-G03/src/sensors_simulation/sensors"
+	sensorTable "github.com/Inteli-College/2024-T0002-EC09-G03/internal/publisher/database/sensor"
+	"github.com/Inteli-College/2024-T0002-EC09-G03/internal/publisher/generator/coords"
+	"github.com/Inteli-College/2024-T0002-EC09-G03/internal/publisher/sensors"
 )
 
 var mArr = sync.Mutex{}

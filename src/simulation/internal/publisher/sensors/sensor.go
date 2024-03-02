@@ -7,8 +7,8 @@ import (
 	"sync"
 	"time"
 
-	mqttConn "github.com/Inteli-College/2024-T0002-EC09-G03/src/sensors_simulation/connections/mqtt"
-	sensorTable "github.com/Inteli-College/2024-T0002-EC09-G03/src/sensors_simulation/database/sensor"
+	mqttConn "github.com/Inteli-College/2024-T0002-EC09-G03/internal/publisher/connections/mqtt"
+	sensorTable "github.com/Inteli-College/2024-T0002-EC09-G03/internal/publisher/database/sensor"
 )
 
 type simulationFunction func() ([]SensorData, error)
