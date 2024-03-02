@@ -33,7 +33,7 @@ func GenerateSensors(number int, sensorsTypes *map[string]sensors.SensorsTypes, 
 
 	case amount == 0:
 		log.Println("Creating all sensors from scratch...")
-		createSensorsFromScratch(number, sensorsTypes, db, wg, &instances)
+		createSensorsFromScratch(number, sensorsTypes, db, wg, &instances, nil)
 
 	case amount < number && amount != 0:
 		log.Println("Not enought sensors, creating more...")
@@ -50,65 +50,109 @@ func GenerateSensors(number int, sensorsTypes *map[string]sensors.SensorsTypes, 
 	return &instances
 }
 
-func createSensorsFromScratch(number int, sensorsTypes *map[string]sensors.SensorsTypes, db dbInterface, wg *sync.WaitGroup, instances *[]*sensors.Sensor) {
+func createSensorsFromScratch(number int, sensorsTypes *map[string]sensors.SensorsTypes, db dbInterface, wg *sync.WaitGroup, instances *[]*sensors.Sensor, sensorsExists *map[string]bool) {
 
 	for key, value := range *sensorsTypes {
 		wg.Add(1)
 		maxIt := number / len(*sensorsTypes)
 
-		go func(key string, value sensors.SensorsTypes, wg *sync.WaitGroup) {
+		createSensor := createSensorWithExistingCheck(sensorsExists, value, key, db, instances)
 
-			defer wg.Done()
+		go manageCreationPerType(wg, maxIt, createSensor)
 
-			for i := 0; i < maxIt; i++ {
-				wg.Add(1)
-
-				go func(index int, value sensors.SensorsTypes, wg *sync.WaitGroup) {
-					defer wg.Done()
-
-					coordsX, coordsY := coords.GenerateCoords(&key)
-
-					sensorName := fmt.Sprintf("%s %d", value.Name, index)
-					log.Printf("Generating sensor: %s\n", sensorName)
-					tempSensor := sensors.New(&sensorName, coordsX, coordsY, value.Callback, db, wg)
-
-					mArr.Lock()
-					*instances = append(*instances, tempSensor)
-					mArr.Unlock()
-
-				}(i, value, wg)
-			}
-		}(key, value, wg)
 	}
 }
 
-func activateSensors(existingSensors *[]*sensorTable.Sensor, sensorsTypes *map[string]sensors.SensorsTypes, db dbInterface, wg *sync.WaitGroup, instances *[]*sensors.Sensor) {
+func manageCreationPerType(wg *sync.WaitGroup, maxIt int, createSensor func(int, *sync.WaitGroup)) {
+
+	defer wg.Done()
+
+	for i := 0; i < maxIt; i++ {
+		wg.Add(1)
+
+		go createSensor(i, wg)
+	}
+}
+
+func createSensorWithExistingCheck(sensorsExists *map[string]bool, value sensors.SensorsTypes, key string, db dbInterface, instances *[]*sensors.Sensor) func(int, *sync.WaitGroup) {
+	blockCheck := sync.Mutex{}
+
+	return func(index int, wg *sync.WaitGroup) {
+		defer wg.Done()
+		sensorName := fmt.Sprintf("%s %d", value.Name, index)
+
+		if sensorsExists != nil {
+			for {
+				blockCheck.Lock()
+				if exists, ok := (*sensorsExists)[sensorName]; ok && exists {
+					blockCheck.Unlock()
+					index = index + 1
+					sensorName = fmt.Sprintf("%s %d", value.Name, index)
+					continue
+				}
+				(*sensorsExists)[sensorName] = true
+				blockCheck.Unlock()
+				break
+			}
+		}
+
+		coordsX, coordsY := coords.GenerateCoords(&key)
+
+		log.Printf("Generating sensor: %s\n", sensorName)
+		tempSensor := sensors.New(&sensorName, coordsX, coordsY, value.Callback, db, wg)
+
+		mArr.Lock()
+		*instances = append(*instances, tempSensor)
+		mArr.Unlock()
+	}
+
+}
+
+func activateSensors(existingSensors *[]*sensorTable.Sensor, sensorsTypes *map[string]sensors.SensorsTypes, db dbInterface, wg *sync.WaitGroup, instances *[]*sensors.Sensor) *map[string]bool {
+
+	sensorsCreated := map[string]bool{}
 
 	for _, sensor := range *existingSensors {
 		wg.Add(1)
-		go func(sensor *sensorTable.Sensor) {
-			defer wg.Done()
-			parts := strings.SplitN(sensor.Name, " ", 2)
-			if len(parts) == 0 {
-				log.Fatalf("Error parsing sensor name: %s\n", sensor.Name)
-			}
-			sensorInfo, exists := (*sensorsTypes)[parts[0]]
-			if !exists {
-				log.Fatalf("Type %s doesn't exists\n", parts[0])
-			}
+		sensorsCreated[sensor.Name] = true
 
-			tempSensor := sensors.New(&sensor.Name, &sensor.CoordinateX, &sensor.CoordinateY, sensorInfo.Callback, db, wg, &sensor.Id)
+		sensorType := strings.Split(sensor.Name, " ")
 
-			mArr.Lock()
-			*instances = append(*instances, tempSensor)
-			mArr.Unlock()
-		}(sensor)
+		coords.MutexMap.Lock()
+		if coords.ExistingCoords[sensorType[0]] == nil {
+			coords.ExistingCoords[sensorType[0]] = make(map[float64]bool)
+		}
+
+		coords.ExistingCoords[sensorType[0]][sensor.CoordinateX+sensor.CoordinateY] = true
+		coords.MutexMap.Unlock()
+
+		go manageOneActivation(sensor, wg, sensorsTypes, db, instances)
 	}
+
+	return &sensorsCreated
+}
+
+func manageOneActivation(sensor *sensorTable.Sensor, wg *sync.WaitGroup, sensorsTypes *map[string]sensors.SensorsTypes, db dbInterface, instances *[]*sensors.Sensor) {
+	defer wg.Done()
+	parts := strings.SplitN(sensor.Name, " ", 2)
+	if len(parts) == 0 {
+		log.Fatalf("Error parsing sensor name: %s\n", sensor.Name)
+	}
+	sensorInfo, exists := (*sensorsTypes)[parts[0]]
+	if !exists {
+		log.Fatalf("Type %s doesn't exists\n", parts[0])
+	}
+
+	tempSensor := sensors.New(&sensor.Name, &sensor.CoordinateX, &sensor.CoordinateY, sensorInfo.Callback, db, wg, &sensor.Id)
+
+	mArr.Lock()
+	*instances = append(*instances, tempSensor)
+	mArr.Unlock()
 }
 
 func createAndActivateSensors(number int, existingSensors *[]*sensorTable.Sensor, sensorsTypes *map[string]sensors.SensorsTypes, db dbInterface, wg *sync.WaitGroup, instances *[]*sensors.Sensor) {
 
-	activateSensors(existingSensors, sensorsTypes, db, wg, instances)
-	createSensorsFromScratch(number, sensorsTypes, db, wg, instances)
+	sensorsExists := activateSensors(existingSensors, sensorsTypes, db, wg, instances)
+	createSensorsFromScratch(number, sensorsTypes, db, wg, instances, sensorsExists)
 
 }

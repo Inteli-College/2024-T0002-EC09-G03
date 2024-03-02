@@ -5,8 +5,8 @@ import (
 	"sync"
 )
 
-var existingCoords = make(map[string]map[float64]bool)
-var mMap = sync.RWMutex{}
+var ExistingCoords = make(map[string]map[float64]bool)
+var MutexMap = sync.RWMutex{}
 
 func GenerateCoords(typeName *string) (*float64, *float64) {
 	baseX := -46.633308
@@ -15,7 +15,7 @@ func GenerateCoords(typeName *string) (*float64, *float64) {
 	maxOffsetX, minOffsetX := 0.3, -0.2
 	maxOffsetY, minOffsetY := 0.1, -0.2
 
-	defer mMap.Unlock()
+	defer MutexMap.Unlock()
 
 	for {
 		offsetX := minOffsetX + (rand.Float64() * (maxOffsetX - minOffsetX))
@@ -24,20 +24,20 @@ func GenerateCoords(typeName *string) (*float64, *float64) {
 		coordsX := baseX + offsetX
 		coordsY := baseY + offsetY
 
-		mMap.Lock()
-		if existingCoords[*typeName] == nil {
-			existingCoords[*typeName] = make(map[float64]bool)
+		MutexMap.Lock()
+		if ExistingCoords[*typeName] == nil {
+			ExistingCoords[*typeName] = make(map[float64]bool)
 		}
-		mMap.Unlock()
+		MutexMap.Unlock()
 
-		mMap.RLock()
-		if existingCoords[*typeName][coordsX+coordsY] {
-			mMap.RUnlock()
+		MutexMap.RLock()
+		if ExistingCoords[*typeName][coordsX+coordsY] {
+			MutexMap.RUnlock()
 			continue
 		} else {
-			mMap.RUnlock()
-			mMap.Lock()
-			existingCoords[*typeName][coordsX+coordsY] = true
+			MutexMap.RUnlock()
+			MutexMap.Lock()
+			ExistingCoords[*typeName][coordsX+coordsY] = true
 			return &coordsX, &coordsY
 		}
 	}
