@@ -12,40 +12,50 @@ Esse diagrama oferece uma representação das interações entre o usuário e o 
 @startuml
 actor Usuário
 participant "Painel" as Painel
-participant "Aplicação IoT" as AplicacaoIoT
-participant "Broker MQTT" as Broker
+participant "Banco de dados" as Database
+participant "Consumidor em GO" as GOConsumer
+participant "Broker MQTT e RabbitMQ" as Broker
 participant "Sensor 1" as Sensor1
 participant "Sensor 2" as Sensor2
 participant "Sensor N" as SensorN
 
 Usuário -> Painel: Acessa o Painel
 activate Painel
-Painel -> AplicacaoIoT: Solicita Dados
-activate AplicacaoIoT
-AplicacaoIoT -> AplicacaoIoT: Autentica Usuário
-AplicacaoIoT --> Painel: Autenticação Bem-Sucedida
-AplicacaoIoT -> AplicacaoIoT: Autoriza Usuário
-AplicacaoIoT --> Painel: Autorização Concedida
-AplicacaoIoT -> Broker: Conecta
+
+activate GOConsumer
+Painel -> Painel: Autentica Usuário
+Painel -> Painel: Autoriza Usuário
+Painel --> Painel: Autorização Concedida
+Painel -> Database: Solicita Dados
+
+GOConsumer -> Database: Conecta
+GOConsumer -> Broker: Conecta
+
 activate Broker
-Broker -> Sensor1: Solicita Dados
+Sensor1 --> Broker: Conexão
 activate Sensor1
 Sensor1 --> Broker: Envia Dados
 deactivate Sensor1
-Broker -> Sensor2: Solicita Dados
+Sensor2 --> Broker: Conexão
 activate Sensor2
 Sensor2 --> Broker: Envia Dados
 deactivate Sensor2
-Broker -> SensorN: Solicita Dados
+SensorN --> Broker: Conexão
 activate SensorN
 SensorN --> Broker: Envia Dados
+
+Broker -> GOConsumer: Recebe dados
 deactivate SensorN
-Broker --> AplicacaoIoT: Dados Recebidos
+GOConsumer --> Database: Salva Dados
+
+
+Database -> Painel: Envia Dados
 deactivate Broker
-AplicacaoIoT --> Painel: Envia Dados
-deactivate AplicacaoIoT
 deactivate Painel
+deactivate GOConsumer
+deactivate Database
 @enduml
+
 
 ```
 
