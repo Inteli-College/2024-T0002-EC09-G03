@@ -6,7 +6,7 @@ Breve descrição do projeto, incluindo objetivos, tecnologias utilizadas, e qua
 
 ## Documentação
 
-<a href="https://inteli-college.github.io/2024-T0002-EC09-G03/" target="_blank"><button>Docussauros</button></a>
+### [Docussauros](https://inteli-college.github.io/2024-T0002-EC09-G03/)
 
 ## Estrutura do Repositório
 
