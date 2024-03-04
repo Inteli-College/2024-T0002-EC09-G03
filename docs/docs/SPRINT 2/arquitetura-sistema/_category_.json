@@ -3,7 +3,7 @@
     "position": 1,
     "link": {
       "type": "generated-index",
-      "description": "Esta seção descreve..."
+      "description": "Nessa parte da documentação é apresentada a arquitetura de software para o sistema de IoT desenvolvido, incluindo a simulação de sensores, a comunicação entre dispositivos e o backend, e a interface do usuário.Também incluí um diagrama UML com as interações detalhadas entre os diferentes componentes do sistema proposto, incluindo os dispositivos de hardware multimodais, a plataforma web de engajamento do cidadão e o dashboard de gerenciamento de dados. "
     }
   }
   

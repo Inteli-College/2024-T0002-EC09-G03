@@ -1,9 +1,9 @@
 {
     "label": "Análise de vulnerabilidades",
-    "position": 4,
+    "position": 6,
     "link": {
       "type": "generated-index",
-      "description": "Esta seção descreve..."
+      "description": "A seção analisa vulnerabilidades em um sistema composto por dashboard, banco de dados, MQTT broker e sensores IoT, destacando a necessidade de segurança para proteger dados urbanos estratégicos. Ela identifica riscos como senhas fracas, falta de criptografia, vulnerabilidades em controle de acesso e a necessidade de conformidade com padrões de segurança. A análise oferece recomendações para fortalecer a segurança, abordando autenticação, proteção de dados, gestão de sessões e educação de usuários, visando mitigar riscos e garantir a integridade do sistema."
     }
   }
   
