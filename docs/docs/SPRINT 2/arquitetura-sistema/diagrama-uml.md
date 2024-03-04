@@ -56,29 +56,32 @@ No Diagrama UML de sequência acima, um usuário acessa o painel de controle do 
 
 ## Diagrama UML de implantação
 
-O Diagrama de UML de implantação discrima a distribuição dos componentes do sistema em um ambiente real de implementação de software, representando os elementos como nós de implantação. Aqui, são destacado as o painel de controle, a aplicação IoT, o broker MQTT e os sensores, identificando suas interações e a forma como estão dispostos no ambiente físico. O diagrama de implantação fornece uma visão da infraestrutura de aplicações de software e hardware necessárias para o funcionamento do sistema, auxiliando no planejamento e compreensão da distribuição dos componentes em sua implementação por uma equipe de desenvolvimento.
+O Diagrama de UML de implantação discrima a distribuição dos componentes do sistema em um ambiente real de implementação de software, representando os elementos como nós de implantação e os respectivos métodos de comunicação entre si. Aqui, são destacados o usuário, o painel de controle, o banco de dados, o consumidor GO, o broker MQTT & RabbitMQ e os sensores, ilustrando como esses elementos se conectam e comunicam entre si. Essa representação visual oferece uma visão geral da distribuição dos componentes e da infraestrutura necessária para o funcionamento do sistema, facilitando o planejamento e a implementação por parte da equipe de desenvolvimento. 
 
 ![Diagrama UML de implantacao](../../../static/img/uml-implantacao.svg)
 
+### Diagrama UML de implantação em PlantUML
+
 ```
 @startuml
-package "Sistema IoT" {
-    [Painel]
-    [Aplicação IoT]
-    [Broker MQTT]
-    [Sensor 1]
-    [Sensor 2]
-    [Sensor N]
-}
+node "Usuário" as User
 
-Painel --> AplicacaoIoT: Solicita Dados
-AplicacaoIoT --> Broker: Conecta
-AplicacaoIoT --> Sensor1: Solicita Dados
-AplicacaoIoT --> Sensor2: Solicita Dados
-AplicacaoIoT --> SensorN: Solicita Dados
-Broker --> Sensor1: Solicita Dados
-Broker --> Sensor2: Solicita Dados
-Broker --> SensorN: Solicita Dados
+node "Painel" as Panel
+node "Banco de Dados" as Database
+node "Consumidor GO" as GOConsumer
+node "Broker MQTT & RabbitMQ" as MQTTBroker
+node "Sensor 1" as Sensor1
+node "Sensor 2" as Sensor2
+node "Sensor N" as SensorN
+
+User --> Panel : HTTP
+Panel --> Database
+Panel --> GOConsumer : HTTP
+GOConsumer --> Database 
+GOConsumer --> MQTTBroker : MQTT
+MQTTBroker --> Sensor1 : MQTT
+MQTTBroker --> Sensor2 : MQTT
+MQTTBroker --> SensorN : MQTT
+
 @enduml
-
 ```
