@@ -4,7 +4,7 @@ Nessa seção são apresentadas as interações detalhadas entre os diferentes c
 
 ## Diagrama UML de sequência
 
-Esse diagrama oferece uma representação das interações entre o usuário e o painel de controle, elucidando o processo de solicitação de dados à aplicação IoT. A validação e concessão de acesso aos usuários autorizados são explicitadas, demonstrando a funcionalidade de autenticação e autorização da aplicação. Além disso, o diagrama retrata de forma clara a troca de informações entre a aplicação IoT e o broker MQTT, que desempenha um papel central na obtenção de dados dos sensores distribuídos. A sequência de interações entre o broker e os sensores, assim como a transmissão de dados de volta à aplicação IoT, é apresentada de maneira lógica e compreensível.
+Esse diagrama oferece uma representação das interações entre o usuário e o painel, elucidando o processo de solicitação de dados a uma aplicação em GO. O método de solicitação e concessão de acesso aos usuários autorizados são explicitados, demonstrando a funcionalidade de autenticação e autorização da aplicação. Além disso, o diagrama retrata de forma clara a troca de informações entre o consumidor GO e o Broker MQTT/RabbitMQ, que desempenha um papel central na obtenção de dados dos sensores IoT. A sequência de interações entre o broker e os sensores, assim como a transmissão de dados de volta a consumidor GO, bem como seu armazenamento em um banco de dados, é apresentada no diagrama abaixo.
 
 ![Diagrama UML de sequencia](../../../static/img/uml-sequencia.svg)
 
@@ -12,54 +12,45 @@ Esse diagrama oferece uma representação das interações entre o usuário e o 
 @startuml
 actor Usuário
 participant "Painel" as Painel
-participant "Banco de dados" as Database
-participant "Consumidor em GO" as GOConsumer
-participant "Broker MQTT e RabbitMQ" as Broker
+participant "Banco de dados" as Banco
+participant "Consumidor GO" as CGO
+participant "Broker MQTT & RabbitMQ" as Broker
 participant "Sensor 1" as Sensor1
 participant "Sensor 2" as Sensor2
 participant "Sensor N" as SensorN
 
 Usuário -> Painel: Acessa o Painel
 activate Painel
-
-activate GOConsumer
+activate CGO
 Painel -> Painel: Autentica Usuário
 Painel -> Painel: Autoriza Usuário
-Painel --> Painel: Autorização Concedida
-Painel -> Database: Solicita Dados
-
-GOConsumer -> Database: Conecta
-GOConsumer -> Broker: Conecta
-
+Painel --> Painel: Autorização concedida
+Painel -> Banco: Solicita dados
+CGO -> Banco: Conecta
+CGO -> Broker: Conecta
 activate Broker
-Sensor1 --> Broker: Conexão
+Sensor1 --> Broker: Conecta
 activate Sensor1
 Sensor1 --> Broker: Envia Dados
 deactivate Sensor1
-Sensor2 --> Broker: Conexão
+Sensor2 --> Broker: Conecta
 activate Sensor2
 Sensor2 --> Broker: Envia Dados
 deactivate Sensor2
-SensorN --> Broker: Conexão
+SensorN --> Broker: Conecta
 activate SensorN
 SensorN --> Broker: Envia Dados
-
-Broker -> GOConsumer: Recebe dados
 deactivate SensorN
-GOConsumer --> Database: Salva Dados
-
-
-Database -> Painel: Envia Dados
+Broker --> CGO: Recebe dados
+CGO --> Banco: Salva dados
+Banco -> Painel: Envia dados
 deactivate Broker
+deactivate CGO
 deactivate Painel
-deactivate GOConsumer
-deactivate Database
 @enduml
-
-
 ```
 
-No Diagrama UML de sequência acima, um usuário acessa um painel de controle, que olicita dados a uma aplicação de Internet das Coisas (IoT). Essa aplicação autentica o usuário, concedendo acesso ao painel após a autenticação bem-sucedida. Em seguida, a aplicação autoriza o usuário e se conecta a um broker MQTT, que é responsável por gerenciar a comunicação entre os diversos sensores e a aplicação. O broker envia solicitações aos sensores, como Sensor 1, Sensor 2 e Sensor N, que respondem enviando os dados solicitados de volta ao broker. Finalmente, o broker envia os dados recebidos de volta à aplicação IoT, que os envia ao painel de controle para serem exibidos. Este processo é desencadeado pela interação inicial do usuário com o painel e continua até a transmissão dos dados de volta ao painel para exibição.
+No Diagrama UML de sequência acima, um usuário acessa o painel de controle do sistema. Em seguida, o painel realiza a validação das credenciais do usuário, autenticando-o no sistema. Após a autenticação, o sistema verifica as permissões do usuário e autoriza o acesso. Uma vez autorizado, o usuário solicita dados ao sistema, que são recuperados do banco de dados. O Consumidor GO (CGO) é ativado para processar essa solicitação. Ele estabelece conexões tanto com o banco de dados quanto com o broker MQTT & RabbitMQ. O broker MQTT & RabbitMQ age como um intermediário na comunicação entre o Consumidor GO e os sensores IoT distribuídos no ambiente físico, aqui representados como Sensor 1, Sensor 2 e Sensor N). Cada sensor envia dados ao broker quando solicitado. Após receber os dados dos sensores, o broker os transmite de volta ao Consumidor GO. O Consumidor GO então os salva no banco de dados para armazenamento e futura recuperação mediante a uma requisição de um usuário autenticado e autorizado pelo próprio painel, fechando o ciclo de interações.
 
 ## Diagrama UML de implantação
 
