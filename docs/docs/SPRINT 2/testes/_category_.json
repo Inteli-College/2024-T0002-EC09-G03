@@ -1,0 +1,9 @@
+{
+    "label": "Testes",
+    "position": 5,
+    "link": {
+      "type": "generated-index",
+      "description": "Esta seção cobre os testes automatizados que validam a integridade e a eficácia das funcionalidades do sistema."
+    }
+  }
+  
