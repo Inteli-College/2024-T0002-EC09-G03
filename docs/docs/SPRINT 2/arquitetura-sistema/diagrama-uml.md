@@ -6,7 +6,9 @@ Nessa seção são apresentadas as interações detalhadas entre os diferentes c
 
 Esse diagrama oferece uma representação das interações entre o usuário e o painel, elucidando o processo de solicitação de dados a uma aplicação em GO. O método de solicitação e concessão de acesso aos usuários autorizados são explicitados, demonstrando a funcionalidade de autenticação e autorização da aplicação. Além disso, o diagrama retrata de forma clara a troca de informações entre o consumidor GO e o Broker MQTT/RabbitMQ, que desempenha um papel central na obtenção de dados dos sensores IoT. A sequência de interações entre o broker e os sensores, assim como a transmissão de dados de volta a consumidor GO, bem como seu armazenamento em um banco de dados, é apresentada no diagrama abaixo.
 
-![Diagrama UML de sequencia](../../../static/img/uml-sequencia.svg)
+![Diagrama UML de sequencia](../../../static/img/uml-sequencia.png)
+
+### Diagrama UML de sequência em PlantUML
 
 ```
 @startuml
