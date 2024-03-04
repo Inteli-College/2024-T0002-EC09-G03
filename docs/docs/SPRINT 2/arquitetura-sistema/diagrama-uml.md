@@ -58,7 +58,7 @@ No Diagrama UML de sequência acima, um usuário acessa o painel de controle do 
 
 O Diagrama de UML de implantação discrima a distribuição dos componentes do sistema em um ambiente real de implementação de software, representando os elementos como nós de implantação e os respectivos métodos de comunicação entre si. Aqui, são destacados o usuário, o painel de controle, o banco de dados, o consumidor GO, o broker MQTT & RabbitMQ e os sensores, ilustrando como esses elementos se conectam e comunicam entre si. Essa representação visual oferece uma visão geral da distribuição dos componentes e da infraestrutura necessária para o funcionamento do sistema, facilitando o planejamento e a implementação por parte da equipe de desenvolvimento. 
 
-![Diagrama UML de implantacao](../../../static/img/uml-implantacao.svg)
+![Diagrama UML de implantacao](../../../static/img/uml-implantacao.png)
 
 ### Diagrama UML de implantação em PlantUML
 
