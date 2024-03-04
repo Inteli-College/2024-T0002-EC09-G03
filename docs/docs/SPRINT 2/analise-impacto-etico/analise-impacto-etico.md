@@ -81,7 +81,13 @@ Para assegurar a responsabilidade social do projeto, estratégias proativas deve
 
 Outrossim, a distribuição equitativa dos benefícios do projeto, como programas de capacitação local e oportunidades de emprego, ou até mesmo o acesso da plataforma dos dados, é crucial para evitar a marginalização de grupos vulneráveis. Além disso, a criação de indicadores de desempenho social e a implementação de mecanismos de monitoramento contínuo garantirão que o impacto social positivo seja mantido ao longo do tempo.
 
+#### VIÉS E DISCRIMINAÇÃO:
 
+Para ter e ao buscar uma cidade mais sustentável e inclusiva, entende-se a importância crítica de abordar questões de viés algorítmico, discriminação e exclusão involuntária. Neste compromisso ético é fundamental para assegurar que a tecnologia não apenas avance, mas também promova a equidade e a justiça social em todas as fases do seu desenvolvimento e implementação, pois ao adotar algoritmos para analisar dados relacionados à qualidade do ar, ruído urbano, radiação solar e outros indicadores ambientais, o projeto reconhece o risco de vieses algorítmico. Então, a avaliação constante desses algoritmos é um elemento crucial, com auditorias éticas regulares garantindo que não haja favorecimento ou prejuízo a grupos específicos.
+
+Desse modo, a diversidade nos conjuntos de dados de treinamento, por exemplo, é uma estratégia proativa para reduzir o viés, permitindo que o modelo se adapte a uma variedade de cenários, ou seja, que o conjunto de dados utilizados para treinar os algoritmos não priorizem apenas áreas urbanas mais desenvolvidas, pois isso pode resultar em uma falta de representação de comunidades de baixa renda. Sem contar a transparência no processo decisório, tornando compreensíveis as razões por trás das conclusões do algoritmo. Essas situaçôes é uma medida eficaz para prevenir e corrigir esses vieses.
+
+Além do mais, vale ressaltar, assim como foi abordado anteriormente no tópico sobre equidade, a transparência nos processos decisórios, além de ser uma ferramenta contra o viés, também contribui para a confiança da comunidade. Alías, a avaliação de impacto social contínua é uma abordagem proativa para assegurar que o projeto não apenas evite prejudicar grupos específicos, mas contribua ativamente para a essa equidade. Ter mecanismos de recurso transparentes e acessíveis são essenciais para lidar prontamente com preocupações da comunidade, garantindo que a voz de todos seja ouvida e respeitada.
 
 
 
