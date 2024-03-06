@@ -4,33 +4,44 @@ Este documento é destinado a usuários que precisam acessar o Metabase para vis
 
 ## Pré-requisitos
 - Certifique-se de ter uma conexão com a internet.
-- Assegure-se de que você tenha sido autorizado a acessar o sistema com seu e-mail da Intel e uma senha temporária fornecida pelo administrador do sistema.
+- Assegure-se de que você tenha sido autorizado a acessar o sistema com seu e-mail e uma senha temporária fornecida pelo administrador do sistema após o seu cadastro.
 
 ## Etapa 1: Configurando Variáveis de Ambiente
 Para interagir com o sistema, você precisará configurar seu ambiente com as variáveis necessárias. Como esta documentação é pública, estamos usando credenciais de exemplo abaixo. Você substituirá estas pelos valores reais fornecidos a você de forma segura.
 
-**Para o serviço de leitura de sensores (sensors_reading):**
+**Para o serviço de leitura de sensores (sensors_reading) e (sensor_simulation):**
 
 1. Abra o arquivo `.env` na pasta de configuração do serviço de leitura.
 2. Substitua as variáveis de ambiente pelas credenciais fornecidas. Veja o exemplo:
 
+
 ```
-RABBITMQ_URL=amqp://[nome_usuario_consumerSensor]:[senha_consumerSensor]@[IP_broker]:5672/
-DATABASE_HOST="[host_bd]"
+sensors_reading:
+RABBITMQ_URL=amqp://consumerSensor:ConsumerSensorPassword@34.201.221.151:5672/
+DATABASE_HOST="grupo-03.ctcg2eeii8w3.us-east-1.rds.amazonaws.com"
 DATABASE_USER="postgres"
 DATABASE_PASSWORD="[senha_bd]"
 DATABASE_NAME="postgres"
 DATABASE_PORT=5432
 ```
-
-**Para o serviço de simulação de sensores (sensors_simulation):**
-1. Repita o processo para o serviço de simulação, prestando atenção para não misturar as credenciais dos dois serviços.
-2. Insira as credenciais apropriadas no arquivo `.env` correspondente.
-
+```
+sensors_simulation:
+BROKER_URL="34.201.221.151"
+BROKER_PORT=1883
+RABBIT_USER=publisherSensor
+RABBIT_PASSWORD=[senha_rabit]
+```
+```
+DATABASE_HOST="grupo-03.ctcg2eeii8w3.us-east-1.rds.amazonaws.com"
+DATABASE_USER="postgres"
+DATABASE_NAME="postgres"
+DATABASE_PASSWORD="[senha_bd]"
+DATABASE_PORT=5432
+```
 ## Etapa 2: Acesso ao Metabase
 O Metabase é a plataforma utilizada para a visualização dos dados. Para acessá-la:
 
-1. Digite a URL do Metabase no seu navegador.
+1. Digite a URL do Metabase no seu navegador: http://metabase-734478867.us-east-1.elb.amazonaws.com/
 2. Faça login usando seu e-mail da Intel e a senha temporária.
 3. Após o primeiro login, siga as instruções para criar uma nova senha pessoal e segura.
 
@@ -52,8 +63,11 @@ Responsáveis pelo gerenciamento dos dados dos sensores devem:
 - Navegar até a seção de gerenciamento no painel do Metabase.
 - Utilizar as ferramentas disponíveis para realizar operações como filtragem, exportação e análise dos dados coletados.
 
+## Video demonstrativo do sistema
+
+O vídeo demonstrativo oferece uma visão geral do processo de acesso e utilização do sistema de visualização de dados dos sensores no Metabase, especificamente projetado para a cidade de São Paulo. 
 
 
-
+[![O vídeo apresenta o Metabase do projeto](https://i3.ytimg.com/vi/6M7lcCCiwwQ/maxresdefault.jpg)](https://youtu.be/6M7lcCCiwwQ)
 
 
