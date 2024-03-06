@@ -10,12 +10,21 @@ import (
 )
 
 // TODO: missing differentiation cmd
-var variablesToCheck = [4]string{
-	"BROKER_URL",
-	"BROKER_PORT",
-	"RABBIT_USER",
-	"RABBIT_PASSWORD",
+var variablesToCheck = [6]string{
+	"RABBITMQ_URL",
+	"DATABASE_HOST",
+	"DATABASE_USER",
+	"DATABASE_PASSWORD",
+	"DATABASE_NAME",
+	"DATABASE_PORT",
 }
+
+// var variablesToCheck = [4]string{
+// 	"BROKER_URL",
+// 	"BROKER_PORT",
+// 	"RABBIT_USER",
+// 	"RABBIT_PASSWORD",
+// }
 
 func checkEnvVarExistence(vars []string) error {
 	for _, envName := range vars {
