@@ -20,7 +20,7 @@ sensors_reading:
 RABBITMQ_URL=amqp://consumerSensor:ConsumerSensorPassword@34.201.221.151:5672/
 DATABASE_HOST="grupo-03.ctcg2eeii8w3.us-east-1.rds.amazonaws.com"
 DATABASE_USER="postgres"
-DATABASE_PASSWORD="[senha_bd]"
+DATABASE_PASSWORD= REPLACE_ME
 DATABASE_NAME="postgres"
 DATABASE_PORT=5432
 ```
@@ -29,7 +29,7 @@ sensors_simulation:
 BROKER_URL="34.201.221.151"
 BROKER_PORT=1883
 RABBIT_USER=publisherSensor
-RABBIT_PASSWORD=[senha_rabit]
+RABBIT_PASSWORD= REPLACE_ME
 ```
 ```
 DATABASE_HOST="grupo-03.ctcg2eeii8w3.us-east-1.rds.amazonaws.com"
