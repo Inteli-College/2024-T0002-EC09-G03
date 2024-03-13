@@ -1,8 +1,3 @@
----
-sidebar_position: 3
-slug: /planejamento-cidades-inteligentes
----
-
 # 3. Planejamento de Hiperconectividade:
 
 a. Integração de Sistemas: Como diferentes sistemas (tráfego, iluminação, informação, etc.) serão integrados.

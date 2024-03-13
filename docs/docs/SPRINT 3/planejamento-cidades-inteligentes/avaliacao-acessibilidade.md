@@ -1,8 +1,3 @@
----
-sidebar_position: 2
-slug: /planejamento-cidades-inteligentes
----
-
 # 2. Avaliação de Acessibilidade Atual
 
 No âmbito do "Planejamento de Hiperconectividade para Cidades Inteligentes", a acessibilidade atual é um aspecto crucial para garantir que as soluções tecnológicas sejam efetivamente inclusivas. Neste cenário progressista, a cidade de São Paulo, através da iniciativa UrbanPulseSP, proposta pelo Grupo 3 em colaboração com a PRODAM, se empenha na criação de um sistema avançado para a visualização e interpretação de dados provenientes de sensores através da plataforma Metabase. Esta proposta sublinha o compromisso em refinar e expandir as dimensões da acessibilidade, abrangendo tanto os domínios físicos quanto os digitais, para cultivar um ambiente urbano onde a tecnologia serve como ponte para a inclusão de todos os cidadãos.
