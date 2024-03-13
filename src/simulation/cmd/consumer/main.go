@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"os"
 
 	initialization "github.com/Inteli-College/2024-T0002-EC09-G03/init"
@@ -11,13 +12,9 @@ import (
 
 func init() {
 
-	var variablesToCheck = [6]string{
+	var variablesToCheck = [2]string{
 		"RABBITMQ_URL",
-		"DATABASE_HOST",
-		"DATABASE_USER",
-		"DATABASE_PASSWORD",
-		"DATABASE_NAME",
-		"DATABASE_PORT",
+		"MONGODB_URI",
 	}
 
 	if len(os.Args) > 1 {
@@ -31,12 +28,19 @@ func init() {
 func main() {
 	// go utils.MonitorNumberOfGoroutines()
 
-	dbConnection := infra.NewDBConnection()
+	dbConnection, dbClient := infra.NewDBConnection()
 	queueConnection := infra.NewQueueAdapter()
 	queueConnection.GenerateConsumer("MQTTSensors")
 
 	sensorDataAdapter := sensorData.NewSensorDataAdapter(dbConnection)
 	messageHandlerAdapter := primary.NewMessageHandlerAdapter("MQTTSensors", queueConnection, sensorDataAdapter)
 
+	defer func() {
+		if err := dbClient.Disconnect(context.TODO()); err != nil {
+			panic(err)
+		}
+	}()
+
 	messageHandlerAdapter.Consume()
+
 }

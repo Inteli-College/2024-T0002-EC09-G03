@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"os"
@@ -20,16 +21,12 @@ func init() {
 
 	argsSize := len(os.Args)
 
-	var variablesToCheck = [9]string{
+	var variablesToCheck = [5]string{
 		"BROKER_URL",
 		"BROKER_PORT",
 		"RABBIT_USER",
 		"RABBIT_PASSWORD",
-		"DATABASE_HOST",
-		"DATABASE_USER",
-		"DATABASE_PASSWORD",
-		"DATABASE_NAME",
-		"DATABASE_PORT",
+		"MONGODB_URI",
 	}
 
 	switch argsSize {
@@ -56,7 +53,7 @@ func init() {
 
 func main() {
 
-	dbConnection := infra.NewDBConnection()
+	dbConnection, dbClient := infra.NewDBConnection()
 
 	sensorAdapter := sensor.NewSensorDataAdapter(dbConnection)
 
@@ -80,5 +77,12 @@ func main() {
 		}(sensorClient)
 	}
 
+	defer func() {
+		if err := dbClient.Disconnect(context.TODO()); err != nil {
+			panic(err)
+		}
+	}()
+
 	select {}
+
 }
