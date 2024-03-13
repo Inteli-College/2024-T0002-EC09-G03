@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strconv"
 
 	"github.com/Inteli-College/2024-T0002-EC09-G03/internal/adapters/secondary/sensor"
 	"github.com/Inteli-College/2024-T0002-EC09-G03/internal/domain/entity"
@@ -13,9 +14,38 @@ import (
 	"github.com/joho/godotenv"
 )
 
-var sensorsAmount int
+var sensorsAmount int = 3
 
 func init() {
+
+  var variablesToCheck = [9]string{
+    "BROKER_URL",
+    "BROKER_PORT",
+    "RABBIT_USER",
+    "RABBIT_PASSWORD",
+		"DATABASE_HOST",
+		"DATABASE_USER",
+		"DATABASE_PASSWORD",
+		"DATABASE_NAME",
+		"DATABASE_PORT",
+	}
+
+  switch {
+  case len(os.Args) == 2:
+		initialization.LoadEnvVariables(variablesToCheck[:], &os.Args[1])
+  case len(os.Args) > 2:
+    initialization.LoadEnvVariables(variablesToCheck[:], &os.Args[1])
+    resul, err := strconv.Atoi(os.Args[2])
+  default:
+    initialization.LoadEnvVariables(variablesToCheck[:], &os.Args[1])
+  
+}
+
+	if len(os.Args) > 1 {
+		initialization.LoadEnvVariables(variablesToCheck[:], &os.Args[1])
+	} else {
+		initialization.LoadEnvVariables(variablesToCheck[:])
+	}
 
 	godotenv.Load(os.Args[1])
 
