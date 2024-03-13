@@ -47,3 +47,7 @@ A oferta de alternativas textuais para imagens, vídeos e outros conteúdos não
 A acessibilidade digital não é um estado, mas um processo contínuo de melhoria. Isso significa que o projeto UrbanPulseSP deve incorporar a acessibilidade desde o início do desenvolvimento e continuar a monitorar e atualizar a plataforma para atender às necessidades emergentes dos usuários e às novas diretrizes de acessibilidade.
 
 A Prefeitura de São Paulo, ao seguir e promover práticas recomendadas de acessibilidade digital em seus sites e sistemas, estabelece um forte precedente para projetos futuros. Alinhando-se a estas práticas, o UrbanPulseSP não apenas cumprirá com requisitos legais e éticos, mas também reforçará o compromisso da cidade com a inclusão digital, garantindo que todas as pessoas, independentemente de suas habilidades, possam se beneficiar das inovações tecnológicas implementadas em prol de uma cidade inteligente e conectada.
+
+## Conclusão
+
+A integração de considerações de acessibilidade física e digital no planejamento de hiperconectividade para cidades inteligentes, como São Paulo, é essencial para construir um ambiente urbano inclusivo. O projeto UrbanPulseSP, desenvolvido no Metabase para a PRODAM, representa um passo adiante na direção de uma cidade mais conectada e acessível. Através de avaliações contínuas e a implementação de melhorias baseadas nas normativas e diretrizes de acessibilidade, São Paulo pode se tornar um modelo de inclusão e inovação urbana.
