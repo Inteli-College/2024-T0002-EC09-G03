@@ -9,23 +9,6 @@ import (
 	"github.com/joho/godotenv"
 )
 
-// TODO: missing differentiation cmd
-var variablesToCheck = [6]string{
-	"RABBITMQ_URL",
-	"DATABASE_HOST",
-	"DATABASE_USER",
-	"DATABASE_PASSWORD",
-	"DATABASE_NAME",
-	"DATABASE_PORT",
-}
-
-// var variablesToCheck = [4]string{
-// 	"BROKER_URL",
-// 	"BROKER_PORT",
-// 	"RABBIT_USER",
-// 	"RABBIT_PASSWORD",
-// }
-
 func checkEnvVarExistence(vars []string) error {
 	for _, envName := range vars {
 		if checking := os.Getenv(envName); checking == "" {
@@ -35,7 +18,7 @@ func checkEnvVarExistence(vars []string) error {
 	return nil
 }
 
-func LoadEnvVariables(path ...*string) {
+func LoadEnvVariables(vars []string, path ...*string) {
 	log.Print("Loading env variables...")
 
 	var dotEnvErr error
@@ -47,7 +30,7 @@ func LoadEnvVariables(path ...*string) {
 		dotEnvErr = godotenv.Load()
 	}
 
-	if errEnvMissing := checkEnvVarExistence(variablesToCheck[:4]); errEnvMissing != nil {
+	if errEnvMissing := checkEnvVarExistence(vars); errEnvMissing != nil {
 
 		if dotEnvErr != nil {
 			log.Fatalf("%s\n%s\n", dotEnvErr.Error(), errEnvMissing.Error())
