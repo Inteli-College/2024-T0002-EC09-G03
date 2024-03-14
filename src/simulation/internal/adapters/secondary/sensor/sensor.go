@@ -7,6 +7,7 @@ import (
 
 	"github.com/Inteli-College/2024-T0002-EC09-G03/internal/domain/entity"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -48,11 +49,15 @@ func (s *SensorAdapter) GetAllSensors() *[]entity.Sensor {
 }
 
 func (s *SensorAdapter) CreateSensor(sensor *entity.Sensor) (*entity.Sensor, error) {
-	_, err := s.db.Collection("sensors").InsertOne(context.TODO(), sensor)
+	result, err := s.db.Collection("sensors").InsertOne(context.TODO(), &sensor)
 	if err != nil {
-		panic("failed to create sensor")
+		errMsg := fmt.Sprintf("Error creating sensor: %s\n", err.Error())
+		panic(errMsg)
 	}
-	fmt.Println("Sensor created")
+
+	sensor.Id = result.InsertedID.(primitive.ObjectID)
+
+	fmt.Printf("Sensor created: %#v\n", *sensor)
 
 	return sensor, nil
 }
