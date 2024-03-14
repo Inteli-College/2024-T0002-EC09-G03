@@ -32,12 +32,13 @@ A conformidade com as Diretrizes de Acessibilidade para Conteúdo Web (WCAG) é 
 
 É importante que a equipe de desenvolvimento realize testes regulares de acessibilidade, utilizando tanto ferramentas automatizadas quanto avaliações manuais, para identificar e corrigir possíveis barreiras de acesso. Além disso, feedback direto de usuários com deficiências pode fornecer insights valiosos sobre como melhorar a usabilidade da plataforma.
 
-Estruturação Lógica da Informação e Alternativas Textuais
+### **3. Estruturação Lógica da Informação e Alternativas Textuais**
+
 A estruturação lógica da informação é essencial para a acessibilidade, assegurando que o conteúdo seja compreendido facilmente e esteja organizado de forma intuitiva. Isso inclui o uso adequado de cabeçalhos, listas e outros elementos estruturais que facilitam a navegação e compreensão do site.
 
 A oferta de alternativas textuais para imagens, vídeos e outros conteúdos não textuais é outro aspecto crítico, permitindo que usuários com deficiências visuais ou auditivas recebam a mesma informação veiculada por meios visuais ou auditivos.
 
-### **3. Implementação e Monitoramento Contínuo**
+### **4. Implementação e Monitoramento Contínuo**
 
 A acessibilidade digital não é um estado, mas um processo contínuo de melhoria. Isso significa que o projeto UrbanPulseSP deve incorporar a acessibilidade desde o início do desenvolvimento e continuar a monitorar e atualizar a plataforma para atender às necessidades emergentes dos usuários e às novas diretrizes de acessibilidade.
 
