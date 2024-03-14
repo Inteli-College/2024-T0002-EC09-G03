@@ -7,42 +7,39 @@ Este documento é destinado a usuários que precisam acessar o Metabase para vis
 - Assegure-se de que você tenha sido autorizado a acessar o sistema com seu e-mail e uma senha temporária fornecida pelo administrador do sistema após o seu cadastro.
 
 ## Etapa 1: Configurando Variáveis de Ambiente
-Para interagir com o sistema, você precisará configurar seu ambiente com as variáveis necessárias. Como esta documentação é pública, estamos usando credenciais de exemplo abaixo. Você substituirá estas pelos valores reais fornecidos a você de forma segura.
+Para interagir com o sistema, é necessário configurar seu ambiente com as variáveis necessárias. As instruções abaixo demonstram como configurar estas variáveis para diferentes ambientes de trabalho. Substitua os placeholders pelas credenciais fornecidas de forma segura, que serão ocultadas aqui por questões de segurança.
 
-**Para o serviço de leitura de sensores (sensors_reading) e (sensor_simulation):**
+### Configurações para o serviço de leitura e simulação de sensores:
 
-1. Abra o arquivo `.env` na pasta de configuração do serviço de leitura.
-2. Substitua as variáveis de ambiente pelas credenciais fornecidas. Veja o exemplo:
+#### Serviço de Simulação dos Sensores (Publisher)
 
+Abra o arquivo `.env` correspondente ao serviço de simulação dos sensores e atualize-o com as credenciais fornecidas. Existem configurações separadas para execução local e na AWS:
 
+**Local**
 ```
-sensors_reading:
-RABBITMQ_URL=amqp://consumerSensor:ConsumerSensorPassword@34.201.221.151:5672/
-DATABASE_HOST="grupo-03.ctcg2eeii8w3.us-east-1.rds.amazonaws.com"
-DATABASE_USER="postgres"
-DATABASE_PASSWORD= REPLACE_ME
-DATABASE_NAME="postgres"
-DATABASE_PORT=5432
+BROKER_URL=localhost
+BROKER_PORT=1883
+RABBIT_USER=publisherSensor
+RABBIT_PASSWORD= placeholder
+MONGODB_URI="mongodb://root:password@localhost:27017/urbanpulsesp?retryWrites=true&connectTimeoutMS=10000&authSource=admin&authMechanism=SCRAM-SHA-1"
 ```
+
+**AWS**
+
 ```
 sensors_simulation:
 BROKER_URL="34.201.221.151"
 BROKER_PORT=1883
 RABBIT_USER=publisherSensor
-RABBIT_PASSWORD= REPLACE_ME
+RABBIT_PASSWORD= placeholder
 ```
-```
-DATABASE_HOST="grupo-03.ctcg2eeii8w3.us-east-1.rds.amazonaws.com"
-DATABASE_USER="postgres"
-DATABASE_NAME="postgres"
-DATABASE_PASSWORD="[senha_bd]"
-DATABASE_PORT=5432
-```
+Certifique-se de substituir **password** pela senha real fornecida de maneira segura para o seu ambiente específico.
+
 ## Etapa 2: Acesso ao Metabase
 O Metabase é a plataforma utilizada para a visualização dos dados. Para acessá-la:
 
-1. Digite a URL do Metabase no seu navegador: http://metabase-734478867.us-east-1.elb.amazonaws.com/
-2. Faça login usando seu e-mail da Intel e a senha temporária.
+1. Digite a URL do Metabase no seu navegador: http://3.226.236.71:3000/
+2. Faça login usando seu e-mail e senha temporária.
 3. Após o primeiro login, siga as instruções para criar uma nova senha pessoal e segura.
 
 ## Etapa 3: Visualização e Análise de Dados
@@ -51,13 +48,31 @@ No Metabase, você terá acesso a várias ferramentas de visualização:
 1. Mapa de Sensores: Mostra a localização geográfica dos sensores e pode ser utilizado para avaliar a cobertura e distribuição dos dispositivos.
 2. Gráficos de Barras: Fornece uma representação visual da quantidade de dados transmitidos por cada sensor, permitindo detectar padrões ou sensores com desempenho atípico.
 
-## Etapa 4: Compreendendo a Arquitetura do Sistema
+## Etapa 4: Executando a Simulação dos Sensores
+Para executar a simulação dos sensores, siga estes passos considerando que você já configurou as variáveis de ambiente conforme a Etapa 1. A simulação possui componentes de CONSUMER e PUBLISHER:
+
+**CONSUMER**
+
+```
+go run cmd/consumer/main.go <caminho_para_o_arquivo_dotenv>
+```
+
+**PUBLISHER**
+
+```
+go run cmd/publisher/main.go <caminho_para_o_arquivo_dotenv> <quantidade_de_sensores>
+```
+
+A quantidade de sensores é opcional. Se não especificada, o sistema irá simular um número padrão de sensores ou todos disponíveis no banco de dados.
+
+
+## Etapa 5: Compreendendo a Arquitetura do Sistema
 Use os diagramas UML dessa documentação para entender as interações entre os componentes do sistema:
 
 - O diagrama UML de sequência detalha o fluxo de dados do usuário final até o banco de dados, passando pelo middleware.
 - O diagrama UML de implantação mostra como os componentes do sistema são organizados e como eles interagem em um ambiente de produção.
 
-## Etapa 5: Gerenciamento dos Dados dos Sensores
+## Etapa 6: Gerenciamento dos Dados dos Sensores
 Responsáveis pelo gerenciamento dos dados dos sensores devem:
 
 - Navegar até a seção de gerenciamento no painel do Metabase.
