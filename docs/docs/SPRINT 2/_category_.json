@@ -3,7 +3,7 @@
     "position": 2,
     "link": {
       "type": "generated-index",
-      "description": " Na Sprint 2..."
+      "description": "Na Sprint 2, foram realizados avanços significativos na elaboração do sistema IoT para gestão ambiental urbana, abordando desde a arquitetura do sistema até análises éticas e de segurança. A arquitetura de software foi detalhadamente apresentada, incluindo simulação de sensores, comunicação entre dispositivos, backend e interface do usuário, acompanhada de um diagrama UML para ilustrar as interações entre componentes. O desenvolvimento do Frontend introduziu um Sistema de Feedback Interativo, facilitando a expressão de opiniões e sugestões pelos usuários. Também foi descrita a importância da ética, privacidade, e conformidade com a LGPD, destacando a coleta de dados não pessoais e a necessidade de políticas de privacidade claras. Instruções de uso detalhadas foram providenciadas para o acesso ao Metabase, permitindo o monitoramento de dados dos sensores em São Paulo. A sprint incluiu a realização de testes automatizados para assegurar a integridade das funcionalidades do sistema. Por fim, uma análise de vulnerabilidades foi conduzida, identificando e recomendando medidas para mitigar riscos de segurança, como a implementação de autenticação robusta e educação de usuários, garantindo a proteção de dados urbanos estratégicos."
     }
   }
   

@@ -1,24 +1,31 @@
 package sensorData
 
 import (
+	"context"
+
 	"github.com/Inteli-College/2024-T0002-EC09-G03/internal/domain/entity"
-	"gorm.io/gorm"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 type SensorDataAdapter struct {
-	db *gorm.DB
+	db *mongo.Database
 }
 
-func NewSensorDataAdapter(db *gorm.DB) *SensorDataAdapter {
+func NewSensorDataAdapter(db *mongo.Database) *SensorDataAdapter {
 	return &SensorDataAdapter{
 		db: db,
 	}
 }
 
 func (s *SensorDataAdapter) CreateInBatch(batch *[]*entity.SensorsData) error {
-	result := s.db.CreateInBatches(*batch, len(*batch))
-	if result.Error != nil {
-		return result.Error
+	batchNew := make([]interface{}, len(*batch))
+	for i, v := range *batch {
+		batchNew[i] = v
+	}
+
+	_, err := s.db.Collection("sensorsData").InsertMany(context.TODO(), batchNew)
+	if err != nil {
+		return err
 	}
 
 	return nil

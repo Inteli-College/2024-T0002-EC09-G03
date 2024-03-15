@@ -9,7 +9,7 @@ import (
 	"github.com/Inteli-College/2024-T0002-EC09-G03/internal/adapters/secondary/mqtt"
 	"github.com/Inteli-College/2024-T0002-EC09-G03/internal/domain/entity"
 	"github.com/Inteli-College/2024-T0002-EC09-G03/internal/ports"
-	"github.com/google/uuid"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 // TODO: change this for the entity SendData
@@ -26,7 +26,6 @@ type SensorRepo struct {
 func (s *SensorRepo) CreateSensor(name string, coordsX float64, coordsY float64, callback entity.SensorCallbackFunc) (*entity.Sensor, ports.MQTTPort, error) {
 	temp := &entity.Sensor{
 		Name:        name,
-		Id:          uuid.New().String(),
 		CoordinateX: coordsX,
 		CoordinateY: coordsY,
 	}
@@ -42,7 +41,7 @@ func (s *SensorRepo) CreateSensor(name string, coordsX float64, coordsY float64,
 	return sensor, mqttClient, err
 }
 
-func (s *SensorRepo) ActivateExistingSensor(id string, name string, coordsX float64, coordsY float64, callback entity.SensorCallbackFunc) (*entity.Sensor, ports.MQTTPort, error) {
+func (s *SensorRepo) ActivateExistingSensor(id primitive.ObjectID, name string, coordsX float64, coordsY float64, callback entity.SensorCallbackFunc) (*entity.Sensor, ports.MQTTPort, error) {
 	sensor := &entity.Sensor{
 		Name:        name,
 		Id:          id,
@@ -86,10 +85,12 @@ func (s *SensorRepo) EmulateSensor(sensor *entity.Sensor, mqttClient interface{}
 		}
 
 		sendData := SendData{
-			Id:   sensor.Id,
+			Id:   sensor.Id.String(),
 			Data: *simulatedData,
 			Date: time.Now(),
 		}
+
+		// log.Printf("Sensor %s simulated data: %#v\n", sensor.Name, sendData)
 
 		payload, _ := json.Marshal(sendData)
 

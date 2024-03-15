@@ -1,85 +1,59 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"os"
 	"strconv"
 
+	initialization "github.com/Inteli-College/2024-T0002-EC09-G03/init"
 	"github.com/Inteli-College/2024-T0002-EC09-G03/internal/adapters/secondary/sensor"
 	"github.com/Inteli-College/2024-T0002-EC09-G03/internal/domain/entity"
 	"github.com/Inteli-College/2024-T0002-EC09-G03/internal/infra"
 	"github.com/Inteli-College/2024-T0002-EC09-G03/internal/ports"
 	"github.com/Inteli-College/2024-T0002-EC09-G03/internal/repository"
-	"github.com/joho/godotenv"
 )
 
 var sensorsAmount int = 3
 
 func init() {
 
-  var variablesToCheck = [9]string{
-    "BROKER_URL",
-    "BROKER_PORT",
-    "RABBIT_USER",
-    "RABBIT_PASSWORD",
-		"DATABASE_HOST",
-		"DATABASE_USER",
-		"DATABASE_PASSWORD",
-		"DATABASE_NAME",
-		"DATABASE_PORT",
+	argsSize := len(os.Args)
+
+	var variablesToCheck = [5]string{
+		"BROKER_URL",
+		"BROKER_PORT",
+		"RABBIT_USER",
+		"RABBIT_PASSWORD",
+		"MONGODB_URI",
 	}
 
-  switch {
-  case len(os.Args) == 2:
-		initialization.LoadEnvVariables(variablesToCheck[:], &os.Args[1])
-  case len(os.Args) > 2:
-    initialization.LoadEnvVariables(variablesToCheck[:], &os.Args[1])
-    resul, err := strconv.Atoi(os.Args[2])
-  default:
-    initialization.LoadEnvVariables(variablesToCheck[:], &os.Args[1])
-  
-}
+	switch argsSize {
+	case 2:
+		// Nao conseguiu converter para int
+		if resul, err := strconv.Atoi(os.Args[1]); err != nil {
+			initialization.LoadEnvVariables(variablesToCheck[:], &os.Args[1])
+		} else {
+			sensorsAmount = resul
+			initialization.LoadEnvVariables(variablesToCheck[:])
+		}
 
-	if len(os.Args) > 1 {
+	case 3:
 		initialization.LoadEnvVariables(variablesToCheck[:], &os.Args[1])
-	} else {
+		if resul, err := strconv.Atoi(os.Args[2]); err == nil {
+			sensorsAmount = resul
+		}
+
+	default:
 		initialization.LoadEnvVariables(variablesToCheck[:])
 	}
-
-	godotenv.Load(os.Args[1])
-
-	// switch {
-	// case len(os.Args) > 1:
-	// 	resul, err := strconv.Atoi(os.Args[1])
-	// 	if err != nil {
-	// 		initialization.LoadEnvVariables(&os.Args[1])
-	// 		sensorsAmount = 3
-	// 		return
-	// 	}
-	// 	sensorsAmount = resul
-	// 	initialization.LoadEnvVariables()
-	//
-	// case len(os.Args) > 2:
-	// 	resul, err := strconv.Atoi(os.Args[2])
-	//
-	// 	if err != nil {
-	// 		log.Fatal("Wrong amount of sensors")
-	// 	}
-	// 	sensorsAmount = resul
-	// 	initialization.LoadEnvVariables(&os.Args[1])
-	//
-	// default:
-	// 	initialization.LoadEnvVariables()
-	// 	sensorsAmount = 3
-	//
-	// }
 
 }
 
 func main() {
 
-	dbConnection := infra.NewDBConnection()
+	dbConnection, dbClient := infra.NewDBConnection()
 
 	sensorAdapter := sensor.NewSensorDataAdapter(dbConnection)
 
@@ -89,7 +63,7 @@ func main() {
 
 	generatorRepo := repository.NewGeneratorRepo(sensorAdapter, generatorEntity, sensorRepo)
 
-	sensorsInstances := generatorRepo.GenerateSensors(3)
+	sensorsInstances := generatorRepo.GenerateSensors(sensorsAmount)
 
 	for _, sensorClient := range *sensorsInstances {
 		go func(sensorClient entity.SensorClient) {
@@ -103,5 +77,12 @@ func main() {
 		}(sensorClient)
 	}
 
+	defer func() {
+		if err := dbClient.Disconnect(context.TODO()); err != nil {
+			panic(err)
+		}
+	}()
+
 	select {}
+
 }
