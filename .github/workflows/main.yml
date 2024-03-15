@@ -21,10 +21,10 @@ jobs:
       working-directory: src/backend_go
     - name: Add missing dependencies
       run: go get github.com/gin-gonic/gin
-      working-directory: src/backend_go 
+      working-directory: src/
     - name: Build
       run: go build -v ./...
-      working-directory: src/backend_go
+      working-directory: src/
     - name: Test
       run: go test -v ./...
-      working-directory: src/backend_go
+      working-directory: src/
