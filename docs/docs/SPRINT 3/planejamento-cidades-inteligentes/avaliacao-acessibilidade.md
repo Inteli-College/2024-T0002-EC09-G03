@@ -20,6 +20,8 @@ Em última análise, a integração de práticas de acessibilidade física nos p
 
 A avaliação dos aspectos digitais de acessibilidade foca na usabilidade de plataformas e sistemas, incluindo a compatibilidade com leitores de tela, design responsivo, e a conformidade com os padrões de acessibilidade Web, especificamente as diretrizes WCAG (Web Content Accessibility Guidelines). Para o projeto UrbanPulse, desenvolvido no Metabase para a visualização de dados dos sensores, é imperativo que a interface do usuário esteja alinhada com essas diretrizes, garantindo que pessoas com deficiências visuais, auditivas, motoras ou cognitivas possam acessar e interpretar os dados apresentados sem barreiras.
 
+Ademais, ao avaliar a acessibilidade digital para o projeto UrbanPulse, desenvolvido no Metabase, é essencial considerar a compatibilidade com leitores de tela e design responsivo. No entanto, é importante reconhecer que, embora o Metabase tenha iniciado esforços para melhorar a acessibilidade, como a seleção de elementos de formulário via tabulação e a desativação de animações para usuários que optam por reduzir o movimento, ainda existem áreas significativas para desenvolvimento. Estas incluem a compatibilidade com leitores de tela, a necessidade de fornecer equivalentes textuais para todos os elementos não-textuais, e a marcação adequada de tabelas de dados. Portanto, para garantir uma experiência inclusiva a todos os usuários, o UrbanPulseSP deve ativamente endereçar e implementar soluções para essas lacunas de acessibilidade.
+
 ### **1. Design Responsivo e Compatibilidade com Leitores de Tela**
 
 A eficácia de uma plataforma digital em ser acessível está intrinsecamente ligada à sua capacidade de se adaptar a uma variedade de dispositivos e tamanhos de tela, bem como à sua compatibilidade com tecnologias assistivas, como leitores de tela. No contexto do projeto UrbanPulseSP, isso significa que a interface do Metabase deve ser meticulosamente projetada para garantir que todos os elementos da página sejam acessíveis e funcionais, independentemente do dispositivo utilizado pelo usuário.
@@ -32,12 +34,13 @@ A conformidade com as Diretrizes de Acessibilidade para Conteúdo Web (WCAG) é 
 
 É importante que a equipe de desenvolvimento realize testes regulares de acessibilidade, utilizando tanto ferramentas automatizadas quanto avaliações manuais, para identificar e corrigir possíveis barreiras de acesso. Além disso, feedback direto de usuários com deficiências pode fornecer insights valiosos sobre como melhorar a usabilidade da plataforma.
 
-Estruturação Lógica da Informação e Alternativas Textuais
+### **3. Estruturação Lógica da Informação e Alternativas Textuais**
+
 A estruturação lógica da informação é essencial para a acessibilidade, assegurando que o conteúdo seja compreendido facilmente e esteja organizado de forma intuitiva. Isso inclui o uso adequado de cabeçalhos, listas e outros elementos estruturais que facilitam a navegação e compreensão do site.
 
 A oferta de alternativas textuais para imagens, vídeos e outros conteúdos não textuais é outro aspecto crítico, permitindo que usuários com deficiências visuais ou auditivas recebam a mesma informação veiculada por meios visuais ou auditivos.
 
-### **3. Implementação e Monitoramento Contínuo**
+### **4. Implementação e Monitoramento Contínuo**
 
 A acessibilidade digital não é um estado, mas um processo contínuo de melhoria. Isso significa que o projeto UrbanPulseSP deve incorporar a acessibilidade desde o início do desenvolvimento e continuar a monitorar e atualizar a plataforma para atender às necessidades emergentes dos usuários e às novas diretrizes de acessibilidade.
 
