@@ -14,9 +14,9 @@ import (
 
 // TODO: change this for the entity SendData
 type SendData struct {
-	Id   string              `json:"id"`
-	Data []entity.DataSensor `json:"data"`
-	Date time.Time           `json:"date"`
+	Id        primitive.ObjectID  `json:"id"`
+	Data      []entity.DataSensor `json:"data"`
+	CreatedAt time.Time           `json:"created_at"`
 }
 
 type SensorRepo struct {
@@ -85,9 +85,9 @@ func (s *SensorRepo) EmulateSensor(sensor *entity.Sensor, mqttClient interface{}
 		}
 
 		sendData := SendData{
-			Id:   sensor.Id.String(),
-			Data: *simulatedData,
-			Date: time.Now(),
+			Id:        sensor.Id,
+			Data:      *simulatedData,
+			CreatedAt: time.Now(),
 		}
 
 		// log.Printf("Sensor %s simulated data: %#v\n", sensor.Name, sendData)
