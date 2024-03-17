@@ -21,3 +21,18 @@ func NewDBConnection() (*mongo.Database, *mongo.Client) {
 
 	return client.Database("urbanpulsesp"), client
 }
+
+// NewDBConnectionUsing adapta a função original para usar uma interface
+
+func NewDBConnectionUsing(connector MockMongoDBConnector) (*mongo.Database, *mongo.Client) {
+	uri := os.Getenv("MONGODB_URI")
+	if uri == "" {
+		log.Fatal("You must set your 'MONGODB_URI' environment variable. See\n\t https://www.mongodb.com/docs/drivers/go/current/usage-examples/#environment-variable")
+	}
+	client, err := connector.Connect(uri)
+	if err != nil {
+		panic(err)
+	}
+
+	return client.Database("urbanpulsesp"), client
+}
