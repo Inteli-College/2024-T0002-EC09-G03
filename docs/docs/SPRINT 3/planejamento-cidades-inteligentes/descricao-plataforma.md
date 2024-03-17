@@ -1,7 +1,6 @@
 # 1. Descrição do Espaço/Produto/Plataforma
-Relatório de Descrição da Plataforma Metabase para Exibição de Dados da Região de São Paulo
 
-A Plataforma para Exibição de Dados da Região de São Paulo é uma ferramenta desenvolvida com o objetivo de fornecer uma visualização clara e acessível dos dados coletados em toda a região de São Paulo. Utilizando a tecnologia Metabase, a plataforma oferece recursos avançados de análise e apresentação de dados para diversos públicos, desde tomadores de decisão governamentais até pesquisadores e o público em geral.
+A Plataforma para Exibição de Dados dos eventos climéticos em São Paulo é uma ferramenta desenvolvida com o objetivo de fornecer uma visualização clara e acessível dos dados coletados em toda a região de São Paulo. Utilizando a tecnologia Metabase, a plataforma oferece recursos avançados de análise e apresentação de dados para diversos públicos, desde tomadores de decisão governamentais até pesquisadores e o público em geral.
 
 ### Descrição do Produto/Serviço:
 A plataforma consiste em um dashboard interativo que exibe informações cruciais sobre a região de São Paulo. Os principais dados apresentados atualmente incluem:
