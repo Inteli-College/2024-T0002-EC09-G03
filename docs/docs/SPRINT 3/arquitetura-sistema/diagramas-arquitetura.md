@@ -42,3 +42,5 @@ O PostgreSQL é conectado ao sistema de uma maneira específica:
 - O Metabase, responsável por visualizar os dados armazenados nos bancos de dados, se conecta diretamente ao PostgreSQL.
 - O PostgreSQL recebe informações do Metabase, que podem incluir consultas específicas ou visualizações preparadas para análise de dados.
 - Essa conexão permite ao Metabase acessar os dados armazenados no PostgreSQL e apresentá-los aos usuários finais de forma intuitiva e compreensível.
+
+
