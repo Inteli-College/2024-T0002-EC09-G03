@@ -23,3 +23,20 @@ Este componente em Go atua como o consumidor da fila do RabbitMQ. Ele é respons
 
 
 # diagrama de sequencia integração do banco de dados com o restante do sistema 
+
+Conexão dos Bancos de Dados ao Sistema
+
+MongoDB
+O MongoDB é conectado ao sistema de duas maneiras distintas:
+
+Via RabbitMQ e Consumidor da Fila em Go:
+Após a recepção dos dados pelos sensores e seu envio ao RabbitMQ, o Consumidor da Fila em Go processa esses dados.
+O Consumidor da Fila então encaminha os dados para o MongoDB.
+Este processo garante que os dados dos sensores sejam armazenados de forma eficiente no MongoDB para posterior análise e visualização.
+PostgreSQL
+O PostgreSQL é conectado ao sistema de uma maneira específica:
+
+Através do Metabase:
+O Metabase, responsável por visualizar os dados armazenados nos bancos de dados, se conecta diretamente ao PostgreSQL.
+O PostgreSQL recebe informações do Metabase, que podem incluir consultas específicas ou visualizações preparadas para análise de dados.
+Essa conexão permite ao Metabase acessar os dados armazenados no PostgreSQL e apresentá-los aos usuários finais de forma intuitiva e compreensível.
