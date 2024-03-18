@@ -42,6 +42,12 @@ Este documento descreve a arquitetura de software para o sistema de IoT desenvol
 3. O backend desenvolvido em Go consome as mensagens, processa os dados e interage com o banco de dados para realizar os registros.
 4. O Metabase faz requisições ao banco de dadaos e apresenta os dados processados aos usuários.
 
-## Considerações Finais
+## Considerações Fi
+
+```
+
+```
+
+nais
 
 A arquitetura foi projetada para garantir a escalabilidade e a eficiência na comunicação entre os componentes do sistema, fornecendo uma experiência de usuário suave e reativa.
