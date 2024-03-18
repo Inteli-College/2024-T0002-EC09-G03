@@ -43,7 +43,7 @@ const sidebars = {
           items: [
             'SPRINT 3/planejamento-cidades-inteligentes/descricao-plataforma',
             'SPRINT 3/planejamento-cidades-inteligentes/avaliacao-acessibilidade',
-            'SPRINT 3/planejamento-cidades-inteligentes/planajemanento-hiperconectividade',
+            'SPRINT 3/planejamento-cidades-inteligentes/planejamento-hiperconectividade',
             'SPRINT 3/planejamento-cidades-inteligentes/integracao-acessibilidade',
             'SPRINT 3/planejamento-cidades-inteligentes/reflexao-final',
           ],
