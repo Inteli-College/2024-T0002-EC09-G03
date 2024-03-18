@@ -18,7 +18,6 @@ Só ressaltando que, no projeto para Ecovigilância da PRODAM, a escolha da arqu
 
 Portanto, vale lembrar que é sempre importante considerar as necessidades e prioridades específicas de cada setor urbano ao planejar a integração de sistemas,para que possa ser garantido que as soluções propostas atendam às demandas dos gestores públicos e também aos cidadãos. Ter a colaboração entre especialistas em IoT, segurança cibernética, computação em nuvem e arquitetura de dados é essencial para desenvolver uma estratégia de integração abrangente e eficaz para uma cidade inteligente.
 
-
 ## IoT e Dispositivos Conectados
 
 Para ter a integração dos dispositivos, como os sensores,  por exemplo, o que poderia ser integrado em uma cidade inteligente são os sensores ambientais, pois são sensores que podem ser utilizados para monitorar a qualidade do ar, níveis de poluição sonora, temperatura, umidade e outras variáveis ambientais, como dispositivos para monitorar a qualidade da água ou escape de água nas avenidas e nas ruas. Ao coletar e analisar dados em tempo real, os sensores ambientais fornecem insights que podem ser utilizados para tomar decisões informadas sobre políticas públicas de saúde, meio ambiente e planejamento urbano em geral.
@@ -33,7 +32,9 @@ Então, portanto, ao integrar esses dispositivos IoT em uma infraestrutura urban
 
 Apesar de todo análise passado no decorrer desse tópico, há uma estrutura que mantém toda hiperconectivdade de pé, que é a rede e comunicação, pois para viabilizar essa hiperconectividade em uma cidade, é essencial contar com uma infraestrutura, a qual deverá ser robusta e eficiente, visto que serve como a espinha dorsal que sustenta a interconexão de dispositivos, sistemas e serviços em toda a cidade, permitindo uma troca de dados rápida, confiável e segura.
 
+![Arquitetura Smart City](../../../static/img/smart-city-arquitetura.png)
+<center>Adaptado de: "Non-Intrusive Deployment of Blockchain in Establishing Cyber-Infrastructure for Smart City" </center> <br>
+
 Em um dos artefatos dessa documentação foi mencionado sobre a sua utilização da rede como um todo, entretanto é válido sempre lembrar sobre as redes de comunicação. E na hiperconectividade, principalmente em IOT, um dos elementos fundamentais dessa infraestrutura é a tecnologia de redes sem fio, que oferece conectividade móvel e flexível para toda a cidade. Nesse sentido, o avanço para redes de quinta geração (5G) desempenha um papel importantante nos dias atuais, uma vez que o 5G oferece velocidades de conexão significativamente mais rápidas e menor latência, o que é essencial para suportar, grandes quantidades de dados, aplicativos e serviços exigentes em tempo real, como carros autônomos, monitoramento de tráfego e saúde digital. Sem contar que o 5G é capaz de suportar um número muito maior de dispositivos conectados simultaneamente, o que é essencial em um ambiente urbano densamente povoado, como na capital de São Paulo.
 
 Além do mais, existe também a fibra ótica, a qual proporciona uma largura de banda muito maior em comparação com os cabos de cobre tradicionais, permitindo transferências de dados mais rápidas e confiáveis. Sem contar que a fibra óptica é menos suscetível a interferências eletromagnéticas, o que a torna ideal para ambientes urbanos onde a densidade de dispositivos eletromagnéticos é alta. Portanto, ao implementar uma rede de fibra óptica abrangente em toda a cidade, é possível garantir uma conectividade de alta velocidade e confiável para todos os pontos da infraestrutura da cidade.
-
