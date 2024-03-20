@@ -1,4 +1,4 @@
-package sensorData_test
+package sensorData
 
 import (
 	"context"
@@ -6,7 +6,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Inteli-College/2024-T0002-EC09-G03/internal/adapters/secondary/sensorData"
 	"github.com/Inteli-College/2024-T0002-EC09-G03/internal/domain/entity"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -24,7 +23,7 @@ func TestCreateInBatch(t *testing.T) {
 	}
 
 	db := client.Database("yourDatabaseName")
-	adapter := sensorData.NewSensorDataAdapter(db)
+	adapter := NewSensorDataAdapter(db)
 
 	// Criando dados de teste para inserir
 	testData := []*entity.SensorsData{
