@@ -48,4 +48,6 @@ func TestCreateAndActivateSensor(t *testing.T) {
 	assert.NotNil(t, sensor)
 	assert.Equal(t, id, sensor.Id)
 	assert.NotNil(t, mqttClient)
+
+	// Teste EmulateSensorData
 }
