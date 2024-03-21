@@ -28,7 +28,7 @@ services:
       RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: '-rabbitmq_management load_definitions "/etc/rabbitmq/definitions.json"'
     ports:
       - "15672:15672"
-      - "5672:5672"
+      - "5673:5672"
       - "1883:1883" # default port for MQTT
     volumes:
       - ./rabbitmq/definitions.json:/etc/rabbitmq/definitions.json
