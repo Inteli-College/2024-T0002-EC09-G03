@@ -7,7 +7,8 @@ import (
 )
 
 func TestNewDBConnection(t *testing.T) {
-	os.Setenv("MONGODB_URI", "mongodb://root:password@localhost:27017/urbanpulsesp?retryWrites=true&connectTimeoutMS=10000&authSource=admin&authMechanism=SCRAM-SHA-1")
+	// Deixando o setup de variaveis de ambiente para o github actions
+	// os.Setenv("MONGODB_URI", "mongodb://root:password@localhost:27017/urbanpulsesp?retryWrites=true&connectTimeoutMS=10000&authSource=admin&authMechanism=SCRAM-SHA-1")
 
 	db, client := NewDBConnection()
 
