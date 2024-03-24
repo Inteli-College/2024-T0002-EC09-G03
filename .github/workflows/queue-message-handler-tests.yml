@@ -37,8 +37,8 @@ jobs:
       # Configura variáveis de ambiente necessárias para os testes usando GitHub Secrets
       - name: Set environment variables
         run: |
-          echo "RABBITMQ_URL=${{ secrets.LOCAL_CONSUMER_RABBITMQ_URL }}" >> $GITHUB_ENV
-          echo "MONGODB_URI=${{ secrets.LOCAL_MONGODB_URI }}" >> $GITHUB_ENV
+          echo "RABBITMQ_URL=amqp://guest:guest@localhost:5672/" >> $GITHUB_ENV
+          echo "MONGODB_URI=mongodb://localhost:27017/urbanpulsesp" >> $GITHUB_ENV
 
       # Roda os testes
       - name: Run tests
