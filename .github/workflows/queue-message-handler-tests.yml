@@ -9,7 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     permissions: 
       contents: read
-      checks: write 
+      checks: write
+      issues: write
+      pull-requests: write     
 
     steps:
       # Checa o código fonte do repositório
