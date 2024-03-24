@@ -50,7 +50,7 @@ func TestMessageHandlerAdapter(t *testing.T) {
 	q, err := channel.QueueDeclare(
 		testRabbitMQQueue, // queue name
 		false,             // durable
-		false,             // delete when unused
+		true,             // delete when unused
 		false,             // exclusive
 		false,             // no-wait
 		nil,               // arguments
