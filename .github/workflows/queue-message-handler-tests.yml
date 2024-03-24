@@ -32,13 +32,12 @@ jobs:
       # Configura variáveis de ambiente (Ajuste conforme sua aplicação)
       - name: Set environment variables
         run: |
-          echo "RABBITMQ_URL=amqp://consumerSensor:ConsumerSensorPassword@localhost:5672/" >> $GITHUB_ENV
+          echo "RABBITMQ_URL=amqp://user:password@localhost:5672/" >> $GITHUB_ENV
           echo "MONGODB_URI=mongodb://root:password@localhost:27017/urbanpulsesp?retryWrites=true&connectTimeoutMS=10000&authSource=admin&authMechanism=SCRAM-SHA-1" >> $GITHUB_ENV
           echo "BROKER_URL=localhost" >> $GITHUB_ENV
           echo "BROKER_PORT=1883" >> $GITHUB_ENV
-          echo "RABBIT_USER=publisherSensor" >> $GITHUB_ENV
-          echo "RABBIT_PASSWORD=PublisherSensorPassword" >> $GITHUB_ENV
-
+          echo "RABBIT_USER=user" >> $GITHUB_ENV
+          echo "RABBIT_PASSWORD=password" >> $GITHUB_ENV
           
       # Roda os testes
       - name: Run tests
