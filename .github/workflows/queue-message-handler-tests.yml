@@ -13,12 +13,7 @@ jobs:
       mongodb:
         image: mongo
         ports:
-          - 27017:27017
-        options: >-
-            --health-cmd "mongo --eval 'db.runCommand({ping: 1})'"
-            --health-interval 20s
-            --health-timeout 10s
-            --health-retries 10         
+          - 27017:27017      
       # Configura o serviço RabbitMQ utilizando a porta padrão
       rabbitmq:
         image: rabbitmq
