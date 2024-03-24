@@ -37,7 +37,7 @@ func TestMessageHandlerAdapter(t *testing.T) {
 	rabbitMQURL := os.Getenv("RABBITMQ_URL")
 	conn, err := amqp.Dial(rabbitMQURL)
 	if err != nil {
-		log.Fatalf("Failed to connect to RabbitMQ: %v", err)
+		log.Fatalf("Failed to connect to RabbitMQ on url '%v': %v", rabbitMQURL, err)
 	}
 	defer conn.Close()
 
