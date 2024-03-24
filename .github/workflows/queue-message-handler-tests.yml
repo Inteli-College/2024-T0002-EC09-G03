@@ -1,0 +1,51 @@
+name: Go Tests Workflow
+
+# Define os eventos que vão acionar este workflow
+on: [push, pull_request]
+
+jobs:
+  build-and-test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    
+    services:
+      # Configura o serviço MongoDB utilizando a porta padrão
+      mongodb:
+        image: mongo
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongo --eval 'db.runCommand({ping: 1})'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      # Configura o serviço RabbitMQ utilizando a porta padrão
+      rabbitmq:
+        image: rabbitmq
+        ports:
+          - 5672:5672
+          - 15672:15672
+        options: >-
+          --hostname localhost
+
+    steps:
+      # Checa o código fonte do repositório
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      # Configura o ambiente Go
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.18 # Ou a versão do Go que você está usando
+      
+      # Configura variáveis de ambiente necessárias para os testes usando GitHub Secrets
+      - name: Set environment variables
+        run: |
+          echo "RABBITMQ_URL=${{ secrets.LOCAL_CONSUMER_RABBITMQ_URL }}" >> $GITHUB_ENV
+          echo "MONGODB_URI=${{ secrets.LOCAL_MONGODB_URI }}" >> $GITHUB_ENV
+          # Aqui você pode adicionar outras variáveis de ambiente necessárias
+
+      # Roda os testes
+      - name: Run tests
+        run: go test ./src/simulation/internal/adapters/primary -v
