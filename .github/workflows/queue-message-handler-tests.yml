@@ -43,4 +43,4 @@ jobs:
 
       # Roda os testes
       - name: Run tests
-        run: go test ./src/simulation -v
+        run: go test ./src/simulation/... -v
