@@ -26,6 +26,20 @@ jobs:
           cd src
           docker-compose up -d
 
+      # Aguarda o RabbitMQ ficar disponível
+      - name: Wait for RabbitMQ to become available
+        run: |
+          echo "Waiting for RabbitMQ to become available..."
+          timeout=60; while ! nc -z localhost 5672; do
+            sleep 1
+            timeout=$((timeout-1))
+            if [ $timeout -eq 0 ]; then
+              echo "Timed out waiting for RabbitMQ to become available"
+              exit 1
+            fi
+          done
+          echo "RabbitMQ is available now"
+
       # Configura o ambiente Go
       - name: Set up Go
         uses: actions/setup-go@v2
