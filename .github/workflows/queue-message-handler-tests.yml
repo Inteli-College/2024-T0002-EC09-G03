@@ -39,8 +39,8 @@ jobs:
         run: |
           echo "RABBITMQ_URL=${{ secrets.LOCAL_CONSUMER_RABBITMQ_URL }}" >> $GITHUB_ENV
           echo "MONGODB_URI=${{ secrets.LOCAL_MONGODB_URI }}" >> $GITHUB_ENV
-          # Aqui você pode adicionar outras variáveis de ambiente necessárias
 
       # Roda os testes
       - name: Run tests
-        run: go test ./src/simulation/... -v
+        working-directory: ./src/simulation
+        run: go test ./...
