@@ -7,43 +7,49 @@ jobs:
   build-and-test:
     name: Build and Test
     runs-on: ubuntu-latest
-    
-    services:
-      # Configura o serviço MongoDB utilizando a porta padrão
-      mongodb:
-        image: mongo
-        ports:
-          - 27017:27017      
-      # Configura o serviço RabbitMQ utilizando a porta padrão
-      rabbitmq:
-        image: rabbitmq
-        ports:
-          - 5672:5672
-          - 1883:1883
-        options: >-
-          --hostname localhost
 
     steps:
       # Checa o código fonte do repositório
       - name: Checkout code
         uses: actions/checkout@v2
       
+      # Configura o ambiente Docker e Docker Compose
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      
+      # Inicia os serviços definidos no docker-compose.yml
+      - name: Start services with Docker Compose
+        run: |
+          cd src
+          docker-compose up -d
+
       # Configura o ambiente Go
       - name: Set up Go
         uses: actions/setup-go@v2
         with:
           go-version: ^1.20
       
-      # Configura variáveis de ambiente necessárias para os testes usando GitHub Secrets
+      # Configura variáveis de ambiente (Ajuste conforme sua aplicação)
       - name: Set environment variables
         run: |
-          echo "RABBITMQ_URL=amqp://guest:guest@localhost:5672/" >> $GITHUB_ENV
-          echo "MONGODB_URI=mongodb://localhost:27017/urbanpulsesp" >> $GITHUB_ENV
+          echo "RABBITMQ_URL=amqp://consumerSensor:ConsumerSensorPassword@localhost:5672/" >> $GITHUB_ENV
+          echo "MONGODB_URI=mongodb://root:password@localhost:27017/urbanpulsesp?retryWrites=true&connectTimeoutMS=10000&authSource=admin&authMechanism=SCRAM-SHA-1" >> $GITHUB_ENV
           echo "BROKER_URL=localhost" >> $GITHUB_ENV
           echo "BROKER_PORT=1883" >> $GITHUB_ENV
+          echo "RABBIT_USER=publisherSensor" >> $GITHUB_ENV
+          echo "RABBIT_PASSWORD=PublisherSensorPassword" >> $GITHUB_ENV
 
+          
       # Roda os testes
       - name: Run tests
         working-directory: ./src/simulation
         run: go test ./...
+      
+      # Para os serviços após a execução dos testes
+      - name: Stop Docker Compose services
+        if: always()
+        run: |
+          cd src
+          docker-compose down
+
 
