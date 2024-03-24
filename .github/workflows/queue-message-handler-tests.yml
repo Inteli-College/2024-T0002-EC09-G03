@@ -39,10 +39,22 @@ jobs:
           echo "RABBIT_USER=user" >> $GITHUB_ENV
           echo "RABBIT_PASSWORD=password" >> $GITHUB_ENV
           
-      # Roda os testes
-      - name: Run tests
+      # Instala gotestsum para deixar o log de execução dos testes mais legivél 
+      - name: Install gotestsum
+        run: go install gotest.tools/gotestsum@latest
+      
+      # Roda os testes utilizando o gotestsum como 'proxy' (equivalente a rodar go test sozinho) 
+      # e salvando os resultados para um arquivo
+      - name: Run tests and generate JUnit XML
         working-directory: ./src/simulation
-        run: go test ./...
+        run: gotestsum --junitfile unit-tests.xml ./...
+      
+      # Publish Unit Test Results
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        if: always()
+        with:
+          files: src/simulation/unit-tests.xml
       
       # Para os serviços após a execução dos testes
       - name: Stop Docker Compose services
