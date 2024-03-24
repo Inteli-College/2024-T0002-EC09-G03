@@ -19,7 +19,7 @@ jobs:
         image: rabbitmq
         ports:
           - 5672:5672
-          - 15672:15672
+          - 1883:1883
         options: >-
           --hostname localhost
 
@@ -39,8 +39,11 @@ jobs:
         run: |
           echo "RABBITMQ_URL=amqp://guest:guest@localhost:5672/" >> $GITHUB_ENV
           echo "MONGODB_URI=mongodb://localhost:27017/urbanpulsesp" >> $GITHUB_ENV
+          echo "BROKER_URL=localhost" >> $GITHUB_ENV
+          echo "BROKER_PORT=1883" >> $GITHUB_ENV
 
       # Roda os testes
       - name: Run tests
         working-directory: ./src/simulation
         run: go test ./...
+
