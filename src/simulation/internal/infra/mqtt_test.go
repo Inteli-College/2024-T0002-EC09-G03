@@ -15,7 +15,7 @@ func setupTestEnvironment() {
 }
 
 func TestNewMQTTConnection(t *testing.T) {
-	setupTestEnvironment()
+	// setupTestEnvironment() // Deixando o setup de variaveis de ambiente para o github actions
 
 	clientName := "testClient"
 	wg := &sync.WaitGroup{}

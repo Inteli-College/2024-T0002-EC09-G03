@@ -1,0 +1,71 @@
+name: Go Tests Workflow
+
+# Define os eventos que vão acionar este workflow
+on: [push, pull_request]
+
+jobs:
+  build-and-test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    permissions: 
+      contents: read
+      checks: write
+      issues: write
+      pull-requests: write     
+
+    steps:
+      # Checa o código fonte do repositório
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      # Configura o ambiente Docker e Docker Compose
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      
+      # Inicia os serviços definidos no docker-compose.yml
+      - name: Start services with Docker Compose
+        run: |
+          cd src
+          docker-compose up -d
+
+      # Configura o ambiente Go
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ^1.20
+      
+      # Configura variáveis de ambiente (Ajuste conforme sua aplicação)
+      - name: Set environment variables
+        run: |
+          echo "RABBITMQ_URL=amqp://admin:AdminPassword@localhost:5672/" >> $GITHUB_ENV
+          echo "MONGODB_URI=mongodb://root:password@localhost:27017/urbanpulsesp?retryWrites=true&connectTimeoutMS=10000&authSource=admin&authMechanism=SCRAM-SHA-1" >> $GITHUB_ENV
+          echo "BROKER_URL=localhost" >> $GITHUB_ENV
+          echo "BROKER_PORT=1883" >> $GITHUB_ENV
+          echo "RABBIT_USER=admin" >> $GITHUB_ENV
+          echo "RABBIT_PASSWORD=AdminPassword" >> $GITHUB_ENV
+          
+      # Instala gotestsum para deixar o log de execução dos testes mais legivél 
+      - name: Install gotestsum
+        run: go install gotest.tools/gotestsum@latest
+      
+      # Roda os testes utilizando o gotestsum como 'proxy' (equivalente a rodar go test sozinho) 
+      # e salvando os resultados para um arquivo
+      - name: Run tests and generate JUnit XML
+        working-directory: ./src/simulation
+        run: gotestsum --junitfile unit-tests.xml ./...
+      
+      # Publica os resultados dos testes como comentario na PR
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        if: always()
+        with:
+          files: src/simulation/unit-tests.xml
+      
+      # Para os serviços após a execução dos testes
+      - name: Stop Docker Compose services
+        if: always()
+        run: |
+          cd src
+          docker-compose down
+
+

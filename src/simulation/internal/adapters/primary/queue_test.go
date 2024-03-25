@@ -37,7 +37,7 @@ func TestMessageHandlerAdapter(t *testing.T) {
 	rabbitMQURL := os.Getenv("RABBITMQ_URL")
 	conn, err := amqp.Dial(rabbitMQURL)
 	if err != nil {
-		log.Fatalf("Failed to connect to RabbitMQ: %v", err)
+		log.Fatalf("Failed to connect to RabbitMQ on url '%v': %v", rabbitMQURL, err)
 	}
 	defer conn.Close()
 
@@ -50,7 +50,7 @@ func TestMessageHandlerAdapter(t *testing.T) {
 	q, err := channel.QueueDeclare(
 		testRabbitMQQueue, // queue name
 		false,             // durable
-		false,             // delete when unused
+		true,             // delete when unused
 		false,             // exclusive
 		false,             // no-wait
 		nil,               // arguments
