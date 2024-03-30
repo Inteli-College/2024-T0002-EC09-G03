@@ -27,7 +27,7 @@ Ao final, os serviços iniciados por Docker Compose são encerrados, garantindo 
 # Resultados dos Testes
 O resultado final mostra uma mistura de testes passados e falhados, com um total de 10 testes realizados e 3 falhas detectadas. As falhas destacadas indicam problemas específicos como autenticação não autorizada em comandos de banco de dados e erros ao tentar acessar documentos no MongoDB.
 
-![Resultado testes](/docs/static/img/teste_workflow_actions_sprint4.png)
+![Resultado testes](../../../static/img/teste_workflow_actions_sprint4.png)
 
 ## Testes com Falhas
 
