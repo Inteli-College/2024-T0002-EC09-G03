@@ -1,6 +1,6 @@
 # Descrição da arquitetura
 
-![Arquitetura do sistema](../../../static/img/arquitetura-do-sistema-sprint-2.png)
+![Arquitetura do sistema](../../../static/img/arquitetura-do-sistema-diagrama-uml.png)
 
 ## Visão Geral
 
@@ -24,7 +24,8 @@ Este documento descreve a arquitetura de software para o sistema de IoT desenvol
 
 ### Banco de Dados
 
-- **PostgreSQL**: Sistema de gerenciamento de banco de dados relacional para armazenamento dos dados coletados.
+- **PostgreSQL**: Sistema de gerenciamento de banco de dados relacional para referência do Metabase.
+- **MongoDB**: Banco de dados não relacional para armazenamento dos dados brutos coletados dos sensores.
 
 ## Arquitetura Detalhada
 
@@ -32,7 +33,7 @@ Este documento descreve a arquitetura de software para o sistema de IoT desenvol
 [Sensores (ESP32s simulados)] --MQTT--> [Broker (RabbitMQ)] --AMQP--> [Backend (Go)]  [Frontend (Metabase)]
                                                                           |                 ^
                                                                           v                 |
-                                                         [Banco de Dados (PostgreSQL)]  <----
+                                                      [MongoDB (NoSQL)] -- >   [Banco de Dados (PostgreSQL)]  <----
 ```
 
 ## Fluxo de Dados
