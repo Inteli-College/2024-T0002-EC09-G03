@@ -1,6 +1,6 @@
 # Descrição da arquitetura
 
-![Arquitetura do sistema](../../../static/img/arquitetura-do-sistema-diagrama-uml.png)
+![Arquitetura do sistema](../../../static/img/arquitetura-do-sistema-atual.png)
 
 ## Visão Geral
 
