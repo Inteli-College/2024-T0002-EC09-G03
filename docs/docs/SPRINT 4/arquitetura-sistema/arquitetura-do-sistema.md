@@ -31,9 +31,9 @@ Este documento descreve a arquitetura de software para o sistema de IoT desenvol
 
 ```plaintext
 [Sensores (ESP32s simulados)] --MQTT--> [Broker (RabbitMQ)] --AMQP--> [Backend (Go)]  [Frontend (Metabase)]
-                                                                          |                 ^
-                                                                          v                 |
-                                                      [MongoDB (NoSQL)] -- >   [Banco de Dados (PostgreSQL)]  <----
+                                                                          |                 ^       | 
+                                                                          v                 |       v
+                                                                            [MongoDB (NoSQL)]    [Banco de Dados (PostgreSQL)]
 ```
 
 ## Fluxo de Dados
