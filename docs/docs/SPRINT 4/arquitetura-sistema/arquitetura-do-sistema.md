@@ -1,6 +1,6 @@
 # Descrição da arquitetura
 
-![Arquitetura do sistema](../../../static/img/arquitetura-do-sistema-sprint-2.png)
+![Arquitetura do sistema](../../../static/img/arquitetura-do-sistema-atual.png)
 
 ## Visão Geral
 
@@ -24,15 +24,16 @@ Este documento descreve a arquitetura de software para o sistema de IoT desenvol
 
 ### Banco de Dados
 
-- **PostgreSQL**: Sistema de gerenciamento de banco de dados relacional para armazenamento dos dados coletados.
+- **PostgreSQL**: Sistema de gerenciamento de banco de dados relacional para referência do Metabase.
+- **MongoDB**: Banco de dados não relacional para armazenamento dos dados brutos coletados dos sensores.
 
 ## Arquitetura Detalhada
 
 ```plaintext
 [Sensores (ESP32s simulados)] --MQTT--> [Broker (RabbitMQ)] --AMQP--> [Backend (Go)]  [Frontend (Metabase)]
-                                                                          |                 ^
-                                                                          v                 |
-                                                         [Banco de Dados (PostgreSQL)]  <----
+                                                                          |                 ^       | 
+                                                                          v                 |       v
+                                                                            [MongoDB (NoSQL)]    [Banco de Dados (PostgreSQL)]
 ```
 
 ## Fluxo de Dados
@@ -42,12 +43,6 @@ Este documento descreve a arquitetura de software para o sistema de IoT desenvol
 3. O backend desenvolvido em Go consome as mensagens, processa os dados e interage com o banco de dados para realizar os registros.
 4. O Metabase faz requisições ao banco de dadaos e apresenta os dados processados aos usuários.
 
-## Considerações Fi
-
-```
-
-```
-
-nais
+## Considerações Finais
 
 A arquitetura foi projetada para garantir a escalabilidade e a eficiência na comunicação entre os componentes do sistema, fornecendo uma experiência de usuário suave e reativa.
