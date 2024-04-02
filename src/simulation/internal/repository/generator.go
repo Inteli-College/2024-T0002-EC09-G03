@@ -6,6 +6,7 @@ import (
 	"math/rand"
 	"strings"
 	"sync"
+	"time"
 
 	"github.com/Inteli-College/2024-T0002-EC09-G03/internal/domain/entity"
 	"github.com/Inteli-College/2024-T0002-EC09-G03/internal/ports"
@@ -136,8 +137,11 @@ func (s *GeneratorRepo) createSensorWithExistingCheck(sensorsExists *map[string]
 
 		coordsX, coordsY := s.generateCoords(&key)
 
+		// Gera um número aleatório entre 1 e 96.
+		areaNumber := rand.Intn(96) + 1
+
 		log.Printf("Generating sensor: %s\n", sensorName)
-		tempSensor, mqttClientInterface, err := s.sensorRepo.CreateSensor(sensorName, *coordsX, *coordsY, s.gen.SensorTypes[value.Name].Callback)
+		tempSensor, mqttClientInterface, err := s.sensorRepo.CreateSensor(sensorName, *coordsX, *coordsY, areaNumber, s.gen.SensorTypes[value.Name].Callback)
 
 		mqttClient, ok := mqttClientInterface.(ports.MQTTPort)
 		if !ok {

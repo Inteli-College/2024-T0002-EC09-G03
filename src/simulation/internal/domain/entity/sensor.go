@@ -9,6 +9,7 @@ type Sensor struct {
 	Id                primitive.ObjectID `bson:"_id,omitempty"`
 	CoordinateX       float64            `bson:"coordinate_x"`
 	CoordinateY       float64            `bson:"coordinate_y"`
+	AreaNumber        int                `bson:"area_number"`
 	emulationCallback SensorCallbackFunc
 }
 

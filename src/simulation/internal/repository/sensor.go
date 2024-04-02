@@ -23,11 +23,12 @@ type SensorRepo struct {
 	sensorAdapter ports.SensorPort
 }
 
-func (s *SensorRepo) CreateSensor(name string, coordsX float64, coordsY float64, callback entity.SensorCallbackFunc) (*entity.Sensor, ports.MQTTPort, error) {
+func (s *SensorRepo) CreateSensor(name string, coordsX float64, coordsY float64, areaNumber int, callback entity.SensorCallbackFunc) (*entity.Sensor, ports.MQTTPort, error) {
 	temp := &entity.Sensor{
 		Name:        name,
 		CoordinateX: coordsX,
 		CoordinateY: coordsY,
+		AreaNumber:  areaNumber,
 	}
 
 	temp.SetCallback(callback)
