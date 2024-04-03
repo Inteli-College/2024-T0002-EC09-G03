@@ -3,16 +3,23 @@ package infra
 import (
 	"context"
 	"fmt"
+	"os"
 	"testing"
 	"time"
 
+	initialization "github.com/Inteli-College/2024-T0002-EC09-G03/init"
 	amqp "github.com/rabbitmq/amqp091-go"
 )
 
 func TestQueueLoad(t *testing.T) {
-	connStr := "amqp://guest:guest@localhost:5672/"
-	queueName := "your_queue_name_here"
-	messageCount := 1000 // Ajuste conforme necessário
+	fmt.Printf("TESTANDO O LOAD QUEUE")
+
+	path := "./.env"
+	initialization.LoadEnvVariables([]string{"RABBITMQ_URL"}, &path)
+
+	connStr := os.Getenv("RABBITMQ_URL")
+	queueName := "testQueue"
+	messageCount := 10 // Ajuste conforme necessário
 
 	conn, err := amqp.Dial(connStr)
 	if err != nil {
@@ -52,4 +59,6 @@ func TestQueueLoad(t *testing.T) {
 
 	elapsedTime := time.Since(startTime)
 	t.Logf("%d messages sent in %s", messageCount, elapsedTime)
+
+	fmt.Printf("FIM DO TESTANDO O LOAD QUEUE")
 }

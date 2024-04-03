@@ -2,7 +2,10 @@ package sensor
 
 import (
 	"context"
+	"os"
 	"testing"
+
+	initialization "github.com/Inteli-College/2024-T0002-EC09-G03/init"
 
 	"github.com/Inteli-College/2024-T0002-EC09-G03/internal/domain/entity"
 	"github.com/stretchr/testify/require"
@@ -12,12 +15,17 @@ import (
 )
 
 func TestCreateSensor(t *testing.T) {
-	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI("mongodb://root:password@localhost:27017/urbanpulsesp?retryWrites=true&connectTimeoutMS=10000&authSource=admin&authMechanism=SCRAM-SHA-1"))
+
+	path := "./.env"
+	initialization.LoadEnvVariables([]string{"MONGODB_URI"}, &path)
+	uri := os.Getenv("MONGOBD_URI")
+
+	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(uri))
 	require.NoError(t, err)
 	defer client.Disconnect(context.Background())
 
 	db := client.Database("testdb")
-	coll := db.Collection("sensors_test")
+	coll := db.Collection("testdb")
 
 	// Limpa a coleção após o teste
 	defer coll.Drop(context.Background())
@@ -39,12 +47,17 @@ func TestCreateSensor(t *testing.T) {
 }
 
 func TestGetAllSensors(t *testing.T) {
-	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI("mongodb://root:password@localhost:27017/urbanpulsesp?retryWrites=true&connectTimeoutMS=10000&authSource=admin&authMechanism=SCRAM-SHA-1"))
+
+	path := "./.env"
+	initialization.LoadEnvVariables([]string{"MONGODB_URI"}, &path)
+	uri := os.Getenv("MONGOBD_URI")
+
+	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(uri))
 	require.NoError(t, err)
 	defer client.Disconnect(context.Background())
 
 	db := client.Database("testdb")
-	coll := db.Collection("sensors_test")
+	coll := db.Collection("testdb")
 
 	// Limpa a coleção após o teste
 	defer coll.Drop(context.Background())

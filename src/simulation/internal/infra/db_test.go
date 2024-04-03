@@ -2,12 +2,17 @@ package infra
 
 import (
 	"context"
-	"os"
+	"fmt"
 	"testing"
+
+	initialization "github.com/Inteli-College/2024-T0002-EC09-G03/init"
 )
 
 func TestNewDBConnection(t *testing.T) {
-	os.Setenv("MONGODB_URI", "mongodb://root:password@localhost:27017/urbanpulsesp?retryWrites=true&connectTimeoutMS=10000&authSource=admin&authMechanism=SCRAM-SHA-1")
+	fmt.Printf("TESTANDO O DB")
+
+	path := "./.env"
+	initialization.LoadEnvVariables([]string{"MONGODB_URI"}, &path)
 
 	db, client := NewDBConnection()
 
@@ -25,4 +30,5 @@ func TestNewDBConnection(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Failed to close database connection: %v", err)
 	}
+	fmt.Printf("FIM DO TESTANDO O DB")
 }
