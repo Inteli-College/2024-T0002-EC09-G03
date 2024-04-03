@@ -8,6 +8,12 @@ Este documento descreve o script de teste contido no arquivo `db_test.go`em `inf
 
 O principal objetivo deste script de teste é assegurar a confiabilidade e robustez da função `NewDBConnection`, que é responsável por estabelecer uma conexão entre a aplicação e o banco de dados MongoDB. Isso inclui a validação da criação do objeto de conexão do banco de dados e do cliente do banco de dados, assegurando que nenhum deles seja nulo, o que indicaria falha na tentativa de conexão.
 
+#### Relacionado aos RFs e RNFs:
+
+- **RF1 - Captura e Armazenamento de Dados Ambientais**: Este teste assegura que a infraestrutura de banco de dados está pronta para capturar e armazenar uma ampla variedade de dados ambientais de forma segura e redundante.
+- **RNF4 - Desempenho (Processamento e geração de arquivos CSV)**: A validação da conexão com o MongoDB e a funcionalidade de leitura/escrita garantem que o processamento e geração de relatórios operacionais sejam eficientes.
+- **RNF5 - Disponibilidade**: Assegura que a base de dados estará disponível conforme o exigido, apoiando o uptime de 99,5%.
+
 ### Fluxo do Teste
 
 1. **Configuração do Ambiente**: O teste começa configurando o ambiente necessário, definindo a string de conexão ao banco de dados MongoDB através de uma variável de ambiente. Esta string contém informações essenciais, como o URI do banco de dados, credenciais, timeout de conexão, e outras opções relevantes.
@@ -31,6 +37,11 @@ Este documento descreve a estrutura e o propósito dos testes implementados no a
 ### Objetivo
 
 O principal objetivo desses testes é assegurar que as conexões MQTT possam ser estabelecidas corretamente, utilizando as configurações fornecidas por variáveis de ambiente, e que tais conexões sejam capazes de suportar as operações de envio e recebimento de mensagens sem falhas. Os testes visam verificar não apenas a capacidade de estabelecer essas conexões, mas também a integridade das sessões de comunicação criadas.
+
+#### Relacionado aos RFs e RNFs:
+
+- **RF6 - Integração API Externa**: Testes de conexão MQTT validam a robustez da integração com APIs externas, crucial para atualizações de dados ambientais.
+- **RNF11 - Adaptação Dinâmica de Carga**: A capacidade de estabelecer conexões MQTT robustas sob demanda apoia diretamente a adaptação dinâmica de carga do sistema.
 
 ### Fluxo do Teste
 
@@ -58,6 +69,11 @@ O principal objetivo destes testes é verificar a capacidade do `QueueAdapter` d
 - A correta declaração de uma fila de teste.
 - A verificação de que um consumidor pode ser gerado para a fila especificada.
 - A limpeza adequada da fila de teste e o fechamento da conexão após a execução do teste.
+
+#### Relacionado aos RFs e RNFs:
+
+- **RF3 - Notificações e Alertas Configuráveis**: Testando a criação e manipulação de consumidores de fila, este teste suporta a funcionalidade de notificações e alertas do sistema, garantindo que as mensagens cheguem aos usuários em tempo real.
+- **RNF7 - Escalabilidade**: A verificação da funcionalidade do adaptador de fila confirma a capacidade do sistema de expandir e suportar um aumento significativo de carga, alinhando-se à exigência de escalabilidade.
 
 #### Fluxo do Teste
 

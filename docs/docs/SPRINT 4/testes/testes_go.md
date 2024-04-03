@@ -6,6 +6,14 @@ Este documento detalha o teste de carga implementado para verificar a capacidade
 
 O principal objetivo deste teste é avaliar a eficiência e a robustez do banco de dados MongoDB ao processar múltiplas inserções em uma coleção específica. Isso inclui validar a conexão com o banco de dados, a correta inserção dos documentos, e a capacidade do sistema de gerenciar cargas de trabalho intensas.
 
+#### Relacionado aos RFs e RNFs:
+
+- **RF1 - Captura e Armazenamento de Dados Ambientais**: Este teste verifica a capacidade do MongoDB de gerenciar com eficácia a inserção de grandes volumes de dados ambientais, essencial para o armazenamento confiável e acessível dessas informações.
+- **RNF2 - Desempenho (Aguentar no mínimo 1000 requisições por segundo)**: Avaliando a eficiência nas operações de inserção no banco de dados, este teste contribui para a garantia de que o sistema pode manter um desempenho elevado, mesmo sob cargas intensas de inserção de dados.
+- **RNF4 - Desempenho (Processamento e geração de arquivos CSV para relatórios de operações deve ser concluído em menos de 30 segundos)**: Indiretamente, ao assegurar a rápida inserção de dados no banco, este teste suporta a eficiência na geração subsequente de relatórios e análises, facilitando a conversão de dados brutos em informações úteis em tempo hábil.
+- **RNF5 - Disponibilidade (99,5% de tempo de operação)**: Confirmar que o banco de dados pode lidar com inserções pesadas sem interrupções assegura a alta disponibilidade dos serviços, fundamental para a confiabilidade contínua do sistema.
+- **RNF6 - Escalabilidade**: Este teste confirma que o banco de dados e, por extensão, o sistema como um todo, são capazes de escalar para suportar aumentos no volume de dados gerados ou coletados, mantendo a performance e a eficiência.
+
 ### Fluxo do Teste
 
 1. **Configuração Inicial:**
@@ -29,34 +37,3 @@ O principal objetivo deste teste é avaliar a eficiência e a robustez do banco 
 ### Conclusão
 
 A execução bem-sucedida do teste de carga no MongoDB indica que o sistema está preparado para gerenciar eficientemente cargas de trabalho elevadas, mantendo a integridade e a performance do banco de dados. Este teste é fundamental para garantir a confiabilidade do sistema em cenários de uso real, onde a eficiência no processamento de grandes volumes de dados é crucial.
-
-# Teste de Carga da Fila RabbitMQ
-
-Este documento detalha o teste implementado para validar a integração e o desempenho na publicação de mensagens para uma fila do RabbitMQ. Este teste é crucial para sistemas que dependem de mensageria para a comunicação entre diferentes serviços, assegurando que as mensagens enviadas através do RabbitMQ sejam corretamente publicadas na fila especificada sob uma carga de trabalho definida.
-
-### Objetivo
-
-O principal objetivo deste teste é verificar que uma série de mensagens enviadas para uma fila do RabbitMQ sejam corretamente publicadas sem erros, validando a capacidade do sistema de lidar com a carga de publicação especificada e a resiliência da conexão e do canal com o RabbitMQ.
-
-### Fluxo do Teste
-
-1. **Configuração Inicial:**
-   - Carrega as variáveis de ambiente necessárias, incluindo a URL de conexão com o RabbitMQ, utilizando a função `LoadEnvVariables` do pacote de inicialização.
-   - Estabelece a conexão com o RabbitMQ e abre um canal de comunicação.
-
-2. **Preparação do Teste:**
-   - Define o nome da fila (`testQueue`) e o número de mensagens a serem publicadas (`messageCount`).
-
-3. **Execução da Publicação de Mensagens:**
-   - Inicia um loop para publicar o número definido de mensagens na fila do RabbitMQ, construindo o corpo da mensagem com um identificador único para cada iteração.
-   - Utiliza um contexto com timeout para garantir que a operação de publicação não exceda um limite de tempo pré-estabelecido.
-
-4. **Verificação e Registro do Desempenho:**
-   - Registra o tempo total gasto para a publicação de todas as mensagens, permitindo avaliar a eficiência da publicação sob a carga de trabalho definida.
-
-5. **Encerramento:**
-   - Fecha o canal e a conexão com o RabbitMQ ao final do teste para liberar recursos.
-
-### Conclusão
-
-A execução bem-sucedida do teste `TestQueueLoad` confirma a eficácia do sistema em lidar com a publicação de uma sequência de mensagens para o RabbitMQ sob a carga de trabalho especificada. Este teste é fundamental para validar a confiabilidade e a eficiência da integração com serviços de mensageria, essenciais para a comunicação entre diferentes componentes do sistema. Garantir a estabilidade e o desempenho dessa integração é crucial para a operação contínua e eficiente de aplicações que dependem de processamento assíncrono e comunicação entre serviços.

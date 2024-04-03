@@ -8,6 +8,12 @@ Este documento detalha o teste implementado para validar a integração e o flux
 
 O principal objetivo deste teste é verificar que uma mensagem enviada para uma fila do RabbitMQ é corretamente processada pelo adaptador e resulta na inserção dos dados da mensagem em uma coleção do MongoDB. Isso valida tanto a conexão e comunicação com o RabbitMQ quanto a lógica de armazenamento no MongoDB.
 
+#### Relacionado aos RFs e RNFs:
+
+- **RF1 - Captura e Armazenamento de Dados Ambientais**: Verifica o armazenamento correto de dados ambientais coletados via mensagens.
+- **RF3 - Notificações e Alertas Configuráveis**: Assegura a entrega e processamento de alertas através de mensagens.
+- **RNF2 - Desempenho (1000 requisições por segundo)**: Testa a capacidade do sistema de processar um alto volume de mensagens eficientemente.
+
 #### Fluxo do Teste
 
 1. **Configuração Inicial:**
@@ -29,6 +35,7 @@ O principal objetivo deste teste é verificar que uma mensagem enviada para uma 
 #### Conclusão
 
 A execução bem-sucedida do `TestMessageHandlerAdapter` confirma a eficácia do sistema em processar mensagens de um broker RabbitMQ e persisti-las no MongoDB. Este teste é fundamental para validar a integridade do fluxo de dados entre componentes de mensageria e armazenamento, essencial para aplicações que dependem de processamento assíncrono de dados. Garantir a confiabilidade desta integração é crucial para a estabilidade e eficácia da aplicação, suportando operações críticas de coleta e análise de dados.
+
 # Testes dos Secondary Adapters
 
 ## Teste MQTT
@@ -41,6 +48,11 @@ Os principais objetivos destes testes incluem:
 
 - **TestCreateClient:** Garantir que um cliente MQTT pode ser criado corretamente, e que os atributos do cliente (como o nome) são configurados como esperado.
 - **TestPublish:** Verificar que mensagens podem ser publicadas em tópicos específicos sem causar erros ou pânico, validando assim a funcionalidade de publicação do adaptador.
+
+#### Relacionado aos RFs e RNFs:
+
+- **RF6 - Integração API Externa**: Valida a capacidade do sistema de se conectar e comunicar com APIs externas através de MQTT.
+- **RNF11 - Adaptação Dinâmica de Carga**: Confirma que o adaptador MQTT pode ajustar seus recursos dinamicamente para manter a eficiência sob diferentes cargas de trabalho.
 
 #### Fluxo dos Testes
 
@@ -73,6 +85,11 @@ O objetivo desses testes é assegurar a integridade das operações de criação
 
 - Sensores podem ser criados com os atributos corretos e armazenados no MongoDB (`TestCreateSensor`).
 - Todos os sensores armazenados podem ser recuperados corretamente, validando a funcionalidade de listagem de sensores (`TestGetAllSensors`).
+
+#### Relacionado aos RFs e RNFs:
+
+- **RF1 - Captura e Armazenamento de Dados Ambientais**: Confirma a capacidade do sistema de criar e recuperar informações dos sensores, essenciais para o monitoramento ambiental.
+- **RNF5 - Disponibilidade**: Verifica a confiabilidade na recuperação de dados dos sensores, crucial para a disponibilidade contínua do serviço.
 
 #### Fluxo dos Testes
 
@@ -107,6 +124,11 @@ O objetivo dos testes é verificar a correta implementação das funcionalidades
 
 - **Criação de Sensor (`TestCreateSensor`):** Garantir que um sensor possa ser criado e armazenado corretamente no MongoDB, com a geração de um identificador único.
 - **Recuperação de Todos os Sensores (`TestGetAllSensors`):** Assegurar que a funcionalidade de recuperação de todos os sensores cadastrados no banco de dados funcione corretamente, retornando os dados esperados.
+
+#### Relacionado aos RFs e RNFs:
+
+- **RF1 - Captura e Armazenamento de Dados Ambientais**: Testa a eficácia na criação e armazenamento de dados coletados pelos sensores no banco de dados.
+- **RNF5 - Disponibilidade**: Assegura a disponibilidade dos dados de sensores para análise e relatórios, suportando decisões baseadas em dados confiáveis.
 
 #### Fluxo dos Testes
 

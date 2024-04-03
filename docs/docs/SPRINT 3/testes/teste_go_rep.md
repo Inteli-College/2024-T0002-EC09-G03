@@ -13,6 +13,11 @@ O objetivo principal desses testes é assegurar que o repositório de sensores f
 - A robustez do sistema em face de estados inesperados nas dependências.
 - A integração e cooperação adequadas entre diferentes componentes do sistema.
 
+#### Relacionado aos RFs e RNFs:
+
+- **RF1 - Captura e Armazenamento de Dados Ambientais**: Este teste assegura a capacidade do sistema de gerar e manipular entidades de sensores, fundamental para a captura e armazenamento de dados ambientais.
+- **RNF5 - Disponibilidade**: Através do tratamento de entradas inválidas e estados inesperados, este teste contribui para a alta disponibilidade do sistema, garantindo que os dados dos sensores sejam gerenciados de forma robusta.
+
 #### Fluxo do Teste
 
 1. **Configuração e Mocking**:
@@ -42,6 +47,11 @@ Este documento descreve os testes implementados para verificar a funcionalidade 
 #### Objetivo
 
 O principal objetivo destes testes é assegurar que a função `NewSensorData` possa corretamente converter um JSON de entrada em uma estrutura de dados de sensor (`SensorData`) quando o JSON está bem formado e identificar e reportar um erro de forma apropriada quando o JSON está malformado.
+
+#### Relacionado aos RFs e RNFs:
+
+- **RF1 - Captura e Armazenamento de Dados Ambientais**: Este teste valida a função de deserialização de dados de sensores a partir de JSON, crucial para processar e armazenar dados ambientais corretamente.
+- **RNF7 - Escalabilidade**: Ao garantir que o sistema possa eficientemente processar tanto dados bem formados quanto identificar dados malformados, este teste suporta a escalabilidade ao lidar com variados volumes e formas de dados.
 
 #### Fluxo dos Testes
 
@@ -85,6 +95,11 @@ Este documento fornece detalhes sobre uma série de testes implementados para va
 
 O principal objetivo desses testes é assegurar que o repositório de sensores possa gerar sensores de forma correta e robusta, lidando apropriadamente com diferentes cenários, incluindo entradas válidas e inválidas, e estados inesperados das dependências. Isso é crucial para manter a integridade dos dados e a estabilidade do sistema.
 
+#### Relacionado aos RFs e RNFs:
+
+- **RF1 - Captura e Armazenamento de Dados Ambientais**: Ao verificar a geração correta de sensores, este teste assegura que o sistema pode expandir e manipular dinamicamente os dados ambientais coletados.
+- **RNF4 - Desempenho**: Os testes com entradas inválidas e estados inesperados das dependências verificam a resiliência e eficiência do sistema sob condições adversas, contribuindo para o desempenho geral ao minimizar interrupções no processo de coleta e armazenamento de dados.
+
 #### Fluxo dos Testes
 
 **Teste Básico de Geração (`TestGenerateSensors`):**
@@ -112,3 +127,4 @@ O principal objetivo desses testes é assegurar que o repositório de sensores p
 #### Conclusão
 
 A execução bem-sucedida desses testes confirma a capacidade do repositório de gerar entidades de sensores de forma eficaz e robusta, tratando corretamente entradas inválidas e sendo resiliente a estados inesperados das dependências. Isso é essencial para garantir a confiabilidade e estabilidade do sistema de gerenciamento de sensores, permitindo que a aplicação opere de maneira eficiente e precisa.
+
