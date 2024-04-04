@@ -1,0 +1,46 @@
+name: Docker Compose and Go Test Workflow
+
+on:
+  push:
+    branches: [ main ]  # Substitua "main" pela sua branch, se necessário.
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    env:
+      RABBITMQ_URL: ${{ secrets.LOCAL_CONSUMER_RABBITMQ_URL }}
+      MONGODB_URI: ${{ secrets.LOCAL_MONGODB_URI }}
+      BROKER_URL: ${{ secrets.LOCAL_PUBLISHER_BROKER_URL }}
+      BROKER_PORT: ${{ secrets.LOCAL_PUBLISHER_BROKER_PORT }}
+      RABBIT_USER: ${{ secrets.LOCAL_PUBLISHER_RABBIT_USER }}
+      RABBIT_PASSWORD: ${{ secrets.LOCAL_PUBLISHER_RABBIT_PASSWORD }}
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Docker Compose Up
+      run: |
+        cd src
+        docker compose up -d
+
+    - name: Run Go Tests - Infra  
+      run: |
+        cd src/simulation/internal/infra
+        go test .
+
+    - name: Run Go Tests - Adapter 1
+      run: |
+        cd src/simulation/internal/adapters/primary
+        go test .
+
+    - name: Run Go Tests - Adapter 2
+      run: |
+        cd src/simulation/internal/adapters/secondary
+        go test .
+
+    - name: Docker Compose Down
+      run: |
+        cd src
+        docker compose down
