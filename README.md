@@ -4,7 +4,7 @@
 <a href= "https://www.inteli.edu.br/"><img src="./docs/static/img/inteli.png" alt="Inteli - Instituto de Tecnologia e Liderança" width="300px"></a>
 </p>
 
-# Planejamento de hiperconectividade para cidades inteligentes
+# Projeto UrbanPulse SP - Conectando Vida Urbana à Inteligência Ambiental
 
 ## Grupo 3
 
@@ -17,7 +17,7 @@
 - <a href="https://www.linkedin.com/in/natalia-k-37a62052/">Natalia Kloeckner</a>
 - <a href="https://www.linkedin.com/in/francisco-escobar/">Francisco Escobar</a> 
 
-## Grupo
+### Grupo
 - <a href="https://www.linkedin.com/in/alysson-c-c-cordeiro-0684a8236/">Alysson C C Cordeiro</a>
 - <a href="https://www.linkedin.com/in/gabriel-pascoli-73733b200/">Gabriel Pascoli</a>
 - <a href="https://www.linkedin.com/in/gabriela-barretto-dados/">Gabriela Barretto</a>
@@ -27,7 +27,7 @@
 - <a href="https://www.linkedin.com/in/lyorrei/">Lyorrei Shono Quintão</a>
 - <a href="https://www.linkedin.com/in/patriciahonorato/">Patricia Honorato</a>
 
-## 📝 Descrição do Projeto UrbanPulse SP
+## 📝 Descrição do Projeto 
 
 O projeto do Grupo 3, denominado UrbanPulseSP, é uma iniciativa focada em trazer inteligência ambiental para o coração da cidade de São Paulo. A missão do projeto é abordar a lacuna significativa causada pela escassez de dados ambientais, o alto custo de operação para a coleta desses dados e os desafios associados à análise de grandes volumes de informações em tempo real.
 
