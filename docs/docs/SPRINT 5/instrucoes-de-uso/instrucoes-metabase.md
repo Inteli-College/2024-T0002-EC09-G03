@@ -1,4 +1,4 @@
-# Guia de Acesso ao Sistema de Visualização de Dados dos Sensores no Metabase
+# Guia de Acesso ao Metabase e Sistema de Simulação
 
 Este documento é destinado a usuários que precisam acessar o Metabase para visualização de dados dos sensores. O sistema é projetado para permitir o monitoramento e a gestão de informações coletadas por sensores localizados na cidade de São Paulo.
 
