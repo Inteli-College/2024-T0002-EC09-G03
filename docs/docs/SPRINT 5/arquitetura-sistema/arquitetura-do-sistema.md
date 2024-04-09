@@ -8,11 +8,11 @@ Este documento descreve a arquitetura de software para o sistema de IoT desenvol
 
 ### Sensores
 
-- **ESP32s**: Usados meramente para fins ilustrativos. Os sensores serão simulados no projeto. A sua simulação consiste em basicamente gerar valores que se encontram em seu "range" de atuação e publicá-los em um tópico MQTT.
+- **ESP32s**: Usados meramente para fins ilustrativos. Os sensores serão simulados no projeto. A sua simulação consiste em basicamente gerar valores que se encontram em seu intervalo de atuação e publicá-los em um tópico MQTT.
 
 ### Comunicação
 
-- **RabbitMQ**: Atua como um gerenciador de fila e broker MQTT (ele já enfileira as mensagens vidas de um tópico). Seu sistema nos permite trazer segurança a aplicação, posto que temo a possibilidade nativamente de gerenciar o acesso aos recuros, tais qual quais usuários podem publicar em quais tópicos MQTT.
+- **RabbitMQ**: Atua como um gerenciador de fila e broker MQTT vindas de um tópico. Seu sistema nos permite trazer segurança a aplicação, posto que temos a possibilidade, de forma nativa, de gerenciar o acesso aos recursos, tais qual quais usuários podem publicar em quais tópicos MQTT.
 
 ### Frontend
 
@@ -41,7 +41,7 @@ Este documento descreve a arquitetura de software para o sistema de IoT desenvol
 1. Os sensores simulados (ESP32s) publicam dados usando o protocolo MQTT.
 2. O broker MQTT recebe e enfileira as mensagens.
 3. O backend desenvolvido em Go consome as mensagens, processa os dados e interage com o banco de dados para realizar os registros.
-4. O Metabase faz requisições ao banco de dadaos e apresenta os dados processados aos usuários.
+4. O Metabase faz requisições ao banco de dados e apresenta os dados processados aos usuários.
 
 ## Considerações Finais
 

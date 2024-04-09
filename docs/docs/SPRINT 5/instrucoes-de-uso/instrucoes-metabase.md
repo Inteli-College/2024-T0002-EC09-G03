@@ -3,8 +3,8 @@
 Este documento é destinado a usuários que precisam acessar o Metabase para visualização de dados dos sensores. O sistema é projetado para permitir o monitoramento e a gestão de informações coletadas por sensores localizados na cidade de São Paulo.
 
 ## Pré-requisitos
-- Certifique-se de ter uma conexão com a internet.
-- Assegure-se de que você tenha sido autorizado a acessar o sistema com seu e-mail e uma senha temporária fornecida pelo administrador do sistema após o seu cadastro.
+- Certifique-se de que você possui uma conexão com a Internet.
+- Assegure-se de estar autorizado(a) a acessar o sistema com seu e-mail e uma senha temporária, fornecidas pelo administrador após seu cadastro.
 
 ## Etapa 1: Configurando Variáveis de Ambiente
 Para interagir com o sistema, é necessário configurar seu ambiente com as variáveis necessárias. As instruções abaixo demonstram como configurar estas variáveis para diferentes ambientes de trabalho. Substitua os placeholders pelas credenciais fornecidas de forma segura, que serão ocultadas aqui por questões de segurança.
@@ -38,7 +38,7 @@ Certifique-se de substituir **password** pela senha real fornecida de maneira se
 ## Etapa 2: Acesso ao Metabase
 O Metabase é a plataforma utilizada para a visualização dos dados. Para acessá-la:
 
-1. Digite a URL do Metabase no seu navegador: http://3.226.236.71:3000/
+1. Digite a URL do Metabase no seu navegador:  http://3.90.150.254:3000/
 2. Faça login usando seu e-mail e senha temporária.
 3. Após o primeiro login, siga as instruções para criar uma nova senha pessoal e segura.
 
@@ -54,16 +54,16 @@ Para executar a simulação dos sensores, siga estes passos considerando que voc
 **CONSUMER**
 
 ```
-go run cmd/consumer/main.go <caminho_para_o_arquivo_dotenv>
+go run cmd/consumer/main.go <src/simulation/cmd/consumer>
 ```
 
 **PUBLISHER**
 
 ```
-go run cmd/publisher/main.go <caminho_para_o_arquivo_dotenv> <quantidade_de_sensores>
+go run cmd/publisher/main.go <src/simulation/cmd/publisher> <quantidade_de_sensores>
 ```
 
-A quantidade de sensores é opcional. Se não especificada, o sistema irá simular um número padrão de sensores ou todos disponíveis no banco de dados.
+Se a quantidade de sensores não for especificada, o sistema simulará um número padrão de sensores ou todos os disponíveis no banco de dados
 
 
 ## Etapa 5: Compreendendo a Arquitetura do Sistema

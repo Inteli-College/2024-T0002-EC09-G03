@@ -13,5 +13,4 @@ O desafio identificado por UrbanPulseSP envolve três aspectos principais: a fal
 
 A solução proposta pelo UrbanPulseSP inclui o desenvolvimento de um sistema de simulação e uma dashboard no Metabase para gestão e análise desses dados. Esta abordagem visa não apenas reduzir os custos operacionais, mas também fomentar a participação da comunidade e aprimorar a tomada de decisões baseada em informações precisas e análises detalhadas, visando transformar a maneira como as cidades gerenciam seu ambiente, tornando-as mais inteligentes, responsivas e habitáveis.
 
-
 https://github.com/Inteli-College/2024-T0002-EC09-G03
