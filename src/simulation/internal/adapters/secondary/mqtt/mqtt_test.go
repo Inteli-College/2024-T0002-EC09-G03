@@ -1,14 +1,21 @@
 package mqtt
 
 import (
+	"fmt"
 	"sync"
 	"testing"
 
+	initialization "github.com/Inteli-College/2024-T0002-EC09-G03/init"
 	"github.com/Inteli-College/2024-T0002-EC09-G03/internal/infra"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestCreateClient(t *testing.T) {
+
+	fmt.Printf("TESTANDO O MQTT")
+	path := "./.env"
+	initialization.LoadEnvVariables([]string{"BROKER_URL", "BROKER_PORT", "RABBIT_USER", "RABBIT_PASSWORD"}, &path)
+
 	adapter := &MQTTAdapter{}
 	clientName := "testClient"
 

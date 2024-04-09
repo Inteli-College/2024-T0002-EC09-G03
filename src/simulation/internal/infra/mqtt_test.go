@@ -1,21 +1,18 @@
 package infra
 
 import (
-	"os"
+	"fmt"
 	"sync"
 	"testing"
+
+	initialization "github.com/Inteli-College/2024-T0002-EC09-G03/init"
 )
 
-// Substitua por seus próprios valores ou configure estes no ambiente de teste
-func setupTestEnvironment() {
-	os.Setenv("BROKER_URL", "localhost")
-	os.Setenv("BROKER_PORT", "1883")
-	os.Setenv("RABBIT_USER", "publisherSensor")
-	os.Setenv("RABBIT_PASSWORD", "PublisherSensorPasswords")
-}
-
 func TestNewMQTTConnection(t *testing.T) {
-	setupTestEnvironment()
+
+	fmt.Printf("TESTANDO O MQTT")
+	path := "./.env"
+	initialization.LoadEnvVariables([]string{"BROKER_URL", "BROKER_PORT", "RABBIT_USER", "RABBIT_PASSWORD"}, &path)
 
 	clientName := "testClient"
 	wg := &sync.WaitGroup{}
@@ -29,4 +26,5 @@ func TestNewMQTTConnection(t *testing.T) {
 	if !client.IsConnected() {
 		t.Fatalf("Expected MQTT client to be connected")
 	}
+	fmt.Printf("FIM DO TESTANDO O MQTT")
 }

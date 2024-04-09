@@ -1,10 +1,16 @@
 # Diagrama UML de sequência e implantação
 
-Nessa seção são apresentadas as interações detalhadas entre os diferentes componentes do sistema proposto, incluindo os dispositivos de hardware multimodais, a plataforma web de engajamento do cidadão e o dashboard de gerenciamento de dados. Esse diagrama oferece uma visão clara da dinâmica de comunicação entre esses elementos, bem como sua distribuição física nos ambientes urbanos. Ao representar as sequências de eventos entre os sensores, a plataforma web e o sistema de gerenciamento, o diagrama fornece uma base sólida para o planejamento e implementação das soluções propostas, contribuindo significativamente para a compreensão e o desenvolvimento eficaz do projeto.
+Nessa seção são apresentadas as interações detalhadas entre os diferentes componentes do sistema proposto, incluindo os dispositivos de hardware multimodais, a plataforma web de engajamento do cidadão e o dashboard de gerenciamento de dados. Esse diagrama oferece uma visão clara da dinâmica de comunicação entre esses elementos, bem como sua distribuição física nos ambientes urbanos. Ao representar as sequências de eventos entre os sensores, a plataforma web e o sistema de gerenciamento, o diagrama fornece uma base sólida para o planejamento e implementação das soluções propostas, contribuindo significativamente para a compreensão e o desenvolvimento eficaz do projeto, além de realçar o papel do consumidor em Go em conjunto com o RabbitMQ no tratamento de eventos complexos.
 
 ## Diagrama UML de sequência
 
-Esse diagrama oferece uma representação das interações entre o usuário e o painel, elucidando o processo de solicitação de dados a uma aplicação em GO. O método de solicitação e concessão de acesso aos usuários autorizados são explicitados, demonstrando a funcionalidade de autenticação e autorização da aplicação. Além disso, o diagrama retrata de forma clara a troca de informações entre o consumidor GO e o Broker MQTT/RabbitMQ, que desempenha um papel central na obtenção de dados dos sensores IoT. A sequência de interações entre o broker e os sensores, assim como a transmissão de dados de volta a consumidor GO, bem como seu armazenamento em um banco de dados, é apresentada no diagrama abaixo.
+Esse diagrama oferece uma representação das interações entre o usuário e o painel, elucidando o processo de solicitação de dados a um banco dados. O método de solicitação e concessão de acesso aos usuários autorizados são explicitados, demonstrando a funcionalidade de autenticação e autorização da aplicação (é observado que no diagrama o próprio painel é responsável por isso, posto que o metabase já tem uma infraestrutura para tal). Além disso, o diagrama retrata de forma clara a troca de informações entre o consumidor GO e o Broker MQTT/RabbitMQ, que desempenha um papel central na obtenção de dados dos sensores IoT. A sequência de interações entre o broker e os sensores, assim como a transmissão de dados de volta a consumidor GO, bem como seu armazenamento em um banco de dados, é apresentada no diagrama abaixo.
+
+_Observações Expansão da Descrição do Diagrama UML de Sequência:_
+
+1. Integração entre Consumidor GO e RabbitMQ: O diagrama agora inclui uma visão detalhada de como o RabbitMQ distribui eventos complexos para o Consumidor GO, que os processa em paralelo. Essa integração assegura que o sistema possa lidar eficientemente com um volume alto de eventos, distribuindo-os de forma equilibrada para evitar gargalos.
+2. Processamento Paralelo pelo Consumidor GO: A capacidade do Consumidor GO de executar o processamento de eventos em paralelo através de goroutines é destacada, sublinhando como isso contribui para a rapidez e eficiência do sistema.
+3. Detalhamento da Função do RabbitMQ: Além de atuar como intermediário na recepção e distribuição de eventos, o RabbitMQ também garante que o sistema mantenha a capacidade de resposta e escalabilidade ao lidar com um aumento na demanda de processamento de eventos complexos
 
 ![Diagrama UML de sequencia](../../../static/img/uml-sequencia.png)
 
@@ -56,7 +62,7 @@ No Diagrama UML de sequência acima, um usuário acessa o painel de controle do 
 
 ## Diagrama UML de implantação
 
-O Diagrama de UML de implantação discrima a distribuição dos componentes do sistema em um ambiente real de implementação de software, representando os elementos como nós de implantação e os respectivos métodos de comunicação entre si. Aqui, são destacados o usuário, o painel de controle, o banco de dados, o consumidor GO, o broker MQTT & RabbitMQ e os sensores, ilustrando como esses elementos se conectam e comunicam entre si. Essa representação visual oferece uma visão geral da distribuição dos componentes e da infraestrutura necessária para o funcionamento do sistema, facilitando o planejamento e a implementação por parte da equipe de desenvolvimento. 
+O Diagrama de UML de implantação discrima a distribuição dos componentes do sistema em um ambiente real de implementação de software, representando os elementos como nós de implantação e os respectivos métodos de comunicação entre si. Aqui, são destacados o usuário, o painel de controle, o banco de dados, o consumidor GO, o broker MQTT & RabbitMQ e os sensores, ilustrando como esses elementos se conectam e comunicam entre si. Essa representação visual oferece uma visão geral da distribuição dos componentes e da infraestrutura necessária para o funcionamento do sistema, facilitando o planejamento e a implementação por parte da equipe de desenvolvimento.
 
 ![Diagrama UML de implantacao](../../../static/img/uml-implantacao.png)
 
@@ -76,8 +82,7 @@ node "Sensor N" as SensorN
 
 User --> Panel : HTTP
 Panel --> Database
-Panel --> GOConsumer : HTTP
-GOConsumer --> Database 
+GOConsumer --> Database
 GOConsumer --> MQTTBroker : MQTT
 MQTTBroker --> Sensor1 : MQTT
 MQTTBroker --> Sensor2 : MQTT

@@ -1,18 +1,25 @@
 package infra
 
 import (
+	"fmt"
 	"testing"
+
+	initialization "github.com/Inteli-College/2024-T0002-EC09-G03/init"
 )
 
 // setUp cria os recursos necessários antes de cada teste
 func setUp(t *testing.T) *QueueAdapter {
+	fmt.Printf("TESTANDO O QUEUE")
 	t.Helper()
+
+	path := "./.env"
+	initialization.LoadEnvVariables([]string{"RABBITMQ_URL"}, &path)
 
 	queueAdapter := NewQueueAdapter()
 	_, err := queueAdapter.ch.QueueDeclare(
 		"testQueue", // name
 		false,       // durable
-		true,        // delete when unused
+		false,       // delete when unused
 		false,       // exclusive
 		false,       // no-wait
 		nil,         // arguments
@@ -33,6 +40,7 @@ func tearDown(t *testing.T, queueAdapter *QueueAdapter) {
 	}
 
 	queueAdapter.conn.Close()
+	fmt.Printf("FIM DO TESTANDO O QUEUE")
 }
 
 func TestGenerateConsumer(t *testing.T) {

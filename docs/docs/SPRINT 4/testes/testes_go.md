@@ -1,36 +1,39 @@
-# Testes de Infraestrutura
+# Teste de Carga do Banco de Dados
 
-A infraestrutura deste projeto parece abranger a integração e gerenciamento de conexões essenciais para a operação e comunicação dentro de uma aplicação distribuída. Isso inclui conexões com bancos de dados MongoDB, integração com sistemas de mensageria MQTT, e adaptações para sistemas de enfileiramento de mensagens AMQP. O objetivo é assegurar que os componentes de infraestrutura estejam robustamente configurados e possam ser facilmente testados para manter a confiabilidade e eficiência operacional do sistema. Os testes unitários são uma parte crucial deste processo, verificando a correta implementação e integração desses componentes críticos.
+Este documento detalha o teste de carga implementado para verificar a capacidade do sistema de inserir múltiplos documentos em uma coleção do MongoDB. Este teste é crucial para sistemas que necessitam de alta performance e confiabilidade no armazenamento de dados, assegurando que o banco de dados pode lidar com um volume significativo de inserções sem degradação de performance.
 
-#### TestNewDBConnection
+### Objetivo
 
-- **Propósito**: Testa a capacidade do sistema de estabelecer uma conexão com o banco de dados MongoDB. Este teste garante que a função `NewDBConnection` consiga criar uma nova conexão de banco de dados de forma confiável.
-- **Preparação**:
-  - Cria um mock da interface `MongoDBConnector`.
-  - Configura o mock para simular uma conexão bem-sucedida ao MongoDB, retornando um objeto `mongo.Database` sem erros.
-- **Execução**: Invoca a função `NewDBConnection` passando os parâmetros necessários para estabelecer uma conexão.
-- **Verificação**:
-  - Confirma se a conexão com o banco de dados é estabelecida sem erros.
-  - Assegura que o objeto retornado é do tipo esperado (`*mongo.Database`).
+O principal objetivo deste teste é avaliar a eficiência e a robustez do banco de dados MongoDB ao processar múltiplas inserções em uma coleção específica. Isso inclui validar a conexão com o banco de dados, a correta inserção dos documentos, e a capacidade do sistema de gerenciar cargas de trabalho intensas.
 
-#### TestNewMQTTConnection
+#### Relacionado aos RFs e RNFs:
 
-- **Propósito**: Verifica a funcionalidade de estabelecimento de conexão com um broker MQTT. Este teste é essencial para garantir a confiabilidade da comunicação entre a aplicação e os dispositivos ou serviços que utilizam o protocolo MQTT.
-- **Preparação**:
-  - Configura um ambiente simulado ou mock do cliente MQTT para testar a conexão sem a necessidade de um broker MQTT real.
-- **Execução**: Chama a função `NewMQTTConnection` com parâmetros apropriados para tentar estabelecer uma conexão.
-- **Verificação**:
-  - Verifica se a conexão é estabelecida corretamente e se o cliente MQTT está pronto para ser usado.
-  - Testa se não há erros retornados durante o processo de conexão.
+- **RF1 - Captura e Armazenamento de Dados Ambientais**: Este teste verifica a capacidade do MongoDB de gerenciar com eficácia a inserção de grandes volumes de dados ambientais, essencial para o armazenamento confiável e acessível dessas informações.
+- **RNF2 - Desempenho (Aguentar no mínimo 1000 requisições por segundo)**: Avaliando a eficiência nas operações de inserção no banco de dados, este teste contribui para a garantia de que o sistema pode manter um desempenho elevado, mesmo sob cargas intensas de inserção de dados.
+- **RNF4 - Desempenho (Processamento e geração de arquivos CSV para relatórios de operações deve ser concluído em menos de 30 segundos)**: Indiretamente, ao assegurar a rápida inserção de dados no banco, este teste suporta a eficiência na geração subsequente de relatórios e análises, facilitando a conversão de dados brutos em informações úteis em tempo hábil.
+- **RNF5 - Disponibilidade (99,5% de tempo de operação)**: Confirmar que o banco de dados pode lidar com inserções pesadas sem interrupções assegura a alta disponibilidade dos serviços, fundamental para a confiabilidade contínua do sistema.
+- **RNF6 - Escalabilidade**: Este teste confirma que o banco de dados e, por extensão, o sistema como um todo, são capazes de escalar para suportar aumentos no volume de dados gerados ou coletados, mantendo a performance e a eficiência.
 
-#### TestNewQueueAdapter
+### Fluxo do Teste
 
-- **Propósito**: Avalia a capacidade do sistema de configurar e utilizar um adaptador de fila para comunicação baseada em mensagens, usando o protocolo AMQP. Isso é crucial para aplicações que dependem de mensageria robusta para processamento de tarefas assíncronas e comunicação entre serviços.
-- **Preparação**:
-  - Prepara um mock do cliente AMQP para simular operações de enfileiramento sem interagir com um sistema de filas real.
-- **Execução**: Executa a função `NewQueueAdapter` para criar uma nova instância do adaptador de fila com a configuração especificada.
-- **Verificação**:
-  - Confirma que o adaptador de fila é criado com sucesso e está pronto para uso.
-  - Garante que não ocorram erros durante a inicialização do adaptador.
+1. **Configuração Inicial:**
+   - Carregamento das variáveis de ambiente necessárias para a conexão com o MongoDB.
+   - Estabelecimento da conexão com o banco de dados utilizando a função `NewDBConnection`.
 
-Essa documentação fornece uma visão geral dos testes implementados para validar a infraestrutura crítica do projeto. Cada teste é desenhado para assegurar a integridade e a confiabilidade dos métodos essenciais das conexões, promovendo uma base sólida para a aplicação.
+2. **Limpeza da Coleção:**
+   - Antes da inserção, garantir que a coleção `testCollection` esteja limpa ou criar uma nova coleção para o teste.
+
+3. **Inserção de Documentos:**
+   - Inserir, de forma iterativa, um total de 10 documentos na coleção `testCollection`. Cada documento contém uma chave única e um valor associado, garantindo a diversidade dos dados inseridos.
+
+4. **Verificações:**
+   - Após a inserção de todos os documentos, verificar se eles foram corretamente armazenados na coleção.
+   - Avaliar a performance da inserção, considerando o tempo total necessário para a operação.
+
+5. **Encerramento e Limpeza:**
+   - Desconectar do cliente MongoDB ao final do teste.
+   - (Opcional) Remover a coleção `testCollection` ou os documentos inseridos para manter o ambiente de teste limpo.
+
+### Conclusão
+
+A execução bem-sucedida do teste de carga no MongoDB indica que o sistema está preparado para gerenciar eficientemente cargas de trabalho elevadas, mantendo a integridade e a performance do banco de dados. Este teste é fundamental para garantir a confiabilidade do sistema em cenários de uso real, onde a eficiência no processamento de grandes volumes de dados é crucial.
