@@ -1,7 +1,7 @@
 # Inteli - Instituto de Tecnologia e Liderança 
 
 <p align="center">
-<a href= "https://www.inteli.edu.br/"><img src="../2024-T0002-EC09-G03/docs/static/img/logo_inteli.png" alt="Inteli - Instituto de Tecnologia e Liderança" width="300px"></a>
+<a href= "https://www.inteli.edu.br/"><img src="https://github.com/Inteli-College/2024-T0002-EC09-G03/blob/main/docs/static/img/logo_inteli.png" alt="Inteli - Instituto de Tecnologia e Liderança" width="300px"></a>
 </p>
 
 # Projeto UrbanPulse SP - Conectando Vida Urbana à Inteligência Ambiental
