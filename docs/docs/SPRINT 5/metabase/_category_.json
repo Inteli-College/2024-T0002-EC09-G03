@@ -1,0 +1,9 @@
+{
+    "label": "Metabase",
+    "position": 5,
+    "link": {
+      "type": "generated-index",
+      "description": "O Dashboard UrbanPulse SP, desenvolvido com o Metabase, oferece uma plataforma avançada para a visualização de dados de sensores IoT, possibilitando uma análise detalhada e intuitiva das condições ambientais em São Paulo. Estruturado em três abas principais, permite aos usuários explorar desde a distribuição geográfica dos sensores até análises específicas sobre poluição e radiação solar, enriquecendo a gestão municipal e promovendo a conscientização cidadã."
+    }
+  }
+  

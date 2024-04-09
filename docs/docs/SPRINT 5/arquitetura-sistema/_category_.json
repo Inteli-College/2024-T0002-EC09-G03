@@ -1,0 +1,9 @@
+{
+    "label": "Arquitetura do sistema",
+    "position": 1,
+    "link": {
+      "type": "generated-index",
+      "description": "Este documento apresenta a arquitetura de um sistema de IoT para monitoramento de dados de sensores, detalhando desde a simulação de sensores até a visualização em dashboards. Utiliza-se ESP32s para simulação, RabbitMQ para gestão de mensagens, Metabase para visualização, Go no backend, e PostgreSQL junto a MongoDB para armazenamento. A arquitetura busca eficiência, segurança e escalabilidade, facilitando a interpretação e gestão dos dados coletados."
+    }
+  }
+  
