@@ -1,7 +1,7 @@
 # Inteli - Instituto de Tecnologia e Liderança 
 
 <p align="center">
-<a href= "https://www.inteli.edu.br/"><img src="./docs/static/img/inteli.png" alt="Inteli - Instituto de Tecnologia e Liderança" width="300px"></a>
+<a href= "https://www.inteli.edu.br/"><img src="../2024-T0002-EC09-G03/docs/static/img/logo_inteli.png" alt="Inteli - Instituto de Tecnologia e Liderança" width="300px"></a>
 </p>
 
 # Projeto UrbanPulse SP - Conectando Vida Urbana à Inteligência Ambiental
@@ -29,11 +29,11 @@
 
 ## 📝 Descrição do Projeto 
 
-O projeto do Grupo 3, denominado UrbanPulseSP, é uma iniciativa focada em trazer inteligência ambiental para o coração da cidade de São Paulo. A missão do projeto é abordar a lacuna significativa causada pela escassez de dados ambientais, o alto custo de operação para a coleta desses dados e os desafios associados à análise de grandes volumes de informações em tempo real.
+O projeto UrbanPulseSP, desenvolvido pelo Grupo 3, é uma iniciativa destinada a melhorar a inteligência ambiental no centro de São Paulo. O objetivo central do projeto é superar a escassez de dados ambientais, o elevado custo associado à sua coleta e os desafios inerentes à análise de grandes quantidades de informação em tempo real.
 
-O problema identificado pelo UrbanPulseSP é tríplice: primeiramente, enfrentamos uma carência de dados detalhados sobre questões ambientais urbanas, como poluição sonora e do ar, o que obstaculiza a capacidade de análise e ação eficaz. Em segundo lugar, o custo proibitivo da coleta de dados ambientais, que geralmente exige investimentos significativos em hardware e infraestrutura. Por fim, o desafio de processar e analisar eficientemente o dilúvio de dados gerados pela ampla rede de sensores necessários para monitorar essas condições ambientais.
+O desafio identificado por UrbanPulseSP envolve três aspectos principais: a falta de dados detalhados sobre questões ambientais urbanas, como poluição sonora e do ar, dificultando análises eficazes; os altos custos de coleta desses dados, que frequentemente exigem investimentos consideráveis em equipamentos e infraestrutura; e a complexidade de processar e analisar o vasto volume de dados gerados pela extensa rede de sensores necessária para monitorar essas condições.
 
-UrbanPulseSP propõe uma solução multifacetada para esses problemas, envolvendo a construção de dispositivos multimodais de simulação, uma plataforma web que engaja cidadãos na coleta de dados ambientais, e um dashboard avançado para a gestão e análise desses dados. Esta abordagem não apenas diminui os custos operacionais, mas também potencializa a participação cidadã e melhora a tomada de decisões com base em dados concretos e análises precisas. Estamos no caminho para transformar como as cidades gerenciam seu ambiente, tornando-as mais inteligentes, reativas e habitáveis para todos.
+A solução proposta pelo UrbanPulseSP inclui o desenvolvimento de um sistema de simulação e uma dashboard no Metabase para gestão e análise desses dados. Esta abordagem visa não apenas reduzir os custos operacionais, mas também fomentar a participação da comunidade e aprimorar a tomada de decisões baseada em informações precisas e análises detalhadas, visando transformar a maneira como as cidades gerenciam seu ambiente, tornando-as mais inteligentes, responsivas e habitáveis.
 
 ## 📁 Estrutura de Pastas
 
@@ -42,6 +42,8 @@ Este repositório contém várias pastas e arquivos importantes. Aqui está um r
 - `README.md`: Este arquivo serve como um guia e explicação geral sobre o projeto. É o documento que você está lendo agora.
 
 - `docs`: Neste diretório há toda a documentação do desenvolvimento do projeto e outros arquivos relacionados a documentação.
+
+- `pdf`: Neste diretório tem todas as apresentações feitas pelo grupo nas sprints.
 
 - `src`: Pasta que contém o código-fonte do projeto. Aqui você encontrará todos os scripts e arquivos de código necessários para executar e entender o funcionamento do projeto.
 
